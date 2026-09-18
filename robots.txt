@@ -1,0 +1,14 @@
+# Internal/authenticated/token-based pages shouldn't show up in search
+# results at all — this is defense-in-depth (the actual admin API is
+# already protected by a real auth key regardless), not the only
+# protection, but there's no reason for a crawler to ever index these.
+User-agent: *
+Disallow: /admin.html
+Disallow: /dashboard.html
+Disallow: /platform.html
+Disallow: /checkout.html
+Disallow: /auth.html
+Disallow: /reset-password.html
+Disallow: /verify-email.html
+
+Sitemap: https://fundedbeyondborders.com/sitemap.xml

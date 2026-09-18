@@ -1,0 +1,46 @@
+# Security headers for the static site. This file uses the format
+# supported by Netlify, Cloudflare Pages, and several other static hosts.
+# If deploying somewhere else (e.g. a plain Nginx/Apache static host, or a
+# host without _headers support), apply the equivalent headers via that
+# host's own configuration instead.
+#
+# WHY THIS FILE EXISTS: the backend (engine/src/server.js) already sets
+# these same security headers, but ONLY on its own API responses — it
+# never serves the actual HTML pages (no express.static anywhere in that
+# file), which are deployed separately as a static site. Without this
+# file, none of those headers ever reached a real page a user's browser
+# renders.
+#
+# CONNECT-SRC PLACEHOLDER: like the YOUR-ENGINE-URL.onrender.com
+# placeholder already used elsewhere in this project (js/api.js's
+# API_BASE default), the connect-src directive below assumes the engine
+# deploys somewhere under *.onrender.com. If it's deployed under a
+# different domain instead, update connect-src to match — otherwise the
+# browser will silently block every API call as a CSP violation.
+#
+# IMPORTANT: test the site thoroughly after deploying this, especially
+# the Content-Security-Policy below — if any external resource this
+# project depends on isn't listed here, the browser will silently block
+# it rather than erroring loudly, which can look like a mysterious broken
+# feature. The domain list below was built by grepping every https:// URL
+# actually referenced across the site's HTML at the time this was
+# written; if new external scripts/styles/fonts get added later, this
+# file needs a matching update.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://unpkg.com https://challenges.cloudflare.com https://s3.tradingview.com https://www.tradingview.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.onrender.com https://challenges.cloudflare.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com wss: https:; frame-src https://challenges.cloudflare.com https://s3.tradingview.com https://www.tradingview.com; object-src 'none'; base-uri 'self'
+
+# Extra-strict referrer policy specifically for the two pages whose URL
+# carries a one-time, sensitive token in the query string (email
+# verification, password reset) — belt-and-suspenders alongside the
+# <meta name="referrer"> tag already in each of those files, since an
+# HTTP-level header is honored even before the page's own HTML is parsed.
+/verify-email.html
+  Referrer-Policy: no-referrer
+
+/reset-password.html
+  Referrer-Policy: no-referrer

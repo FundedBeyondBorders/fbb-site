@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'en';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta name="referrer" content="no-referrer">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_home">FundedBeyondBorders | Trading Evaluation, Without Borders</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap" style="max-width:480px; margin:100px auto; text-align:center;">
+  <h1 class="sr-only" data-i18n="verify_email_h1">Email verification</h1>
+  <div class="card" id="resultCard">
+    <p data-i18n="verify_email_checking">Checking...</p>
+  </div>
+  <a href="dashboard.html" class="btn btn-primary" style="margin-top:20px;" data-i18n="nav_dashboard">Dashboard</a>
+</div>
+<script src="js/i18n.js"></script>
+<script src="js/pwa.js"></script>
+<script src="js/api.js"></script>
+<script src="js/settings.js"></script>
+<script>
+  const token = new URLSearchParams(location.search).get('token');
+  const card = document.getElementById('resultCard');
+  const isFa = () => (localStorage.getItem('fbb_lang') || 'fa') === 'fa';
+  function T(dict) { return dict[localStorage.getItem('fbb_lang') || 'fa'] ?? dict.en; }
+  if (!token) {
+    card.innerHTML = `<p style="color:var(--red)">${T({fa:'توکن نامعتبر است.', en:'Invalid token.', ar:'الرمز غير صالح.', tr:'Geçersiz token.', ru:'Недействительный токен.', es:'Token inválido.', ku:'تۆکن نادروستە.'})}</p>`;
+  } else {
+    apiGet('/auth/verify-email?token=' + encodeURIComponent(token))
+      .then(data => {
+        card.innerHTML = `<p style="color:var(--green); font-size:16px;">✅ ${T({fa:'ایمیلت با موفقیت تایید شد!', en:'Your email has been verified!', ar:'تم التحقق من بريدك الإلكتروني بنجاح!', tr:'E-postan başarıyla doğrulandı!', ru:'Ваш email успешно подтверждён!', es:'¡Tu correo ha sido verificado!', ku:'ئیمەیلەکەت بە سەرکەوتوویی پشتڕاست کرایەوە!'})}</p>`;
+      })
+      .catch((err) => { card.innerHTML = `<p style="color:var(--red)">${err.message || T({fa:'خطا در ارتباط با سرور.', en:'Could not reach the server.', ar:'تعذر الوصول إلى الخادم.', tr:'Sunucuya ulaşılamadı.', ru:'Не удалось связаться с сервером.', es:'No se pudo contactar con el servidor.', ku:'نەتوانرا پەیوەندی بە سێرڤەرەوە بکرێت.'})}</p>`; });
+  }
+</script>
+</body>
+</html>

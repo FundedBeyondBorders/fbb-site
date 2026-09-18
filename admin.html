@@ -1,0 +1,1925 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Admin | FundedBeyondBorders</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/i18n.js"></script>
+<script src="js/pwa.js"></script>
+<style>
+  body{ font-family:'Vazirmatn', sans-serif; }
+  .admin-tabs{ display:flex; gap:6px; flex-wrap:wrap; margin-bottom:20px; }
+  .admin-tab{ padding:9px 16px; border-radius:8px; border:1px solid var(--line); background:var(--ink-2); color:var(--paper-dim); cursor:pointer; font-family:inherit; font-size:13.5px; }
+  .admin-tab.active{ background:var(--gold); color:#211605; border-color:var(--gold); font-weight:700; }
+  .admin-panel{ display:none; }
+  .admin-panel.active{ display:block; }
+  .row-item{ background:var(--ink-2); border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin-bottom:10px; font-size:13.5px; }
+  .row-item .top{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+  .row-item .meta{ color:var(--paper-dim); font-size:12px; margin-top:6px; }
+  .row-actions{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .kyc-img{ max-width:220px; border-radius:8px; margin-top:8px; border:1px solid var(--line); cursor:zoom-in; }
+  .search-bar{ display:flex; gap:8px; margin-bottom:16px; }
+  .search-bar input{ flex:1; }
+  #gateScreen{ max-width:380px; margin:120px auto; text-align:center; }
+  table.mini{ width:100%; font-size:13px; }
+  table.mini th, table.mini td{ padding:6px 8px; }
+  .stat-grid{ display:grid; gap:12px; margin-bottom:10px; }
+  .stat-box{ background:var(--ink-3); border:1px solid var(--line); border-radius:12px; padding:14px; text-align:center; }
+  .stat-box .v{ font-weight:700; font-size:22px; color:var(--gold-soft); }
+  .stat-box .l{ font-size:11.5px; color:var(--paper-dim); margin-top:4px; }
+</style>
+</head>
+<body>
+
+<div id="gateScreen">
+  <h1 style="margin-bottom:16px;">🔐 Admin Access</h1>
+  <div class="field">
+    <label for="adminKeyInput">Admin Key</label>
+    <input type="password" id="adminKeyInput" placeholder="paste your ADMIN_KEY">
+  </div>
+  <button class="btn btn-primary btn-block" id="enterAdminBtn">Enter</button>
+  <p id="gateError" style="color:var(--red); font-size:13px; margin-top:10px;" role="alert"></p>
+</div>
+
+<div id="adminApp" style="display:none;">
+  <nav>
+    <div class="wrap row">
+      <div class="logo"><span>🛡️ Admin — FundedBeyondBorders</span></div>
+      <button class="btn btn-ghost btn-sm" id="logoutAdminBtn">Lock panel</button>
+    </div>
+  </nav>
+
+  <section style="padding-top:24px;">
+    <div class="wrap">
+      <div class="admin-tabs">
+        <button class="admin-tab active" data-tab="dashboard">📊 Dashboard</button>
+        <button class="admin-tab" data-tab="orders">Orders needing review</button>
+        <button class="admin-tab" data-tab="tickets">Support tickets</button>
+        <button class="admin-tab" data-tab="kyc">KYC queue</button>
+        <button class="admin-tab" data-tab="withdrawals">Withdrawals</button>
+        <button class="admin-tab" data-tab="deposits">Deposits</button>
+        <button class="admin-tab" data-tab="accounts">Accounts (search)</button>
+        <button class="admin-tab" data-tab="users">Users (ban/delete/grant)</button>
+        <button class="admin-tab" data-tab="discounts">Discount codes</button>
+        <button class="admin-tab" data-tab="newsletter">📧 Newsletter</button>
+        <button class="admin-tab" data-tab="ledger">Wallet ledger</button>
+        <button class="admin-tab" data-tab="suspicious">🚨 Suspicious Activity</button>
+        <button class="admin-tab" data-tab="settings">⚙️ Site Settings</button>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div class="admin-panel active" id="panel-dashboard">
+        <div id="liquidityWarning" style="display:none; background:rgba(200,92,60,0.15); border:1px solid var(--red); border-radius:10px; padding:12px 16px; margin-bottom:14px; font-size:13px;"></div>
+        <div class="stat-grid" id="statsGrid" style="grid-template-columns:repeat(4,1fr);"></div>
+        <div class="card" style="margin-top:16px;">
+          <h4 style="margin-bottom:8px;">💾 Database Backup</h4>
+          <p style="color:var(--paper-dim); font-size:12.5px; margin-bottom:10px;">
+            Download the full database now and store it somewhere safe (your computer, cloud drive) — do this
+            regularly, especially before any deploy. See the README section on data persistence for why this matters.
+          </p>
+          <a id="downloadBackupBtn" class="btn btn-primary btn-sm" href="#" target="_blank" rel="noopener">Download backup now</a>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <h4 style="margin-bottom:8px;">📢 Status Page Announcements</h4>
+          <p style="color:var(--paper-dim); font-size:12.5px; margin-bottom:10px;">Posted here appear immediately on the public status.html page — use for maintenance windows, symbol changes, or incident updates.</p>
+          <div class="field"><label for="saTitle">Title</label><input type="text" id="saTitle" maxlength="200" placeholder="e.g. Scheduled maintenance tonight"></div>
+          <div class="field"><label for="saBody">Details</label><textarea id="saBody" rows="3" maxlength="2000"></textarea></div>
+          <div class="field" style="max-width:200px;">
+            <label for="saSeverity">Severity</label>
+            <select id="saSeverity">
+              <option value="info">Info</option>
+              <option value="maintenance">Maintenance</option>
+              <option value="incident">Incident</option>
+              <option value="resolved">Resolved</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-sm" id="postAnnouncementBtn">Post announcement</button>
+          <p id="announcementResult" style="font-size:12.5px; margin-top:8px;" aria-live="polite"></p>
+          <div id="announcementsAdminList" style="margin-top:16px;"></div>
+        </div>
+        <div class="card" style="margin-top:16px;">
+          <h4 style="margin-bottom:8px;">💬 Testimonials</h4>
+          <p style="color:var(--paper-dim); font-size:12.5px; margin-bottom:10px;">Enter REAL customer feedback here as it comes in — never fabricate a testimonial. New entries are unpublished by default; publish only once you've confirmed it's genuine.</p>
+          <div class="field"><label for="tmAuthor">Author name (as they want to be credited)</label><input type="text" id="tmAuthor" maxlength="100" placeholder="e.g. Ahmad K."></div>
+          <div class="field"><label for="tmBody">Feedback</label><textarea id="tmBody" rows="3" maxlength="1000"></textarea></div>
+          <div class="field" style="max-width:160px;">
+            <label for="tmRating">Rating (optional)</label>
+            <select id="tmRating">
+              <option value="">No rating</option>
+              <option value="5">5 stars</option>
+              <option value="4">4 stars</option>
+              <option value="3">3 stars</option>
+              <option value="2">2 stars</option>
+              <option value="1">1 star</option>
+            </select>
+          </div>
+          <button class="btn btn-primary btn-sm" id="addTestimonialBtn">Add as draft</button>
+          <p id="testimonialResult" style="font-size:12.5px; margin-top:8px;" aria-live="polite"></p>
+          <div id="testimonialsAdminList" style="margin-top:16px;"></div>
+        </div>
+      </div>
+
+      <!-- ORDERS -->
+      <div class="admin-panel" id="panel-orders">
+        <h3 style="margin-bottom:12px;">Orders in pending_review (auto-verification couldn't confirm)</h3>
+        <div id="ordersList" style="max-height:500px; overflow-y:auto;"></div>
+
+        <h3 style="margin:24px 0 12px;">Search all orders (any status)</h3>
+        <div class="search-bar">
+          <input type="text" id="orderSearchInput" placeholder="owner email contains...">
+          <select id="orderStatusFilter">
+            <option value="">any status</option>
+            <option value="pending_payment">pending_payment</option>
+            <option value="pending_review">pending_review</option>
+            <option value="fulfilled">fulfilled</option>
+            <option value="rejected">rejected</option>
+          </select>
+          <button class="btn btn-primary btn-sm" id="searchOrdersBtn">Search</button>
+        </div>
+        <div id="allOrdersList" style="max-height:500px; overflow-y:auto;"></div>
+      </div>
+
+      <!-- TICKETS -->
+      <div class="admin-panel" id="panel-tickets">
+        <div class="search-bar">
+          <select id="ticketStatusFilter">
+            <option value="open">open</option>
+            <option value="in_progress">in_progress</option>
+            <option value="resolved">resolved</option>
+            <option value="">all</option>
+          </select>
+          <button class="btn btn-primary btn-sm" id="loadTicketsBtn">Load</button>
+        </div>
+        <div id="ticketsList" style="max-height:500px; overflow-y:auto;"></div>
+      </div>
+
+      <!-- KYC -->
+      <div class="admin-panel" id="panel-kyc">
+        <h3 style="margin-bottom:12px;">KYC documents</h3>
+        <div class="search-bar" style="margin-bottom:14px;">
+          <select id="kycStatusFilter">
+            <option value="pending">pending</option>
+            <option value="approved">approved</option>
+            <option value="rejected">rejected</option>
+            <option value="superseded">superseded (replaced by a newer submission)</option>
+          </select>
+          <button class="btn btn-primary btn-sm" id="kycFilterBtn">Load</button>
+        </div>
+        <div id="kycList" style="max-height:500px; overflow-y:auto;"></div>
+      </div>
+
+      <!-- WITHDRAWALS -->
+      <div class="admin-panel" id="panel-withdrawals">
+        <h3 style="margin-bottom:12px;">Pending wallet withdrawal requests (send real USDT, then mark paid)</h3>
+        <div id="withdrawalsList" style="max-height:500px; overflow-y:auto;"></div>
+      </div>
+
+      <!-- DEPOSITS -->
+      <div class="admin-panel" id="panel-deposits">
+        <h3 style="margin-bottom:12px;">Wallet deposit requests awaiting amount verification</h3>
+        <div id="depositsList" style="max-height:500px; overflow-y:auto;"></div>
+      </div>
+
+      <!-- NEWSLETTER -->
+      <div class="admin-panel" id="panel-newsletter">
+        <h3 style="margin-bottom:12px;">Newsletter subscribers</h3>
+        <p style="font-size:12px; color:var(--paper-dim); margin-bottom:12px;">
+          This site doesn't connect to an email marketing service directly — export the list below as CSV and import it into whichever tool you actually send campaigns from (Mailchimp, Brevo, etc). The CSV includes an <code>unsubscribe_link</code> column — most email tools let you insert a per-recipient custom field like this into your email template, so each person gets a working, one-click unsubscribe link that's specific to them.
+        </p>
+        <div style="margin-bottom:12px;">
+          <button class="btn btn-primary btn-sm" id="exportNewsletterBtn">Export as CSV</button>
+          <span id="newsletterCount" style="margin-left:10px; font-size:12px; color:var(--paper-dim);"></span>
+        </div>
+        <div id="newsletterList" style="max-height:500px; overflow-y:auto;"></div>
+      </div>
+
+      <!-- ACCOUNTS -->
+      <div class="admin-panel" id="panel-accounts">
+        <h3 style="margin-bottom:12px;">Search accounts</h3>
+        <div class="search-bar">
+          <input type="text" id="accountSearchInput" placeholder="owner email contains...">
+          <select id="accountStatusFilter">
+            <option value="">any status</option>
+            <option value="active">active</option>
+            <option value="funded">funded</option>
+            <option value="breached">breached</option>
+            <option value="expired">expired</option>
+          </select>
+          <label style="display:flex; align-items:center; gap:4px; font-size:12px; color:var(--paper-dim);">
+            <input type="checkbox" id="accountIncludeDeleted"> include deleted
+          </label>
+          <button class="btn btn-primary btn-sm" id="searchAccountsBtn">Search</button>
+        </div>
+        <div id="accountsList" style="max-height:500px; overflow-y:auto;"></div>
+        <div id="accountDetail" style="margin-top:20px;"></div>
+      </div>
+
+      <!-- USERS -->
+      <div class="admin-panel" id="panel-users">
+        <h3 style="margin-bottom:12px;">Search users</h3>
+        <div class="search-bar">
+          <input type="text" id="userSearchInput" placeholder="email contains...">
+          <button class="btn btn-primary btn-sm" id="searchUsersBtn">Search</button>
+        </div>
+        <div id="usersList" style="max-height:500px; overflow-y:auto;"></div>
+
+        <div class="card" style="max-width:460px; margin-top:24px;">
+          <h4 style="margin-bottom:10px;">Create a login manually</h4>
+          <div class="field"><label for="newUserEmail">Email</label><input type="text" id="newUserEmail"></div>
+          <div class="field"><label for="newUserPassword">Temporary password</label><input type="text" id="newUserPassword"></div>
+          <div class="field-row">
+            <div class="field"><label for="newUserName">Full name</label><input type="text" id="newUserName"></div>
+            <div class="field"><label for="newUserCountry">Country</label><input type="text" id="newUserCountry"></div>
+          </div>
+          <button class="btn btn-primary btn-sm" id="createUserBtn">Create login</button>
+          <p id="createUserResult" style="margin-top:8px; font-size:13px;" aria-live="polite"></p>
+        </div>
+
+        <div class="card" style="max-width:460px; margin-top:24px;">
+          <h4 style="margin-bottom:10px;">Grant a free challenge account</h4>
+          <div class="field"><label for="grantEmail">Owner email</label><input type="text" id="grantEmail"></div>
+          <div class="field"><label for="grantModel">Model</label>
+            <select id="grantModel"><option value="1step">1-step</option><option value="2step" selected>2-step</option><option value="3step">3-step</option></select>
+          </div>
+          <div class="field"><label for="grantSize">Plan size</label>
+            <select id="grantSize"><option value="5000">$5,000</option><option value="10000" selected>$10,000</option><option value="25000">$25,000</option><option value="50000">$50,000</option></select>
+          </div>
+          <button class="btn btn-primary btn-sm" id="grantBtn">Grant free account</button>
+          <p id="grantResult" style="margin-top:8px; font-size:13px;" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="admin-panel" id="panel-settings">
+        <p style="color:var(--paper-dim); font-size:13px; margin-bottom:16px;">
+          Everything here takes effect live on the site immediately after saving — no code change, no redeploy.
+          Leave an override field blank to keep using the built-in default text.
+        </p>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Branding</h4>
+          <div class="field"><label for="s_brand_name">Site / brand name</label><input type="text" id="s_brand_name"></div>
+          <div class="field"><label for="s_logo_svg">Logo (raw SVG markup)</label><textarea id="s_logo_svg" rows="3" style="font-family:monospace; font-size:12px;"></textarea></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Homepage text overrides (optional)</h4>
+          <div class="field"><label for="s_hero_tagline">Hero headline override</label><input type="text" id="s_hero_tagline"></div>
+          <div class="field"><label for="s_mission_text">"Why we exist" mission paragraph override</label><textarea id="s_mission_text" rows="3"></textarea></div>
+          <div class="field"><label for="s_disclaimer">Disclaimer text override</label><textarea id="s_disclaimer" rows="3"></textarea></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Contact / support</h4>
+          <div class="field-row">
+            <div class="field"><label for="s_support_email">Support email</label><input type="text" id="s_support_email"></div>
+            <div class="field"><label for="s_support_telegram">Support Telegram (@handle)</label><input type="text" id="s_support_telegram"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">CAPTCHA (Cloudflare Turnstile)</h4>
+          <p style="font-size:12px; color:var(--paper-dim); margin-bottom:10px;">
+            Free, no request limits. Get a site key + secret key at
+            <a href="https://dash.cloudflare.com/?to=/:account/turnstile" target="_blank" rel="noopener" style="color:var(--gold-soft);">dash.cloudflare.com → Turnstile</a>.
+            Put the site key here (public, safe); put the secret key in the server's <code>.env</code> as <code>TURNSTILE_SECRET_KEY</code>
+            (never here — this panel only manages public-safe settings).
+          </p>
+          <div class="field"><label for="s_turnstile_site_key">Site key</label><input type="text" id="s_turnstile_site_key"></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Google Analytics 4</h4>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-bottom:10px;">
+            Paste your GA4 Measurement ID (looks like <code>G-XXXXXXXXXX</code>) from your Google Analytics account
+            to track visitors and conversions across the site. Leave empty to disable — no analytics script loads at all until this is set.
+          </p>
+          <div class="field"><label for="s_ga4_measurement_id">Measurement ID</label><input type="text" id="s_ga4_measurement_id" placeholder="G-XXXXXXXXXX"></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Forex polling interval</h4>
+          <p style="font-size:12px; color:var(--paper-dim); margin-bottom:10px;">
+            Forex has no free live tick feed, so stop-loss/take-profit/pending orders are checked on this
+            interval instead — 3 symbols polled every N seconds = 3 × (60/N) Twelve Data requests per minute.
+            Lower = faster reaction but more API calls (watch for rate-limit errors in the server logs);
+            raise it if you hit those errors, lower it if you're on a paid Twelve Data plan.
+          </p>
+          <div class="field"><label for="s_forex_poll_seconds">Interval (seconds)</label><input type="number" id="s_forex_poll_seconds" min="5" step="1"></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Pricing (USD)</h4>
+          <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;"><table class="mini" id="pricingTable">
+            <thead><tr><th>Model</th><th>$1,000</th><th>$2,500</th><th>$5,000</th><th>$10,000</th><th>$25,000</th><th>$50,000</th><th>$100,000</th><th>$200,000</th><th>$250,000</th><th>$500,000</th></tr></thead>
+            <tbody>
+              <tr><td>1-step</td><td><input type="number" id="p_1step_1000"></td><td><input type="number" id="p_1step_2500"></td><td><input type="number" id="p_1step_5000"></td><td><input type="number" id="p_1step_10000"></td><td><input type="number" id="p_1step_25000"></td><td><input type="number" id="p_1step_50000"></td><td><input type="number" id="p_1step_100000"></td><td><input type="number" id="p_1step_200000"></td><td><input type="number" id="p_1step_250000"></td><td><input type="number" id="p_1step_500000"></td></tr>
+              <tr><td>2-step</td><td><input type="number" id="p_2step_1000"></td><td><input type="number" id="p_2step_2500"></td><td><input type="number" id="p_2step_5000"></td><td><input type="number" id="p_2step_10000"></td><td><input type="number" id="p_2step_25000"></td><td><input type="number" id="p_2step_50000"></td><td><input type="number" id="p_2step_100000"></td><td><input type="number" id="p_2step_200000"></td><td><input type="number" id="p_2step_250000"></td><td><input type="number" id="p_2step_500000"></td></tr>
+              <tr><td>3-step</td><td><input type="number" id="p_3step_1000"></td><td><input type="number" id="p_3step_2500"></td><td><input type="number" id="p_3step_5000"></td><td><input type="number" id="p_3step_10000"></td><td><input type="number" id="p_3step_25000"></td><td><input type="number" id="p_3step_50000"></td><td><input type="number" id="p_3step_100000"></td><td><input type="number" id="p_3step_200000"></td><td><input type="number" id="p_3step_250000"></td><td><input type="number" id="p_3step_500000"></td></tr>
+              <tr><td>Instant</td><td><input type="number" id="p_instant_1000"></td><td><input type="number" id="p_instant_2500"></td><td><input type="number" id="p_instant_5000"></td><td><input type="number" id="p_instant_10000"></td><td><input type="number" id="p_instant_25000"></td><td><input type="number" id="p_instant_50000"></td><td><input type="number" id="p_instant_100000"></td><td><input type="number" id="p_instant_200000"></td><td><input type="number" id="p_instant_250000"></td><td><input type="number" id="p_instant_500000"></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Risk / evaluation parameters per model</h4>
+          <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;"><table class="mini">
+            <thead><tr><th>Model</th><th>Phases</th><th>Profit target</th><th>Max daily loss</th><th>Max total loss</th><th>Trader profit split</th><th>Min trading days</th></tr></thead>
+            <tbody>
+              <tr><td>1-step</td><td><input type="number" id="m_1step_phases" min="1" max="5" step="1" style="width:60px;"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_1step_target"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_1step_daily"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_1step_total"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_1step_split"></td><td><input type="number" step="1" min="0" max="60" id="m_1step_mintdays" style="width:60px;"></td></tr>
+              <tr><td>2-step</td><td><input type="number" id="m_2step_phases" min="1" max="5" step="1" style="width:60px;"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_2step_target"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_2step_daily"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_2step_total"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_2step_split"></td><td><input type="number" step="1" min="0" max="60" id="m_2step_mintdays" style="width:60px;"></td></tr>
+              <tr><td>3-step</td><td><input type="number" id="m_3step_phases" min="1" max="5" step="1" style="width:60px;"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_3step_target"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_3step_daily"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_3step_total"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_3step_split"></td><td><input type="number" step="1" min="0" max="60" id="m_3step_mintdays" style="width:60px;"></td></tr>
+              <tr><td>Instant (0 phases = no evaluation)</td><td><input type="number" id="m_instant_phases" min="0" max="5" step="1" style="width:60px;"></td><td><input type="number" step="0.01" min="0" max="1" id="m_instant_target"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_instant_daily"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_instant_total"></td><td><input type="number" step="0.01" min="0.01" max="1" id="m_instant_split"></td><td><input type="number" step="1" min="0" max="60" id="m_instant_mintdays" style="width:60px;"></td></tr>
+            </tbody>
+          </table></div>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-top:6px;">Percentages as decimals (0.10 = 10%). Only applies to NEW accounts created after saving — existing accounts keep the rules they were created under.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Advanced risk rules (per model)</h4>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-bottom:10px;">Previously hardcoded in source code with no admin control at all — now editable per model. Defaults match what was always used, so saving without changes is safe.</p>
+          <div class="table-scroll"><table>
+            <thead><tr><th>Model</th><th>Min daily profit %</th></tr></thead>
+            <tbody>
+              <tr><td>1-step</td><td><input type="number" step="0.001" min="0" max="1" id="m_1step_mindailyprofit"></td></tr>
+              <tr><td>2-step</td><td><input type="number" step="0.001" min="0" max="1" id="m_2step_mindailyprofit"></td></tr>
+              <tr><td>3-step</td><td><input type="number" step="0.001" min="0" max="1" id="m_3step_mindailyprofit"></td></tr>
+              <tr><td>Instant</td><td><input type="number" step="0.001" min="0" max="1" id="m_instant_mindailyprofit"></td></tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Scaling plan (funded-stage account growth)</h4>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-bottom:10px;">Every profit milestone a FUNDED account withdraws grows both its size and the trader's profit split — the same retention mechanic FTMO, The5ers, and FundedNext all use. Triggers automatically at payout time.</p>
+          <div class="field" style="max-width:200px;">
+            <label for="sp_enabled">Enabled</label>
+            <select id="sp_enabled"><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="sp_milestone">Profit milestone (e.g. 0.10 = every 10%)</label><input type="number" step="0.01" min="0.01" max="2" id="sp_milestone"></div>
+            <div class="field"><label for="sp_balance_inc">Account size increase per scale-up</label><input type="number" step="0.01" min="0.01" max="2" id="sp_balance_inc"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="sp_split_inc">Profit split increase per scale-up</label><input type="number" step="0.01" min="0.01" max="2" id="sp_split_inc"></div>
+            <div class="field"><label for="sp_split_max">Profit split ceiling (max 1.0 = 100%)</label><input type="number" step="0.01" min="0.01" max="1" id="sp_split_max"></div>
+          </div>
+          <div class="field" style="max-width:200px;">
+            <label for="sp_max_scaleups">Max scale-ups per account</label>
+            <input type="number" step="1" min="0" max="50" id="sp_max_scaleups">
+          </div>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-top:6px;">Example with defaults: a $10,000 funded account that withdraws $1,000 profit (10%) grows to $12,500 and the trader's split rises from 80% to 85%.</p>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Account reset (breached/expired accounts)</h4>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-bottom:10px;">Lets a trader pay a reduced fee to reset a breached or expired account back to its starting state, instead of buying a whole new challenge.</p>
+          <div class="field" style="max-width:200px;">
+            <label for="ar_enabled">Enabled</label>
+            <select id="ar_enabled"><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div class="field-row">
+            <div class="field"><label for="ar_fee_pct">Reset fee (% of original fee paid)</label><input type="number" step="0.01" min="0" max="1" id="ar_fee_pct"></div>
+            <div class="field"><label for="ar_min_fee">Minimum reset fee (USD)</label><input type="number" step="1" min="0" id="ar_min_fee"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:8px;">📰 News windows (spread widening + chart markers)</h4>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-bottom:10px;">Add the exact UTC time of an upcoming high-impact release (NFP, CPI, rate decisions) — spreads widen automatically during these windows, and they're shown as markers on the trading chart. Times are UTC, 24-hour HH:MM.</p>
+          <div id="newsWindowsList"></div>
+          <button class="btn btn-ghost btn-sm" id="addNewsWindowBtn" style="margin-top:8px;">+ Add news window</button>
+          <h5 style="margin:16px 0 8px; font-size:13px;">End-of-day rollover window</h5>
+          <div class="field-row">
+            <div class="field"><label for="eod_start">Start (UTC)</label><input type="text" id="eod_start" placeholder="20:55"></div>
+            <div class="field"><label for="eod_end">End (UTC)</label><input type="text" id="eod_end" placeholder="21:15"></div>
+            <div class="field"><label for="eod_mult">Multiplier</label><input type="number" step="0.5" min="1" id="eod_mult"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:8px;">🎁 Loyalty rewards (repeat-purchase milestones)</h4>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-bottom:10px;">A trader gets a one-time discount code the moment their completed-order count reaches one of these milestones. Fires exactly once per milestone.</p>
+          <div class="field" style="max-width:200px;">
+            <label for="lr_enabled">Enabled</label>
+            <select id="lr_enabled"><option value="true">Yes</option><option value="false">No</option></select>
+          </div>
+          <div id="loyaltyMilestonesList"></div>
+          <button class="btn btn-ghost btn-sm" id="addLoyaltyMilestoneBtn" style="margin-top:8px;">+ Add milestone</button>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:8px;">🤝 Referral reward (one-time, on referred user's first order)</h4>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-bottom:10px;">Paid to the REFERRER, once, the moment the person they referred completes their first fulfilled order. Choose whether that's a discount code or a direct cash credit to the referrer's wallet.</p>
+          <div style="display:flex; gap:14px; flex-wrap:wrap;">
+            <div class="field" style="max-width:200px;">
+              <label for="rr_enabled">Enabled</label>
+              <select id="rr_enabled"><option value="true">Yes</option><option value="false">No</option></select>
+            </div>
+            <div class="field" style="max-width:200px;">
+              <label for="rr_type">Reward type</label>
+              <select id="rr_type"><option value="cash">Cash to wallet</option><option value="discount">Discount code</option></select>
+            </div>
+            <div class="field" style="max-width:220px;">
+              <label for="rr_reward_pct">Reward % (10% default)</label>
+              <p style="font-size:11px; color:var(--paper-dim); margin:2px 0 4px;">Cash: % of the referred user's first order total. Discount: the code's discount %.</p>
+              <input type="number" step="0.01" min="0.01" max="1" id="rr_reward_pct">
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Trading costs</h4>
+          <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;"><table class="mini">
+            <thead><tr><th></th><th>Crypto</th><th>Forex</th><th>Metals</th><th>Energy</th><th>Indices</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Spread %</td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_spread_crypto"></td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_spread_forex"></td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_spread_metals"></td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_spread_energy"></td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_spread_indices"></td>
+              </tr>
+              <tr>
+                <td>Commission %</td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_comm_crypto"></td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_comm_forex"></td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_comm_metals"></td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_comm_energy"></td>
+                <td><input type="number" step="0.00001" min="0" max="0.1" id="tc_comm_indices"></td>
+              </tr>
+            </tbody>
+          </table></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Leverage (max notional per $1 equity)</h4>
+          <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;"><table class="mini">
+            <thead><tr><th></th><th>Crypto</th><th>Forex</th><th>Metals</th><th>Energy</th><th>Indices</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Leverage (1:x)</td>
+                <td><input type="number" step="1" min="1" max="1000" id="lev_crypto"></td>
+                <td><input type="number" step="1" min="1" max="1000" id="lev_forex"></td>
+                <td><input type="number" step="1" min="1" max="1000" id="lev_metals"></td>
+                <td><input type="number" step="1" min="1" max="1000" id="lev_energy"></td>
+                <td><input type="number" step="1" min="1" max="1000" id="lev_indices"></td>
+              </tr>
+            </tbody>
+          </table></div>
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-top:6px;">Enter the "x" in 1:x — e.g. 100 means 1:100. Applies immediately to every new position opened after saving (existing open positions aren't retroactively affected).</p>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Account caps</h4>
+          <div class="field-row">
+            <div class="field"><label for="c_max_plan_size">Max plan size ($)</label><input type="number" id="c_max_plan_size" min="1"></div>
+            <div class="field"><label for="c_max_funded_total">Max total funded per trader ($)</label><input type="number" id="c_max_funded_total" min="1"></div>
+            <div class="field"><label for="c_max_active_accounts">Max active accounts per trader</label><input type="number" id="c_max_active_accounts" min="1" step="1"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Payout / withdrawal / deposit minimums ($)</h4>
+          <div class="field-row">
+            <div class="field"><label for="pl_payout">Min payout</label><input type="number" id="pl_payout" min="1"></div>
+            <div class="field"><label for="pl_withdrawal">Min withdrawal</label><input type="number" id="pl_withdrawal" min="1"></div>
+            <div class="field"><label for="pl_maxdaily">Max withdrawal per 24h</label><input type="number" id="pl_maxdaily" min="1"></div>
+            <div class="field"><label for="pl_deposit">Min deposit</label><input type="number" id="pl_deposit" min="1"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Wallet addresses (USDT) — overrides .env if filled in</h4>
+          <div class="field"><label for="w_trc20">TRC20 address</label><input type="text" id="w_trc20" pattern="^T[a-zA-Z0-9]{33}$" title="Must start with T, 34 characters total" style="font-family:monospace;"></div>
+          <div class="field"><label for="w_erc20">ERC20 address</label><input type="text" id="w_erc20" pattern="^0x[a-fA-F0-9]{40}$" title="Must start with 0x, 42 characters total" style="font-family:monospace;"></div>
+          <div class="field"><label for="w_bep20">BEP20 (BNB Smart Chain) address</label><input type="text" id="w_bep20" pattern="^0x[a-fA-F0-9]{40}$" title="Must start with 0x, 42 characters total" style="font-family:monospace;"></div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Theme — colors</h4>
+          <div class="field-row" style="flex-wrap:wrap; display:grid; grid-template-columns:repeat(4,1fr); gap:10px;">
+            <div class="field"><label for="th_ink">Background</label><input type="color" id="th_ink"></div>
+            <div class="field"><label for="th_ink2">Card background</label><input type="color" id="th_ink2"></div>
+            <div class="field"><label for="th_ink3">Input background</label><input type="color" id="th_ink3"></div>
+            <div class="field"><label for="th_gold">Gold (accent)</label><input type="color" id="th_gold"></div>
+            <div class="field"><label for="th_goldSoft">Gold (soft)</label><input type="color" id="th_goldSoft"></div>
+            <div class="field"><label for="th_teal">Teal</label><input type="color" id="th_teal"></div>
+            <div class="field"><label for="th_tealSoft">Teal (soft)</label><input type="color" id="th_tealSoft"></div>
+            <div class="field"><label for="th_paper">Text</label><input type="color" id="th_paper"></div>
+            <div class="field"><label for="th_paperDim">Dim text</label><input type="color" id="th_paperDim"></div>
+            <div class="field"><label for="th_green">Green (success)</label><input type="color" id="th_green"></div>
+            <div class="field"><label for="th_red">Red (danger)</label><input type="color" id="th_red"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:10px;">Theme — fonts (any Google Fonts name)</h4>
+          <div class="field-row">
+            <div class="field"><label for="th_body_font">Body font</label><input type="text" id="th_body_font" placeholder="Vazirmatn"></div>
+            <div class="field"><label for="th_display_font">Display/heading font</label><input type="text" id="th_display_font" placeholder="Fraunces"></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <h4 style="margin-bottom:4px;">Text editor — every button, label, and Rules-page sentence on the site</h4>
+          <p style="font-size:12px; color:var(--paper-dim); margin-bottom:12px;">
+            Pick a language and a text key, see what it currently shows, and override it. This covers literally every
+            piece of UI text on the site, including the full Rules page (keys named rule1_title, rule1_desc, rule2_title, etc.)
+          </p>
+          <div class="field-row">
+            <div class="field">
+              <label for="txLang">Language</label>
+              <select id="txLang"><option value="fa">فارسی</option><option value="en">English</option><option value="ar">العربية</option><option value="tr">Türkçe</option><option value="ru">Русский</option><option value="es">Español</option><option value="ku">کوردی</option></select>
+            </div>
+            <div class="field">
+              <label for="txKey">Text key</label>
+              <select id="txKey"></select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="txCurrent">Current text (built-in default, unless already overridden)</label>
+            <textarea id="txCurrent" rows="2" readonly style="opacity:.7;"></textarea>
+          </div>
+          <div class="field">
+            <label for="txNew">New text</label>
+            <textarea id="txNew" rows="2"></textarea>
+          </div>
+          <div class="row-actions">
+            <button class="btn btn-primary btn-sm" id="txSaveBtn">Save this override</button>
+            <button class="btn btn-ghost btn-sm" id="txResetBtn">Reset to built-in default</button>
+          </div>
+          <div id="txOverridesList" style="margin-top:16px;"></div>
+        </div>
+
+        <button class="btn btn-primary" id="saveSettingsBtn">💾 Save all settings</button>
+        <p id="settingsResult" style="margin-top:10px; font-size:13px;" aria-live="polite"></p>
+      </div>
+
+      <!-- DISCOUNTS -->
+      <div class="admin-panel" id="panel-discounts">
+        <h3 style="margin-bottom:12px;">Create a discount code</h3>
+        <div class="card" style="max-width:420px; margin-bottom:20px;">
+          <div class="field"><label for="dcCode">Code</label><input type="text" id="dcCode" placeholder="WELCOME10"></div>
+          <div class="field"><label for="dcPercent">Percent off (0.10 = 10%)</label><input type="number" id="dcPercent" step="0.01" value="0.10"></div>
+          <div class="field"><label for="dcMaxUses">Max uses (blank = unlimited)</label><input type="number" id="dcMaxUses"></div>
+          <button class="btn btn-primary" id="dcCreateBtn">Create</button>
+          <p id="dcResult" style="margin-top:10px; font-size:13px;" aria-live="polite"></p>
+        </div>
+        <h3 style="margin-bottom:12px;">All discount codes</h3>
+        <div id="dcList" style="max-height:500px; overflow-y:auto;"></div>
+      </div>
+
+      <!-- LEDGER -->
+      <div class="admin-panel" id="panel-ledger">
+        <h3 style="margin-bottom:12px;">Global wallet ledger (every credit/debit, every user)</h3>
+        <div id="ledgerList" style="max-height:500px; overflow-y:auto;"></div>
+      </div>
+
+      <!-- SUSPICIOUS ACTIVITY -->
+      <div class="admin-panel" id="panel-suspicious">
+        <p style="color:var(--paper-dim); font-size:13px; margin-bottom:16px;">
+          These are candidates for manual review, not automatic breaches — coincidences happen (two strangers
+          trading the same pair at the same time isn't proof of anything). Use judgment; check trade sizes,
+          account history, and whether it's a repeated pattern before acting.
+        </p>
+        <h3 style="margin-bottom:10px;">Same IP address, different account owners</h3>
+        <div id="sharedIpList" style="margin-bottom:24px;"></div>
+        <h3 style="margin-bottom:10px;">Opposite-direction trades within 5 minutes, different owners</h3>
+        <div id="crossHedgeList" style="margin-bottom:24px;"></div>
+        <h3 style="margin-bottom:4px;">Correlated-symbol hedges (e.g. long BTC + short ETH)</h3>
+        <p style="font-size:11.5px; color:var(--paper-dim); margin-bottom:10px;">
+          Catches an evasive hedge that dodges the exact-symbol check by using two assets that tend to move
+          together instead of the same one. Weaker signal than an identical-symbol hedge — a real pairs trade
+          looks the same — so treat as a lead, not a verdict.
+        </p>
+        <h4 style="margin-bottom:8px; color:var(--gold-soft);">👤 One person, own accounts</h4>
+        <div id="correlatedSameOwnerList" style="margin-bottom:20px;"></div>
+        <h4 style="margin-bottom:8px; color:var(--red);">👥 Different people (group)</h4>
+        <div id="correlatedGroupList"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  const API_BASE = localStorage.getItem('fbb_api_base') || 'https://YOUR-ENGINE-URL.onrender.com';
+
+  // SECURITY (critical): every piece of data rendered below can originate
+  // from an untrusted, often fully unauthenticated source — a ticket
+  // subject, a registered email, a full name, a discount code. Without
+  // escaping, a malicious value like <img src=x onerror="steal admin key">
+  // would execute the moment an admin views it here, in the one browser
+  // session that holds the admin key. ALWAYS wrap user-controlled values
+  // in esc() before putting them in innerHTML — never interpolate raw.
+  function esc(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  function apiUrl(p) { return API_BASE.replace(/\/$/, '') + p; }
+  function adminKey() { return sessionStorage.getItem('fbb_admin_key'); }
+
+  async function adminFetch(path, opts = {}) {
+    const res = await fetch(apiUrl(path), {
+      ...opts,
+      headers: { 'Content-Type': 'application/json', 'X-Admin-Key': adminKey(), ...(opts.headers || {}) },
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `Request failed (${res.status})`);
+    return data;
+  }
+
+  async function tryEnterAdmin(key) {
+    if (!key) return;
+    sessionStorage.setItem('fbb_admin_key', key);
+    try {
+      await adminFetch('/admin/orders?status=pending_review'); // cheap call just to validate the key
+      document.getElementById('gateScreen').style.display = 'none';
+      document.getElementById('adminApp').style.display = 'block';
+      loadStats(); loadAnnouncements(); loadTestimonials(); loadOrders(); loadKyc(); loadWithdrawals(); loadDeposits(); loadTickets();
+    } catch (err) {
+      document.getElementById('gateError').textContent = 'Invalid admin key or cannot reach the server: ' + err.message;
+    }
+  }
+  document.getElementById('enterAdminBtn').addEventListener('click', () => {
+    tryEnterAdmin(document.getElementById('adminKeyInput').value.trim());
+  });
+  document.getElementById('logoutAdminBtn').addEventListener('click', () => {
+    sessionStorage.removeItem('fbb_admin_key');
+    location.reload();
+  });
+
+  document.querySelectorAll('.admin-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  function fmt(n) {
+    const num = Number(n);
+    const sign = num < 0 ? '-' : '';
+    return sign + '$' + Math.abs(num).toLocaleString(undefined, { maximumFractionDigits: 2 });
+  }
+
+  // ---- Orders ----
+  // ---- Dashboard (site-wide stats) ----
+  async function loadStats() {
+    const grid = document.getElementById('statsGrid');
+    grid.innerHTML = 'Loading…';
+    try {
+      const s = await adminFetch('/admin/stats');
+      const box = (label, value) => `<div class="stat-box"><div class="v">${value}</div><div class="l">${label}</div></div>`;
+      grid.innerHTML = [
+        box('Total users', s.users.total),
+        box('Banned', s.users.banned),
+        box('Email verified', s.users.email_verified),
+        box('KYC approved', s.users.kyc_approved),
+        box('KYC pending', s.users.kyc_pending),
+        box('Total accounts', s.accounts.total),
+        box('Active accounts', s.accounts.active),
+        box('Funded accounts', s.accounts.funded),
+        box('Breached accounts', s.accounts.breached),
+        box('Test accounts', s.accounts.test_accounts),
+        box('Total orders', s.orders.total),
+        box('Fulfilled orders', s.orders.fulfilled),
+        box('Orders needing review', s.orders.pending_review),
+        box('Revenue (fulfilled)', fmt(s.orders.revenue_usd)),
+        box('Wallet balances outstanding', fmt(s.wallets.total_balance_outstanding)),
+        box('Pending withdrawals', fmt(s.wallets.pending_withdrawals_usd)),
+        box('Pending deposits', fmt(s.wallets.pending_deposits_usd)),
+        box('Open tickets', s.support.open_tickets),
+        box('Total tickets', s.support.total_tickets),
+      ].join('');
+
+      // SOLVENCY WARNING: this is the exact failure pattern that killed many
+      // real prop firms — paying withdrawals out of new challenge fees
+      // instead of a real reserve. If what you owe traders is creeping up
+      // toward what you've actually collected, that's the early signal.
+      const warnEl = document.getElementById('liquidityWarning');
+      const owed = s.wallets.total_balance_outstanding + s.wallets.pending_withdrawals_usd;
+      const collected = s.orders.revenue_usd;
+      if (collected > 0 && owed > collected * 0.5) {
+        warnEl.style.display = 'block';
+        warnEl.innerHTML = `⚠️ <strong>Solvency check:</strong> you currently owe ${fmt(owed)} in wallet balances + pending withdrawals, against ${fmt(collected)} in total collected revenue. Make sure you actually hold enough real USDT to cover this — this exact gap (paying withdrawals from new challenge fees instead of a real reserve) is what has bankrupted real prop firms.`;
+      } else {
+        warnEl.style.display = 'none';
+      }
+    } catch (err) { grid.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.querySelector('.admin-tab[data-tab="dashboard"]').addEventListener('click', () => { loadStats(); loadAnnouncements(); loadTestimonials(); });
+
+  async function loadAnnouncements() {
+    const listEl = document.getElementById('announcementsAdminList');
+    try {
+      const { announcements } = await apiGet('/status'); // public endpoint — no admin key needed to read
+      listEl.innerHTML = announcements.length
+        ? announcements.map(a => `
+            <div class="acct-row">
+              <div><strong>[${a.severity}]</strong> ${a.title} <span style="color:var(--paper-dim); font-size:11px;">— ${new Date(a.created_at).toLocaleString()}</span></div>
+              <button class="btn btn-ghost btn-sm delete-announcement" data-id="${a.id}">Delete</button>
+            </div>`).join('')
+        : '<p style="color:var(--paper-dim); font-size:12.5px;">No announcements posted yet.</p>';
+      listEl.querySelectorAll('.delete-announcement').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!confirm('Delete this announcement?')) return;
+          try { await adminFetch(`/admin/status-announcements/${btn.dataset.id}`, { method: 'DELETE' }); loadAnnouncements(); }
+          catch (err) { alert(err.message); }
+        });
+      });
+    } catch (err) {
+      listEl.innerHTML = `<p style="color:var(--red)">${err.message}</p>`;
+    }
+  }
+
+  async function loadTestimonials() {
+    const listEl = document.getElementById('testimonialsAdminList');
+    try {
+      const testimonials = await adminFetch('/admin/testimonials'); // admin endpoint — shows drafts too, unlike the public one
+      listEl.innerHTML = testimonials.length
+        ? testimonials.map(t => `
+            <div class="acct-row">
+              <div>
+                <strong>${t.author_name}</strong>${t.rating ? ' ' + '⭐'.repeat(t.rating) : ''}
+                <span style="color:${t.published ? 'var(--green)' : 'var(--paper-dim)'};"> [${t.published ? 'published' : 'draft'}]</span>
+                <div style="font-size:12px; color:var(--paper-dim);">${t.body}</div>
+              </div>
+              <div>
+                <button class="btn btn-ghost btn-sm toggle-testimonial" data-id="${t.id}">${t.published ? 'Unpublish' : 'Publish'}</button>
+                <button class="btn btn-ghost btn-sm delete-testimonial" data-id="${t.id}">Delete</button>
+              </div>
+            </div>`).join('')
+        : '<p style="color:var(--paper-dim); font-size:12.5px;">No testimonials yet.</p>';
+      listEl.querySelectorAll('.toggle-testimonial').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          try { await adminFetch(`/admin/testimonials/${btn.dataset.id}/toggle-publish`, { method: 'POST', body: '{}' }); loadTestimonials(); }
+          catch (err) { alert(err.message); }
+        });
+      });
+      listEl.querySelectorAll('.delete-testimonial').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!confirm('Hide this testimonial? It can be restored later if needed.')) return;
+          try { await adminFetch(`/admin/testimonials/${btn.dataset.id}`, { method: 'DELETE' }); loadTestimonials(); }
+          catch (err) { alert(err.message); }
+        });
+      });
+    } catch (err) {
+      listEl.innerHTML = `<p style="color:var(--red)">${err.message}</p>`;
+    }
+  }
+
+  document.getElementById('addTestimonialBtn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    const resultEl = document.getElementById('testimonialResult');
+    try {
+      const ratingVal = document.getElementById('tmRating').value;
+      await adminFetch('/admin/testimonials', {
+        method: 'POST',
+        body: JSON.stringify({
+          author_name: document.getElementById('tmAuthor').value.trim(),
+          body: document.getElementById('tmBody').value.trim(),
+          rating: ratingVal ? parseInt(ratingVal, 10) : null,
+        }),
+      });
+      document.getElementById('tmAuthor').value = '';
+      document.getElementById('tmBody').value = '';
+      document.getElementById('tmRating').value = '';
+      resultEl.style.color = 'var(--green)';
+      resultEl.textContent = 'Added as draft — remember to publish it.';
+      loadTestimonials();
+    } catch (err) {
+      resultEl.style.color = 'var(--red)';
+      resultEl.textContent = err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById('postAnnouncementBtn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    const resultEl = document.getElementById('announcementResult');
+    try {
+      await adminFetch('/admin/status-announcements', {
+        method: 'POST',
+        body: JSON.stringify({
+          title: document.getElementById('saTitle').value.trim(),
+          body: document.getElementById('saBody').value.trim(),
+          severity: document.getElementById('saSeverity').value,
+        }),
+      });
+      document.getElementById('saTitle').value = '';
+      document.getElementById('saBody').value = '';
+      resultEl.style.color = 'var(--green)';
+      resultEl.textContent = 'Posted.';
+      loadAnnouncements();
+    } catch (err) {
+      resultEl.style.color = 'var(--red)';
+      resultEl.textContent = err.message;
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById('downloadBackupBtn').addEventListener('click', async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(apiUrl('/admin/backup'), { headers: { 'X-Admin-Key': adminKey() } });
+      if (!res.ok) { alert('Backup failed: ' + res.status); return; }
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `fbb-backup-${new Date().toISOString().slice(0, 10)}.db`;
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) { alert(err.message); }
+  });
+
+  async function loadOrders() {
+    const list = document.getElementById('ordersList');
+    list.innerHTML = 'Loading…';
+    try {
+      const orders = await adminFetch('/admin/orders?status=pending_review');
+      list.innerHTML = orders.length ? '' : '<p style="color:var(--paper-dim)">Nothing pending.</p>';
+      orders.forEach(o => list.appendChild(renderOrderRow(o, loadOrders)));
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+
+  function renderOrderRow(o, refreshFn) {
+    const div = document.createElement('div');
+    div.className = 'row-item';
+    const rejectionLine = o.status === 'rejected' && o.rejection_reason
+      ? `<div class="meta" style="color:var(--red-soft, var(--red));">Rejection reason: ${esc(o.rejection_reason)}</div>` : '';
+    div.innerHTML = `
+      <div class="top"><strong>${esc(o.owner_label)}</strong><span>${fmt(o.total)} via ${esc(o.chain)} · ${esc(o.status)}</span></div>
+      <div class="meta">Order ${esc(o.id)} · tx: ${esc(o.tx_hash) || '—'} · items: ${o.items.map(i => `${esc(i.model)}/$${Number(i.plan_size)}`).join(', ')}</div>
+      ${rejectionLine}
+      <div class="row-actions">
+        ${o.status === 'pending_review' ? `
+          <button class="btn btn-primary btn-sm approve-order" data-id="${o.id}">✓ Verify & fulfill</button>
+          <button class="btn btn-ghost btn-sm reject-order" data-id="${o.id}">✕ Reject</button>` : ''}
+        <button class="btn btn-ghost btn-sm delete-order" data-id="${o.id}">🗑 Delete order</button>
+      </div>`;
+    div.querySelector('.approve-order')?.addEventListener('click', async (e) => {
+      const btn = e.currentTarget;
+      const admin_name = prompt('Your name (for the audit log):', 'admin') || 'admin';
+      btn.disabled = true;
+      try { await adminFetch(`/orders/${o.id}/verify-manual`, { method: 'POST', body: JSON.stringify({ admin_name }) }); refreshFn(); }
+      catch (err) { alert(err.message); btn.disabled = false; }
+    });
+    div.querySelector('.reject-order')?.addEventListener('click', async () => {
+      const reason = prompt('Reason for rejecting this order? (shown to the customer)');
+      if (reason === null) return; // user clicked Cancel — do NOT reject this order
+      try { await adminFetch(`/orders/${o.id}/reject`, { method: 'POST', body: JSON.stringify({ reason }) }); refreshFn(); }
+      catch (err) { alert(err.message); }
+    });
+    div.querySelector('.delete-order').addEventListener('click', async () => {
+      if (!confirm('Hide this order record? It can be restored later if needed.')) return;
+      try { await adminFetch(`/admin/orders/${o.id}`, { method: 'DELETE' }); refreshFn(); }
+      catch (err) { alert(err.message); }
+    });
+    return div;
+  }
+
+  async function searchAllOrders() {
+    const list = document.getElementById('allOrdersList');
+    list.innerHTML = 'Loading…';
+    const owner_label = document.getElementById('orderSearchInput').value.trim();
+    const status = document.getElementById('orderStatusFilter').value;
+    const qs = new URLSearchParams();
+    if (owner_label) qs.set('owner_label', owner_label);
+    if (status) qs.set('status', status);
+    try {
+      const orders = await adminFetch('/admin/orders?' + qs.toString());
+      list.innerHTML = orders.length ? '' : '<p style="color:var(--paper-dim)">No matches.</p>';
+      orders.forEach(o => list.appendChild(renderOrderRow(o, searchAllOrders)));
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+
+  // ---- KYC ----
+  async function loadKyc() {
+    const list = document.getElementById('kycList');
+    list.innerHTML = 'Loading…';
+    const filterStatus = document.getElementById('kycStatusFilter').value || 'pending';
+    try {
+      const docs = await adminFetch(`/admin/kyc?status=${filterStatus}`);
+      list.innerHTML = docs.length ? '' : '<p style="color:var(--paper-dim)">Nothing here.</p>';
+      docs.forEach(d => {
+        const div = document.createElement('div');
+        div.className = 'row-item';
+        const reuseWarning = d.also_submitted_by && d.also_submitted_by.length
+          ? `<div style="background:rgba(200,92,60,0.15); border:1px solid var(--red); border-radius:8px; padding:8px 10px; margin:8px 0; font-size:12.5px;">
+               🚨 <strong>Same document also submitted by:</strong> ${d.also_submitted_by.map(r => `${esc(r.email)} (${esc(r.status)})`).join(', ')}
+             </div>`
+          : '';
+        const actions = d.status === 'pending'
+          ? `<button class="btn btn-primary btn-sm approve-kyc" data-id="${d.id}">✓ Approve</button>
+             <button class="btn btn-ghost btn-sm reject-kyc" data-id="${d.id}">✕ Reject</button>
+             <button class="btn btn-ghost btn-sm delete-kyc" data-id="${d.id}">🗑 Delete document</button>`
+          : `<span style="font-size:12px; color:var(--paper-dim);">${d.reviewed_by ? `Reviewed by ${esc(d.reviewed_by)}` : ''} ${d.reviewed_at || ''}${d.admin_note ? ' · ' + esc(d.admin_note) : ''}</span>
+             <button class="btn btn-ghost btn-sm delete-kyc" data-id="${d.id}">🗑 Delete document</button>`;
+        div.innerHTML = `
+          <div class="top"><strong>${esc(d.email)}</strong><span>${esc(d.doc_type)} · ${esc(d.status)}</span></div>
+          <div class="meta">
+            Registered as: <strong>${esc(d.full_name) || '—'}</strong>, ${esc(d.country) || '—'}, DOB: ${esc(d.date_of_birth) || '—'}<br>
+            → Cross-check these against the name/DOB printed on the document image below.
+          </div>
+          ${reuseWarning}
+          ${d.decrypt_error
+            ? `<p style="color:var(--red); font-weight:600;">⚠️ This document failed to decrypt (possibly corrupted or tampered with) — check server logs for KYC document ${d.id}.</p>`
+            : `<a href="${esc(d.image_base64)}" target="_blank" rel="noopener" title="Click to view full size"><img class="kyc-img" src="${esc(d.image_base64)}" alt="Submitted identity document"></a>`}
+          <div class="row-actions">${actions}</div>`;
+        list.appendChild(div);
+      });
+      list.querySelectorAll('.approve-kyc').forEach(btn => btn.addEventListener('click', async () => {
+        if (!confirm('Approve this KYC document? This unlocks the user\'s ability to request payouts.')) return;
+        const admin_name = getReviewerName();
+        if (!admin_name) return;
+        btn.disabled = true;
+        try { await adminFetch(`/kyc/${btn.dataset.id}/review`, { method: 'POST', body: JSON.stringify({ decision: 'approved', admin_name }) }); loadKyc(); }
+        catch (err) { alert(err.message); btn.disabled = false; }
+      }));
+      list.querySelectorAll('.reject-kyc').forEach(btn => btn.addEventListener('click', async () => {
+        const admin_name = getReviewerName();
+        if (!admin_name) return;
+        const note = prompt('Reason for rejection (required):');
+        if (!note) { alert('A reason is required to reject.'); return; }
+        try { await adminFetch(`/kyc/${btn.dataset.id}/review`, { method: 'POST', body: JSON.stringify({ decision: 'rejected', admin_note: note, admin_name }) }); loadKyc(); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.delete-kyc').forEach(btn => btn.addEventListener('click', async () => {
+        if (!confirm('Permanently delete this document?')) return;
+        try { await adminFetch(`/kyc/${btn.dataset.id}`, { method: 'DELETE' }); loadKyc(); }
+        catch (err) { alert(err.message); }
+      }));
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.getElementById('kycFilterBtn').addEventListener('click', loadKyc);
+  document.querySelector('.admin-tab[data-tab="kyc"]').addEventListener('click', loadKyc);
+
+  // Asked once per admin session, then cached — every KYC decision needs a
+  // reviewer on record, but retyping it every single time would be tedious.
+  function getReviewerName() {
+    let name = sessionStorage.getItem('fbb_admin_reviewer_name');
+    if (!name) {
+      name = prompt('Your name (recorded against every KYC decision this session):');
+      if (!name) return null;
+      sessionStorage.setItem('fbb_admin_reviewer_name', name);
+    }
+    return name;
+  }
+
+  // ---- Withdrawals (real USDT out) ----
+  async function loadWithdrawals(filterAddress) {
+    const list = document.getElementById('withdrawalsList');
+    list.innerHTML = 'Loading…';
+    try {
+      const query = filterAddress ? `?address=${encodeURIComponent(filterAddress)}` : '?status=pending';
+      const withdrawals = await adminFetch(`/admin/withdrawals${query}`);
+      list.innerHTML = withdrawals.length ? '' : '<p style="color:var(--paper-dim)">Nothing found.</p>';
+      if (filterAddress) {
+        const backBtn = document.createElement('button');
+        backBtn.className = 'btn btn-ghost btn-sm';
+        backBtn.textContent = '← Back to pending';
+        backBtn.style.marginBottom = '10px';
+        backBtn.addEventListener('click', () => loadWithdrawals());
+        list.appendChild(backBtn);
+      }
+      withdrawals.forEach(w => {
+        const div = document.createElement('div');
+        div.className = 'row-item';
+        div.innerHTML = `
+          <div class="top"><strong>${esc(w.owner_label)}</strong><span>${fmt(w.amount)} via ${esc(w.chain)}</span></div>
+          <div class="meta">Send to: <span style="font-family:monospace;">${esc(w.address)}</span>${w.is_new_address ? ' <strong style="color:#c0392b;">⚠️ new address</strong>' : ''}${w.shared_by_other_users ? ` <button type="button" class="investigate-shared-address" data-address="${esc(w.address)}" style="background:none; border:none; padding:0; font:inherit; color:#c0392b; font-weight:700; cursor:pointer; text-decoration:underline;">🚩 shared with ${w.shared_by_other_users} other account(s) — click to investigate</button>` : ''}</div>
+          <div class="row-actions">
+            <button class="btn btn-primary btn-sm approve-withdrawal" data-id="${w.id}">✓ Mark paid (after sending)</button>
+            <button class="btn btn-ghost btn-sm reject-withdrawal" data-id="${w.id}">✕ Reject (auto-refunds wallet)</button>
+          </div>`;
+        list.appendChild(div);
+      });
+      list.querySelectorAll('.approve-withdrawal').forEach(btn => btn.addEventListener('click', async () => {
+        const tx_hash = prompt('Transaction hash you sent it with:');
+        if (tx_hash === null) return; // user clicked Cancel — do NOT mark this withdrawal as paid
+        try { await adminFetch(`/admin/withdrawals/${btn.dataset.id}/mark-paid`, { method: 'POST', body: JSON.stringify({ tx_hash }) }); loadWithdrawals(filterAddress); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.reject-withdrawal').forEach(btn => btn.addEventListener('click', async () => {
+        const admin_note = prompt('Reason:');
+        if (admin_note === null) return; // user clicked Cancel — do NOT reject this withdrawal
+        try { await adminFetch(`/admin/withdrawals/${btn.dataset.id}/reject`, { method: 'POST', body: JSON.stringify({ admin_note }) }); loadWithdrawals(filterAddress); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.investigate-shared-address').forEach(el => el.addEventListener('click', () => loadWithdrawals(el.dataset.address)));
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.querySelector('.admin-tab[data-tab="withdrawals"]').addEventListener('click', () => loadWithdrawals());
+  document.getElementById('searchOrdersBtn').addEventListener('click', searchAllOrders);
+
+  // ---- Deposits (real USDT in — amount always eyeballed here before crediting) ----
+  async function loadDeposits() {
+    const list = document.getElementById('depositsList');
+    list.innerHTML = 'Loading…';
+    try {
+      const deposits = await adminFetch('/admin/deposits?status=pending_review');
+      list.innerHTML = deposits.length ? '' : '<p style="color:var(--paper-dim)">Nothing pending.</p>';
+      deposits.forEach(d => {
+        const div = document.createElement('div');
+        div.className = 'row-item';
+        div.innerHTML = `
+          <div class="top"><strong>${esc(d.owner_label)}</strong><span>expects ${fmt(d.amount)} via ${esc(d.chain)}</span></div>
+          <div class="meta">tx: ${esc(d.tx_hash) || '—'} · to: <span style="font-family:monospace;">${esc(d.pay_to_address)}</span><br>
+            → Open this tx on tronscan.org / etherscan.io and confirm the AMOUNT and DESTINATION match before crediting.</div>
+          <div class="row-actions">
+            <button class="btn btn-primary btn-sm approve-deposit" data-id="${d.id}">✓ Confirmed — credit wallet</button>
+            <button class="btn btn-ghost btn-sm reject-deposit" data-id="${d.id}">✕ Reject</button>
+          </div>`;
+        list.appendChild(div);
+      });
+      list.querySelectorAll('.approve-deposit').forEach(btn => btn.addEventListener('click', async () => {
+        if (!confirm('Credit this deposit to the user\'s wallet?')) return;
+        btn.disabled = true;
+        try { await adminFetch(`/admin/deposits/${btn.dataset.id}/approve`, { method: 'POST', body: '{}' }); loadDeposits(); }
+        catch (err) { alert(err.message); btn.disabled = false; }
+      }));
+      list.querySelectorAll('.reject-deposit').forEach(btn => btn.addEventListener('click', async () => {
+        const admin_note = prompt('Reason:');
+        if (admin_note === null) return; // user clicked Cancel — do NOT reject this deposit
+        try { await adminFetch(`/admin/deposits/${btn.dataset.id}/reject`, { method: 'POST', body: JSON.stringify({ admin_note }) }); loadDeposits(); }
+        catch (err) { alert(err.message); }
+      }));
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.querySelector('.admin-tab[data-tab="deposits"]').addEventListener('click', loadDeposits);
+
+  let cachedSubscribers = [];
+  async function loadNewsletter() {
+    const list = document.getElementById('newsletterList');
+    const countEl = document.getElementById('newsletterCount');
+    list.innerHTML = 'Loading…';
+    try {
+      cachedSubscribers = await adminFetch('/admin/newsletter/subscribers');
+      countEl.textContent = `${cachedSubscribers.length} active subscriber(s)`;
+      list.innerHTML = cachedSubscribers.length ? '' : '<p style="color:var(--paper-dim)">No subscribers yet.</p>';
+      cachedSubscribers.forEach(s => {
+        const div = document.createElement('div');
+        div.className = 'row-item';
+        div.innerHTML = `<div class="top"><strong>${esc(s.email)}</strong><span>${esc(s.source) || 'unknown source'}</span>
+            <button class="btn btn-ghost btn-sm delete-subscriber-btn" data-id="${esc(s.id)}" data-email="${esc(s.email)}">Delete permanently</button></div>
+          <div class="meta">subscribed ${new Date(s.subscribed_at).toLocaleDateString()}</div>`;
+        list.appendChild(div);
+      });
+      list.querySelectorAll('.delete-subscriber-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          if (!confirm(`Permanently delete ${btn.dataset.email}? This cannot be undone — use this only for an explicit data-deletion request, not routine unsubscribes.`)) return;
+          try {
+            await adminFetch(`/admin/newsletter/subscribers/${btn.dataset.id}`, { method: 'DELETE' });
+            loadNewsletter();
+          } catch (err) { alert(err.message); }
+        });
+      });
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.querySelector('.admin-tab[data-tab="newsletter"]').addEventListener('click', loadNewsletter);
+
+  function csvField(value) {
+    const str = String(value ?? '');
+    // per CSV RFC: quote any field containing a comma, quote, or newline —
+    // otherwise a source value like 'homepage, footer' would corrupt columns.
+    return /[",\n]/.test(str) ? '"' + str.replace(/"/g, '""') + '"' : str;
+  }
+  document.getElementById('exportNewsletterBtn').addEventListener('click', () => {
+    const rows = [['email', 'source', 'subscribed_at', 'unsubscribe_link']];
+    cachedSubscribers.forEach(s => rows.push([s.email, s.source || '', s.subscribed_at, `${API_BASE}/newsletter/unsubscribe/${s.id}`]));
+    const csv = rows.map(row => row.map(csvField).join(',')).join('\n');
+    const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv' }); // UTF-8 BOM so Excel (esp. on Windows) correctly displays non-Latin characters instead of garbling them
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `newsletter-subscribers-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+
+  // ---- Users: search, ban/unban, delete, wallet-adjust ----
+  async function searchUsers() {
+    const list = document.getElementById('usersList');
+    list.innerHTML = 'Loading…';
+    const email = document.getElementById('userSearchInput').value.trim();
+    try {
+      const users = await adminFetch('/admin/users' + (email ? '?email=' + encodeURIComponent(email) : ''));
+      list.innerHTML = users.length ? '' : '<p style="color:var(--paper-dim)">No matches.</p>';
+      users.forEach(u => {
+        const div = document.createElement('div');
+        div.className = 'row-item';
+        div.innerHTML = `
+          <div class="top"><strong>${esc(u.email)}</strong><span>${u.banned ? '🚫 banned' : '✓ active'}</span></div>
+          <div class="meta">${esc(u.full_name) || '—'} · ${esc(u.country) || '—'} · KYC: ${esc(u.kyc_status)} · verified: ${u.email_verified ? 'yes' : 'no'}</div>
+          <div class="row-actions">
+            <button class="btn btn-ghost btn-sm view-full-dossier" data-id="${u.id}">View full dossier</button>
+            <button class="btn btn-ghost btn-sm edit-profile" data-id="${u.id}" data-email="${esc(u.email)}" data-name="${esc(u.full_name)||''}" data-country="${esc(u.country)||''}" data-dob="${esc(u.date_of_birth)||''}">Edit profile</button>
+            <button class="btn btn-ghost btn-sm wallet-adjust" data-id="${u.id}">Adjust wallet</button>
+            <button class="btn btn-ghost btn-sm issue-cert" data-email="${esc(u.email)}">Issue certificate</button>
+            <button class="btn btn-ghost btn-sm force-logout" data-id="${u.id}">Force logout</button>
+            ${!u.email_verified ? `<button class="btn btn-ghost btn-sm verify-email" data-id="${u.id}">Verify email manually</button>` : ''}
+            ${u.banned
+              ? `<button class="btn btn-primary btn-sm unban-user" data-id="${u.id}">Unban</button>`
+              : `<button class="btn btn-ghost btn-sm ban-user" data-id="${u.id}">Ban</button>`}
+            <button class="btn btn-ghost btn-sm delete-user" data-id="${u.id}">Delete login</button>
+          </div>
+          <div class="dossier" id="dossier-${u.id}" style="display:none; margin-top:10px;"></div>`;
+        list.appendChild(div);
+      });
+      list.querySelectorAll('.edit-profile').forEach(btn => btn.addEventListener('click', async () => {
+        const full_name = prompt('Full name:', btn.dataset.name) ?? btn.dataset.name;
+        const country = prompt('Country:', btn.dataset.country) ?? btn.dataset.country;
+        const date_of_birth = prompt('Date of birth (YYYY-MM-DD):', btn.dataset.dob) ?? btn.dataset.dob;
+        const email = prompt('Email:', btn.dataset.email) ?? btn.dataset.email;
+        try { await adminFetch(`/admin/users/${btn.dataset.id}`, { method: 'PUT', body: JSON.stringify({ full_name, country, date_of_birth, email }) }); searchUsers(); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.issue-cert').forEach(btn => btn.addEventListener('click', async () => {
+        const type = confirm('OK = funded certificate, Cancel = phase-pass certificate') ? 'funded' : 'phase_pass';
+        const model = prompt('Model (1step/2step/3step):', '2step');
+        const plan_size = parseInt(prompt('Plan size ($):', '10000'), 10);
+        const phase = parseInt(prompt('Phase number:', type === 'funded' ? '3' : '2'), 10);
+        btn.disabled = true;
+        try { await adminFetch('/admin/certificates', { method: 'POST', body: JSON.stringify({ owner_label: btn.dataset.email, type, model, plan_size, phase }) }); alert('Issued.'); }
+        catch (err) { alert(err.message); }
+        finally { btn.disabled = false; }
+      }));
+      list.querySelectorAll('.force-logout').forEach(btn => btn.addEventListener('click', async () => {
+        try { await adminFetch(`/admin/users/${btn.dataset.id}/force-logout`, { method: 'POST', body: '{}' }); alert('Logged out everywhere.'); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.verify-email').forEach(btn => btn.addEventListener('click', async () => {
+        try { await adminFetch(`/admin/users/${btn.dataset.id}/verify-email`, { method: 'POST', body: '{}' }); searchUsers(); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.ban-user').forEach(btn => btn.addEventListener('click', async () => {
+        if (!confirm('Ban this user? They will be logged out everywhere immediately.')) return;
+        try { await adminFetch(`/admin/users/${btn.dataset.id}/ban`, { method: 'POST', body: '{}' }); searchUsers(); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.unban-user').forEach(btn => btn.addEventListener('click', async () => {
+        try { await adminFetch(`/admin/users/${btn.dataset.id}/unban`, { method: 'POST', body: '{}' }); searchUsers(); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.delete-user').forEach(btn => btn.addEventListener('click', async () => {
+        if (!confirm('Delete this login identity permanently? Trading history is kept for audit.')) return;
+        try { await adminFetch(`/admin/users/${btn.dataset.id}`, { method: 'DELETE' }); searchUsers(); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.wallet-adjust').forEach(btn => btn.addEventListener('click', async () => {
+        const amount = parseFloat(prompt('Amount to add (negative to subtract):', '0'));
+        if (!amount) return;
+        const reason = prompt('Reason (for the audit log):');
+        if (reason === null) return; // user clicked Cancel — do NOT adjust this wallet
+        btn.disabled = true;
+        try { const r = await adminFetch(`/admin/users/${btn.dataset.id}/wallet-adjust`, { method: 'POST', body: JSON.stringify({ amount, reason }) }); alert('New wallet balance: $' + r.wallet_balance.toFixed(2)); }
+        catch (err) { alert(err.message); }
+        finally { btn.disabled = false; }
+      }));
+      list.querySelectorAll('.view-full-dossier').forEach(btn => btn.addEventListener('click', async () => {
+        const box = document.getElementById('dossier-' + btn.dataset.id);
+        if (box.style.display === 'block') { box.style.display = 'none'; return; }
+        box.style.display = 'block';
+        box.innerHTML = 'Loading…';
+        try {
+          const full = await adminFetch(`/admin/users/${btn.dataset.id}/full`);
+          box.innerHTML = `<pre style="white-space:pre-wrap; font-size:11.5px; background:var(--ink-3); padding:10px; border-radius:8px; max-height:400px; overflow:auto;">${JSON.stringify(full, null, 2).replace(/</g,'&lt;')}</pre>
+            <div style="display:flex; gap:8px; margin-top:8px;">
+              <input type="text" class="revoke-cert-input" placeholder="certificate id to revoke" style="flex:1;">
+              <button class="btn btn-ghost btn-sm revoke-cert-btn">Revoke certificate</button>
+            </div>`;
+          box.querySelector('.revoke-cert-btn').addEventListener('click', async (e) => {
+            const certId = box.querySelector('.revoke-cert-input').value.trim();
+            if (!certId) return;
+            if (!confirm(`Hide certificate ${certId}? This breaks any link to it the trader may have already shared. It can be restored later if needed.`)) return;
+            const revokeBtn = e.currentTarget;
+            revokeBtn.disabled = true;
+            try { await adminFetch(`/admin/certificates/${certId}`, { method: 'DELETE' }); alert('Revoked.'); btn.click(); btn.click(); }
+            catch (err) { alert(err.message); revokeBtn.disabled = false; }
+          });
+        } catch (err) { box.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+      }));
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.getElementById('searchUsersBtn').addEventListener('click', searchUsers);
+  document.querySelector('.admin-tab[data-tab="users"]').addEventListener('click', searchUsers);
+
+  document.getElementById('createUserBtn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    const resultEl = document.getElementById('createUserResult');
+    btn.disabled = true;
+    try {
+      const email = document.getElementById('newUserEmail').value.trim();
+      const password = document.getElementById('newUserPassword').value;
+      const full_name = document.getElementById('newUserName').value.trim();
+      const country = document.getElementById('newUserCountry').value.trim();
+      const user = await adminFetch('/admin/users', { method: 'POST', body: JSON.stringify({ email, password, full_name, country }) });
+      resultEl.style.color = 'var(--green)';
+      resultEl.textContent = `Created: ${user.email}`;
+    } catch (err) { resultEl.style.color = 'var(--red)'; resultEl.textContent = err.message; }
+    finally { btn.disabled = false; }
+  });
+
+  document.getElementById('grantBtn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    const resultEl = document.getElementById('grantResult');
+    const owner_label = document.getElementById('grantEmail').value.trim();
+    if (!confirm(`Grant a free account to ${owner_label}?`)) return;
+    btn.disabled = true;
+    try {
+      const model = document.getElementById('grantModel').value;
+      const plan_size = parseInt(document.getElementById('grantSize').value, 10);
+      const acc = await adminFetch('/admin/grant-account', { method: 'POST', body: JSON.stringify({ owner_label, model, plan_size }) });
+      resultEl.style.color = 'var(--green)';
+      resultEl.textContent = `Granted! Account ID: ${acc.id}`;
+    } catch (err) { resultEl.style.color = 'var(--red)'; resultEl.textContent = err.message; }
+    finally { btn.disabled = false; }
+  });
+
+  // ---- Tickets ----
+  async function loadTickets() {
+    const list = document.getElementById('ticketsList');
+    list.innerHTML = 'Loading…';
+    const status = document.getElementById('ticketStatusFilter').value;
+    try {
+      const tickets = await adminFetch('/admin/tickets' + (status ? '?status=' + status : ''));
+      list.innerHTML = tickets.length ? '' : '<p style="color:var(--paper-dim)">No tickets.</p>';
+      tickets.forEach(t => {
+        const div = document.createElement('div');
+        div.className = 'row-item';
+        const thread = t.replies.map(r => `<div style="margin-top:6px; padding-inline-start:10px; border-inline-start:2px solid ${r.sender === 'admin' ? 'var(--gold)' : 'var(--line)'};"><strong>${esc(r.sender)}</strong>: ${esc(r.message)}</div>`).join('');
+        div.innerHTML = `
+          <div class="top"><strong>${esc(t.subject)}</strong><span class="status-badge status-${t.status === 'resolved' ? 'active' : 'funded'}">${esc(t.status)}</span> <span class="status-badge" style="background:var(--ink-3);">${esc(t.category)}</span></div>
+          <div class="meta">From: ${esc(t.owner_label)} · #${t.id.slice(0,8)}</div>
+          <div style="margin-top:8px; max-height:180px; overflow-y:auto;">${thread}</div>
+          <textarea class="ticket-reply-box" rows="2" placeholder="Type a reply..." style="width:100%; margin-top:8px;"></textarea>
+          <div class="row-actions">
+            <button class="btn btn-primary btn-sm reply-ticket" data-id="${t.id}">Reply</button>
+            <button class="btn btn-ghost btn-sm resolve-ticket" data-id="${t.id}">Mark resolved</button>
+          </div>`;
+        list.appendChild(div);
+      });
+      list.querySelectorAll('.reply-ticket').forEach(btn => btn.addEventListener('click', async () => {
+        const box = btn.closest('.row-item').querySelector('.ticket-reply-box');
+        const message = box.value.trim();
+        if (!message) return;
+        try { await adminFetch(`/admin/tickets/${btn.dataset.id}/reply`, { method: 'POST', body: JSON.stringify({ message, status: 'in_progress' }) }); loadTickets(); }
+        catch (err) { alert(err.message); }
+      }));
+      list.querySelectorAll('.resolve-ticket').forEach(btn => btn.addEventListener('click', async () => {
+        try { await adminFetch(`/admin/tickets/${btn.dataset.id}/reply`, { method: 'POST', body: JSON.stringify({ status: 'resolved' }) }); loadTickets(); }
+        catch (err) { alert(err.message); }
+      }));
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.getElementById('loadTicketsBtn').addEventListener('click', loadTickets);
+
+  // ---- Accounts search + detail (this is the "manually review a banned account" tool) ----
+  async function searchAccounts() {
+    const list = document.getElementById('accountsList');
+    list.innerHTML = 'Loading…';
+    const owner_label = document.getElementById('accountSearchInput').value.trim();
+    const status = document.getElementById('accountStatusFilter').value;
+    const includeDeleted = document.getElementById('accountIncludeDeleted').checked;
+    const qs = new URLSearchParams();
+    if (owner_label) qs.set('owner_label', owner_label);
+    if (status) qs.set('status', status);
+    if (includeDeleted) qs.set('include_deleted', 'true');
+    try {
+      const accounts = await adminFetch('/admin/accounts?' + qs.toString());
+      list.innerHTML = accounts.length ? '' : '<p style="color:var(--paper-dim)">No matches.</p>';
+      accounts.forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'row-item';
+        div.innerHTML = `
+          <div class="top"><strong>${esc(a.owner_label)}</strong><span class="status-badge ${a.status === 'breached' ? 'status-breached' : a.status === 'funded' ? 'status-funded' : 'status-active'}">${esc(a.status)}</span>${a.deleted_at ? '<span style="color:var(--red); font-size:11px;">⚑ HIDDEN (deleted)</span>' : ''}</div>
+          <div class="meta">$${a.plan_size.toLocaleString()} ${esc(a.model)} · phase ${a.phase}/${a.total_phases} · balance ${fmt(a.balance)} · breach reason: ${esc(a.breached_reason) || '—'}</div>
+          <div class="row-actions">
+            <button class="btn btn-ghost btn-sm view-detail" data-id="${a.id}">Open full detail</button>
+            ${a.deleted_at ? `<button class="btn btn-ghost btn-sm quick-restore" data-id="${a.id}">Restore</button>` : ''}
+          </div>`;
+        list.appendChild(div);
+      });
+      list.querySelectorAll('.view-detail').forEach(btn => btn.addEventListener('click', () => showAccountDetail(btn.dataset.id)));
+      list.querySelectorAll('.quick-restore').forEach(btn => btn.addEventListener('click', async () => {
+        try { await adminFetch(`/admin/accounts/${btn.dataset.id}/restore`, { method: 'POST' }); searchAccounts(); }
+        catch (err) { alert(err.message); }
+      }));
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.getElementById('searchAccountsBtn').addEventListener('click', searchAccounts);
+
+  async function showAccountDetail(id) {
+    const box = document.getElementById('accountDetail');
+    box.innerHTML = 'Loading…';
+    try {
+      const a = await adminFetch(`/admin/accounts/${id}`);
+      const rows = a.positions.map(p => `
+        <tr${p.deleted_at ? ' style="opacity:0.5;"' : ''}>
+          <td>${p.symbol}${p.deleted_at ? ' <span style="color:var(--red); font-size:10px;">⚑ HIDDEN</span>' : ''}</td><td>${p.side}</td><td>${p.qty}</td><td>${Number(p.entry_price).toFixed(4)}</td>
+          <td>${p.close_price ? Number(p.close_price).toFixed(4) : '—'}</td>
+          <td style="color:${(p.pnl||0)>=0?'var(--green)':'var(--red)'}">${p.pnl != null ? fmt(p.pnl) : '—'}</td>
+          <td>${p.opened_at}</td><td>${p.closed_at || '—'}</td>
+          <td>
+            ${p.deleted_at
+              ? `<button class="btn btn-ghost btn-sm restore-position" data-id="${p.id}" aria-label="Restore">↺</button>`
+              : `<button class="btn btn-ghost btn-sm edit-position" data-id="${p.id}" data-qty="${p.qty}" data-entry="${p.entry_price}" data-pnl="${p.pnl ?? ''}" data-stop="${p.stop_loss ?? ''}" data-tp="${p.take_profit ?? ''}" aria-label="Edit">✎</button>
+                 <button class="btn btn-ghost btn-sm delete-position" data-id="${p.id}" aria-label="Delete">✕</button>`}
+          </td>
+        </tr>`).join('');
+      const dailyRows = (a.daily_stats || []).map(d => `<tr><td>${d.trade_date}</td><td style="color:${d.day_pnl>=0?'var(--green)':'var(--red)'}">${fmt(d.day_pnl)}</td></tr>`).join('');
+      box.innerHTML = `
+        <div class="card">
+          <div class="top" style="display:flex; justify-content:space-between;">
+            <h4>${esc(a.owner_label)} — $${a.plan_size.toLocaleString()} ${esc(a.model)} (phase ${a.phase}/${a.total_phases})</h4>
+            <span class="status-badge ${a.status === 'breached' ? 'status-breached' : a.status === 'funded' ? 'status-funded' : 'status-active'}">${esc(a.status)}</span>
+          </div>
+          <p class="meta">Balance: ${fmt(a.balance)} · Live equity: ${fmt(a.equity)} · Breach reason: ${esc(a.breached_reason) || '—'} · Created: ${a.created_at} · Last trade: ${a.last_trade_at || '—'}</p>
+          ${a.flagged_for_review ? `<p class="meta" style="color:var(--gold-soft);">⚑ Flagged for review: ${esc(a.flagged_for_review)}</p>` : ''}
+          <p style="font-size:11.5px; color:var(--paper-dim); margin-bottom:8px;">If the balance also needs correcting before reinstating, click "Adjust balance" FIRST, then "Reinstate" — reinstating snapshots the current balance as the account's fresh daily-loss baseline.</p>
+          <div class="row-actions">
+            <button class="btn btn-primary btn-sm override-btn" data-status="active">Reinstate (set active)</button>
+            <button class="btn btn-ghost btn-sm override-btn" data-status="breached">Force-breach</button>
+            <button class="btn btn-ghost btn-sm override-btn" data-status="expired">Mark expired</button>
+            <button class="btn btn-ghost btn-sm balance-adjust-btn">Adjust balance</button>
+            <button class="btn btn-ghost btn-sm daily-stat-btn">Adjust a day's P/L</button>
+            <button class="btn btn-ghost btn-sm delete-account-btn">Delete this account</button>
+          </div>
+          <h4 style="margin-top:18px;">Full trade history (${a.positions.length}) — ✎ edits a field, ✕ deletes the row (neither auto-adjusts balance)</h4>
+          <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;"><table class="mini">
+            <thead><tr><th>Symbol</th><th>Side</th><th>Qty</th><th>Entry</th><th>Close</th><th>P/L</th><th>Opened</th><th>Closed</th><th></th></tr></thead>
+            <tbody>${rows || '<tr><td colspan="9">No trades yet.</td></tr>'}</tbody>
+          </table></div>
+          <h4 style="margin-top:18px;">Daily stats (used for min-trading-days / 40% consistency rules)</h4>
+          <div style="overflow-x:auto; -webkit-overflow-scrolling:touch;"><table class="mini"><thead><tr><th>Date</th><th>Day P/L</th></tr></thead><tbody>${dailyRows || '<tr><td colspan="2">None yet.</td></tr>'}</tbody></table></div>
+        </div>`;
+      box.querySelectorAll('.override-btn').forEach(btn => btn.addEventListener('click', async () => {
+        const admin_note = prompt('Reason for this override (goes in the audit trail):');
+        if (admin_note === null) return; // user clicked Cancel — do NOT proceed with the status change
+        try {
+          await adminFetch(`/admin/accounts/${id}/override-status`, {
+            method: 'POST', body: JSON.stringify({ status: btn.dataset.status, admin_note }),
+          });
+          showAccountDetail(id);
+        } catch (err) { alert(err.message); }
+      }));
+      box.querySelector('.balance-adjust-btn').addEventListener('click', async (e) => {
+        const btn = e.currentTarget;
+        const amount = parseFloat(prompt('Amount to add to balance (negative to subtract):', '0'));
+        if (!amount) return;
+        const reason = prompt('Reason (required, for the audit trail):');
+        if (!reason) return;
+        btn.disabled = true;
+        try { await adminFetch(`/admin/accounts/${id}/balance-adjust`, { method: 'POST', body: JSON.stringify({ amount, reason }) }); showAccountDetail(id); }
+        catch (err) { alert(err.message); btn.disabled = false; }
+      });
+      box.querySelector('.daily-stat-btn').addEventListener('click', async (e) => {
+        const btn = e.currentTarget;
+        const trade_date = prompt('Date to set (YYYY-MM-DD):', new Date().toISOString().slice(0, 10));
+        if (!trade_date) return;
+        const day_pnl = parseFloat(prompt('Day P/L to set for that date:', '0'));
+        if (Number.isNaN(day_pnl)) return;
+        btn.disabled = true;
+        try { await adminFetch(`/admin/accounts/${id}/daily-stats-adjust`, { method: 'POST', body: JSON.stringify({ trade_date, day_pnl }) }); showAccountDetail(id); }
+        catch (err) { alert(err.message); btn.disabled = false; }
+      });
+      box.querySelector('.delete-account-btn').addEventListener('click', async () => {
+        if (!confirm('Hide this account? Its trading history is kept and can be restored later if needed.')) return;
+        try {
+          await adminFetch(`/admin/accounts/${id}`, { method: 'DELETE' });
+          box.innerHTML = `<p style="color:var(--green)">Hidden — not erased.</p><button class="btn btn-ghost btn-sm restore-account-btn">Restore this account</button>`;
+          box.querySelector('.restore-account-btn').addEventListener('click', async () => {
+            try { await adminFetch(`/admin/accounts/${id}/restore`, { method: 'POST' }); showAccountDetail(id); }
+            catch (err) { alert(err.message); }
+          });
+        }
+        catch (err) { alert(err.message); }
+      });
+      box.querySelectorAll('.edit-position').forEach(btn => btn.addEventListener('click', async () => {
+        const qty = parseFloat(prompt('New qty:', btn.dataset.qty));
+        const entry_price = parseFloat(prompt('New entry price:', btn.dataset.entry));
+        const pnlInput = prompt('New P/L (leave blank to keep unchanged):', btn.dataset.pnl);
+        const stopInput = prompt('New stop_loss (leave blank to keep unchanged, type "clear" to remove):', btn.dataset.stop);
+        const tpInput = prompt('New take_profit (leave blank to keep unchanged, type "clear" to remove):', btn.dataset.tp);
+        const body = {};
+        if (!Number.isNaN(qty)) body.qty = qty;
+        if (!Number.isNaN(entry_price)) body.entry_price = entry_price;
+        if (pnlInput !== '' && pnlInput !== null && !Number.isNaN(parseFloat(pnlInput))) body.pnl = parseFloat(pnlInput);
+        if (stopInput === 'clear') body.stop_loss = null;
+        else if (stopInput !== '' && stopInput !== null && !Number.isNaN(parseFloat(stopInput))) body.stop_loss = parseFloat(stopInput);
+        if (tpInput === 'clear') body.take_profit = null;
+        else if (tpInput !== '' && tpInput !== null && !Number.isNaN(parseFloat(tpInput))) body.take_profit = parseFloat(tpInput);
+        try { await adminFetch(`/admin/positions/${btn.dataset.id}`, { method: 'PUT', body: JSON.stringify(body) }); showAccountDetail(id); }
+        catch (err) { alert(err.message); }
+      }));
+      box.querySelectorAll('.delete-position').forEach(btn => btn.addEventListener('click', async () => {
+        if (!confirm('Hide this single trade row? Balance will NOT be auto-adjusted. It can be restored later if needed.')) return;
+        try { await adminFetch(`/admin/positions/${btn.dataset.id}`, { method: 'DELETE' }); showAccountDetail(id); }
+        catch (err) { alert(err.message); }
+      }));
+      box.querySelectorAll('.restore-position').forEach(btn => btn.addEventListener('click', async () => {
+        try { await adminFetch(`/admin/positions/${btn.dataset.id}/restore`, { method: 'POST' }); showAccountDetail(id); }
+        catch (err) { alert(err.message); }
+      }));
+    } catch (err) { box.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+
+  // ---- Settings (the "100% control" panel) ----
+  let currentSettings = null;
+
+  const ALL_I18N_KEYS = ['account_id_label','add_to_cart','analytics_avgloss','analytics_avgwin','analytics_equity_curve','analytics_title','analytics_trades','analytics_winrate','auth_email','auth_have_account','auth_login_title','auth_no_account','auth_password','auth_ref_code','auth_register_title','auth_submit_login','auth_submit_register','brand_name','cart_items_title','chat_body','chat_placeholder','chat_send','chat_title','checkout_h1','close_btn','coin_btc','coin_usdt_erc20','coin_usdt_trc20','contact_h1','contact_p','continue_payment_btn','create_test_btn','dash_analytics_link','dash_logout','dash_my_accounts','dash_my_orders','dash_no_accounts','dash_referral_count','dash_referral_desc','dash_referral_rewards','dash_referral_title','dash_title','dash_welcome','disclaimer_label','disclaimer_text','discount_apply','discount_label','discount_preview_msg','done_desc','done_title','empty_cart','footer_contact','footer_platform','footer_rights','footer_rules','form_contact','form_message','form_name','form_subject','form_submit','form_success','go_platform_btn','home_crypto_desc','home_crypto_eyebrow','home_crypto_h2','home_eyebrow','home_h1_1','home_h1_2','home_how_eyebrow','home_how_h2','home_lead','home_mission','home_plans_desc','home_plans_eyebrow','home_plans_h2','home_step1_desc','home_step1_title','home_step2_desc','home_step2_title','home_step3_desc','home_step3_title','lbl_balance','lbl_equity','lbl_phase','lbl_qty','lbl_status','lbl_stop','lbl_symbol','live_support_desc','live_support_title','load_account_btn','login_btn','logout_btn','nav_cart','nav_contact','nav_dashboard','nav_home','nav_plans','nav_platform','nav_rules','no_account_p','no_positions','open_position_btn','or_word','pay_address_label','pay_amount_label','pay_desc','pay_title','payment_method_label','pending_desc','pending_title','platform_h1','platform_p','positions_title','refresh_btn','register_btn','rule10_desc','rule10_title','rule11_desc','rule11_title','rule12_desc','rule12_title','rule13_desc','rule13_title','rule14_desc','rule14_title','rule15_desc','rule15_title','rule16_desc','rule16_title','rule17_desc','rule17_title','rule1_desc','rule1_title','rule2_desc','rule2_title','rule3_desc','rule3_title','rule4_desc','rule4_title','rule5_desc','rule5_title','rule6_desc','rule6_title','rule7_desc','rule7_title','rule8_desc','rule8_title','rule9_desc','rule9_title','rules_eyebrow','rules_footer_note','rules_h1','rules_lang_note','rules_p','rules_section_caps','rules_section_general','rules_section_risk','see_full_rules','side_buy','side_sell','start_challenge','subj_account','subj_bug','subj_general','subj_payment','submit_tx_btn','sum_discount','sum_subtotal','sum_total','tab_1step','tab_2step','tab_3step','terms_text','terms_view_link','th_entry','th_pnl','th_qty','th_side','th_status','th_symbol','ticket_title','title_checkout','title_contact','title_home','title_platform','title_rules','try_free','tut1_desc','tut1_title','tut2_desc','tut2_title','tut3_desc','tut3_title','tut4_desc','tut4_title','tut5_desc','tut5_title','tutorial_eyebrow','tutorial_h2','tx_hash_label'];
+
+  function populateTxKeyDropdown() {
+    const sel = document.getElementById('txKey');
+    if (sel.options.length) return;
+    ALL_I18N_KEYS.forEach(k => {
+      const opt = document.createElement('option');
+      opt.value = k; opt.textContent = k;
+      sel.appendChild(opt);
+    });
+  }
+
+  function refreshTxFields() {
+    const lang = document.getElementById('txLang').value;
+    const key = document.getElementById('txKey').value;
+    const builtIn = (typeof I18N !== 'undefined') ? (I18N[lang]?.[key] ?? I18N.en?.[key] ?? '') : '';
+    const override = currentSettings?.i18n_overrides?.[lang]?.[key];
+    document.getElementById('txCurrent').value = override ? `${override}  (overridden — built-in was: ${builtIn})` : builtIn;
+    document.getElementById('txNew').value = override || '';
+  }
+
+  function renderOverridesList() {
+    const lang = document.getElementById('txLang').value;
+    const overrides = currentSettings?.i18n_overrides?.[lang] || {};
+    const box = document.getElementById('txOverridesList');
+    const entries = Object.entries(overrides);
+    if (!entries.length) { box.innerHTML = '<p style="color:var(--paper-dim); font-size:12.5px;">No overrides set for this language yet.</p>'; return; }
+    box.innerHTML = `<p style="font-size:12px; color:var(--paper-dim); margin-bottom:6px;">Current overrides for ${lang}:</p>` +
+      entries.map(([k, v]) => `<div class="row-item" style="padding:8px 10px;"><strong>${k}</strong>: ${v.replace(/</g,'&lt;')} <button class="btn btn-ghost btn-sm reset-key" data-key="${k}" style="margin-inline-start:8px;">reset</button></div>`).join('');
+    box.querySelectorAll('.reset-key').forEach(btn => btn.addEventListener('click', async () => {
+      delete currentSettings.i18n_overrides[lang][btn.dataset.key];
+      await adminFetch('/admin/settings', { method: 'PUT', body: JSON.stringify({ i18n_overrides: currentSettings.i18n_overrides }) });
+      renderOverridesList(); refreshTxFields();
+    }));
+  }
+
+  document.getElementById('txLang').addEventListener('change', () => { refreshTxFields(); renderOverridesList(); });
+  document.getElementById('txKey').addEventListener('change', refreshTxFields);
+
+  document.getElementById('txSaveBtn').addEventListener('click', async () => {
+    const lang = document.getElementById('txLang').value;
+    const key = document.getElementById('txKey').value;
+    const value = document.getElementById('txNew').value;
+    if (!currentSettings.i18n_overrides[lang]) currentSettings.i18n_overrides[lang] = {};
+    currentSettings.i18n_overrides[lang][key] = value;
+    try {
+      await adminFetch('/admin/settings', { method: 'PUT', body: JSON.stringify({ i18n_overrides: currentSettings.i18n_overrides }) });
+      renderOverridesList(); refreshTxFields();
+    } catch (err) { alert(err.message); }
+  });
+  document.getElementById('txResetBtn').addEventListener('click', async () => {
+    const lang = document.getElementById('txLang').value;
+    const key = document.getElementById('txKey').value;
+    if (currentSettings.i18n_overrides[lang]) delete currentSettings.i18n_overrides[lang][key];
+    try {
+      await adminFetch('/admin/settings', { method: 'PUT', body: JSON.stringify({ i18n_overrides: currentSettings.i18n_overrides }) });
+      renderOverridesList(); refreshTxFields();
+    } catch (err) { alert(err.message); }
+  });
+
+  function renderLoyaltyMilestones(milestones) {
+    const listEl = document.getElementById('loyaltyMilestonesList');
+    listEl.innerHTML = milestones.map((m, i) => `
+      <div class="field-row loyalty-milestone-row" data-index="${i}" style="align-items:end; margin-bottom:8px;">
+        <div class="field"><label for="lm-orders-${i}">Orders needed</label><input type="number" id="lm-orders-${i}" step="1" min="1" max="1000" class="lm-orders" value="${m.orders_count ?? ''}" style="width:100px;"></div>
+        <div class="field"><label for="lm-discount-${i}">Discount %</label><input type="number" id="lm-discount-${i}" step="0.01" min="0.01" max="1" class="lm-discount" value="${m.discount_pct ?? ''}"></div>
+        <button type="button" class="btn btn-ghost btn-sm remove-loyalty-milestone">✕</button>
+      </div>`).join('');
+    listEl.querySelectorAll('.remove-loyalty-milestone').forEach(btn => {
+      btn.addEventListener('click', () => btn.closest('.loyalty-milestone-row').remove());
+    });
+  }
+  let nextMilestoneId = 0;
+  document.getElementById('addLoyaltyMilestoneBtn').addEventListener('click', () => {
+    const listEl = document.getElementById('loyaltyMilestonesList');
+    const newIdx = nextMilestoneId++;
+    listEl.insertAdjacentHTML('beforeend', `
+      <div class="field-row loyalty-milestone-row" style="align-items:end; margin-bottom:8px;">
+        <div class="field"><label for="lm-orders-new-${newIdx}">Orders needed</label><input type="number" id="lm-orders-new-${newIdx}" step="1" min="1" max="1000" class="lm-orders" style="width:100px;"></div>
+        <div class="field"><label for="lm-discount-new-${newIdx}">Discount %</label><input type="number" id="lm-discount-new-${newIdx}" step="0.01" min="0.01" max="1" class="lm-discount" value="0.15"></div>
+        <button type="button" class="btn btn-ghost btn-sm remove-loyalty-milestone">✕</button>
+      </div>`);
+    listEl.querySelector('.loyalty-milestone-row:last-child .remove-loyalty-milestone').addEventListener('click', function () { this.closest('.loyalty-milestone-row').remove(); });
+  });
+
+  function renderNewsWindows(windows) {
+    const listEl = document.getElementById('newsWindowsList');
+    listEl.innerHTML = windows.map((w, i) => `
+      <div class="field-row news-window-row" data-index="${i}" style="align-items:end; margin-bottom:8px;">
+        <div class="field"><label for="nw-start-${i}">Start (UTC)</label><input type="text" id="nw-start-${i}" class="nw-start" value="${w.start || ''}" placeholder="12:25"></div>
+        <div class="field"><label for="nw-end-${i}">End (UTC)</label><input type="text" id="nw-end-${i}" class="nw-end" value="${w.end || ''}" placeholder="12:45"></div>
+        <div class="field"><label for="nw-label-${i}">Label</label><input type="text" id="nw-label-${i}" class="nw-label" value="${esc(w.label || '')}" placeholder="e.g. NFP release"></div>
+        <div class="field" style="max-width:100px;"><label for="nw-mult-${i}">Multiplier</label><input type="number" id="nw-mult-${i}" step="0.5" min="1" class="nw-mult" value="${w.multiplier ?? ''}"></div>
+        <button type="button" class="btn btn-ghost btn-sm remove-news-window">✕</button>
+      </div>`).join('');
+    listEl.querySelectorAll('.remove-news-window').forEach(btn => {
+      btn.addEventListener('click', () => btn.closest('.news-window-row').remove());
+    });
+  }
+  let nextNewsWindowId = 0;
+  document.getElementById('addNewsWindowBtn').addEventListener('click', () => {
+    const listEl = document.getElementById('newsWindowsList');
+    const currentCount = listEl.querySelectorAll('.news-window-row').length;
+    const newIdx = nextNewsWindowId++;
+    listEl.insertAdjacentHTML('beforeend', `
+      <div class="field-row news-window-row" data-index="${currentCount}" style="align-items:end; margin-bottom:8px;">
+        <div class="field"><label for="nw-start-new-${newIdx}">Start (UTC)</label><input type="text" id="nw-start-new-${newIdx}" class="nw-start" placeholder="12:25"></div>
+        <div class="field"><label for="nw-end-new-${newIdx}">End (UTC)</label><input type="text" id="nw-end-new-${newIdx}" class="nw-end" placeholder="12:45"></div>
+        <div class="field"><label for="nw-label-new-${newIdx}">Label</label><input type="text" id="nw-label-new-${newIdx}" class="nw-label" placeholder="e.g. NFP release"></div>
+        <div class="field" style="max-width:100px;"><label for="nw-mult-new-${newIdx}">Multiplier</label><input type="number" id="nw-mult-new-${newIdx}" step="0.5" min="1" class="nw-mult" value="5"></div>
+        <button type="button" class="btn btn-ghost btn-sm remove-news-window">✕</button>
+      </div>`);
+    listEl.querySelector('.news-window-row:last-child .remove-news-window').addEventListener('click', function () { this.closest('.news-window-row').remove(); });
+  });
+
+  async function loadSettings() {
+    try {
+      const s = await adminFetch('/admin/settings');
+      currentSettings = s;
+      document.getElementById('s_brand_name').value = s.brand_name || '';
+      document.getElementById('s_logo_svg').value = s.logo_svg || '';
+      document.getElementById('s_hero_tagline').value = s.hero_tagline_override || '';
+      document.getElementById('s_mission_text').value = s.mission_text_override || '';
+      document.getElementById('s_disclaimer').value = s.disclaimer_override || '';
+      document.getElementById('s_support_email').value = s.support_email || '';
+      document.getElementById('s_support_telegram').value = s.support_telegram || '';
+      document.getElementById('s_turnstile_site_key').value = s.turnstile_site_key || '';
+      document.getElementById('s_ga4_measurement_id').value = s.ga4_measurement_id || '';
+      document.getElementById('s_forex_poll_seconds').value = Math.round((s.forex_poll_interval_ms || 20000) / 1000);
+
+      for (const model of ['1step', '2step', '3step', 'instant']) {
+        for (const size of [1000, 2500, 5000, 10000, 25000, 50000, 100000, 200000, 250000, 500000]) {
+          const el = document.getElementById(`p_${model}_${size}`);
+          if (el) el.value = s.pricing?.[model]?.[size] ?? '';
+        }
+        document.getElementById(`m_${model}_phases`).value = s.model_config?.[model]?.total_phases ?? '';
+        document.getElementById(`m_${model}_target`).value = s.model_config?.[model]?.profit_target_pct ?? '';
+        document.getElementById(`m_${model}_daily`).value = s.model_config?.[model]?.max_daily_loss_pct ?? '';
+        document.getElementById(`m_${model}_total`).value = s.model_config?.[model]?.max_total_loss_pct ?? '';
+        document.getElementById(`m_${model}_split`).value = s.model_config?.[model]?.profit_split_pct ?? '';
+        document.getElementById(`m_${model}_mintdays`).value = s.model_config?.[model]?.min_trading_days ?? '';
+        document.getElementById(`m_${model}_mindailyprofit`).value = s.model_config?.[model]?.min_daily_profit_pct ?? '';
+      }
+
+      document.getElementById('sp_enabled').value = String(s.scaling_plan?.enabled ?? true);
+      document.getElementById('sp_milestone').value = s.scaling_plan?.profit_milestone_pct ?? '';
+      document.getElementById('sp_balance_inc').value = s.scaling_plan?.balance_increase_pct ?? '';
+      document.getElementById('sp_split_inc').value = s.scaling_plan?.profit_split_increase_pct ?? '';
+      document.getElementById('sp_split_max').value = s.scaling_plan?.max_profit_split_pct ?? '';
+      document.getElementById('sp_max_scaleups').value = s.scaling_plan?.max_scale_ups ?? '';
+
+      document.getElementById('ar_enabled').value = String(s.account_reset?.enabled ?? true);
+      document.getElementById('ar_fee_pct').value = s.account_reset?.fee_pct_of_original ?? '';
+      document.getElementById('ar_min_fee').value = s.account_reset?.min_reset_fee_usd ?? '';
+
+      renderNewsWindows(s.news_windows?.windows || []);
+      document.getElementById('lr_enabled').value = String(s.loyalty_rewards?.enabled ?? true);
+      renderLoyaltyMilestones(s.loyalty_rewards?.milestones || []);
+      document.getElementById('rr_enabled').value = String(s.referral_reward?.enabled ?? true);
+      document.getElementById('rr_type').value = s.referral_reward?.type || 'cash';
+      document.getElementById('rr_reward_pct').value = s.referral_reward?.reward_pct ?? '';
+      document.getElementById('eod_start').value = s.news_windows?.eod_window?.start ?? '';
+      document.getElementById('eod_end').value = s.news_windows?.eod_window?.end ?? '';
+      document.getElementById('eod_mult').value = s.news_windows?.eod_window?.multiplier ?? '';
+
+      document.getElementById('tc_spread_crypto').value = s.trading_costs?.spread_pct?.crypto ?? '';
+      document.getElementById('tc_spread_forex').value = s.trading_costs?.spread_pct?.forex ?? '';
+      document.getElementById('tc_spread_metals').value = s.trading_costs?.spread_pct?.metals ?? '';
+      document.getElementById('tc_spread_energy').value = s.trading_costs?.spread_pct?.energy ?? '';
+      document.getElementById('tc_spread_indices').value = s.trading_costs?.spread_pct?.indices ?? '';
+      document.getElementById('tc_comm_crypto').value = s.trading_costs?.commission_pct?.crypto ?? '';
+      document.getElementById('tc_comm_forex').value = s.trading_costs?.commission_pct?.forex ?? '';
+      document.getElementById('tc_comm_metals').value = s.trading_costs?.commission_pct?.metals ?? '';
+      document.getElementById('tc_comm_energy').value = s.trading_costs?.commission_pct?.energy ?? '';
+      document.getElementById('tc_comm_indices').value = s.trading_costs?.commission_pct?.indices ?? '';
+      document.getElementById('lev_crypto').value = s.leverage?.crypto ?? '';
+      document.getElementById('lev_forex').value = s.leverage?.forex ?? '';
+      document.getElementById('lev_metals').value = s.leverage?.metals ?? '';
+      document.getElementById('lev_energy').value = s.leverage?.energy ?? '';
+      document.getElementById('lev_indices').value = s.leverage?.indices ?? '';
+
+      document.getElementById('c_max_plan_size').value = s.caps?.max_plan_size ?? '';
+      document.getElementById('c_max_funded_total').value = s.caps?.max_funded_total ?? '';
+      document.getElementById('c_max_active_accounts').value = s.caps?.max_active_accounts ?? '';
+
+      document.getElementById('pl_payout').value = s.payout_limits?.min_payout_usd ?? '';
+      document.getElementById('pl_withdrawal').value = s.payout_limits?.min_withdrawal_usd ?? '';
+      document.getElementById('pl_maxdaily').value = s.payout_limits?.max_daily_withdrawal_usd ?? '';
+      document.getElementById('pl_deposit').value = s.payout_limits?.min_deposit_usd ?? '';
+
+      document.getElementById('w_trc20').value = s.wallet_addresses?.USDT_TRC20 || '';
+      document.getElementById('w_erc20').value = s.wallet_addresses?.USDT_ERC20 || '';
+      document.getElementById('w_bep20').value = s.wallet_addresses?.USDT_BEP20 || '';
+
+      const th = s.theme || {};
+      const tc = th.colors || {};
+      document.getElementById('th_ink').value = tc.ink || '#0F1720';
+      document.getElementById('th_ink2').value = tc.ink2 || '#16212C';
+      document.getElementById('th_ink3').value = tc.ink3 || '#1C2833';
+      document.getElementById('th_gold').value = tc.gold || '#C89B3C';
+      document.getElementById('th_goldSoft').value = tc.goldSoft || '#E3C878';
+      document.getElementById('th_teal').value = tc.teal || '#2C8C99';
+      document.getElementById('th_tealSoft').value = tc.tealSoft || '#4FB3BF';
+      document.getElementById('th_paper').value = tc.paper || '#EDEAE2';
+      document.getElementById('th_paperDim').value = tc.paperDim || '#A9B2BC';
+      document.getElementById('th_green').value = tc.green || '#4C9A6A';
+      document.getElementById('th_red').value = tc.red || '#C85C3C';
+      document.getElementById('th_body_font').value = th.body_font || 'Vazirmatn';
+      document.getElementById('th_display_font').value = th.display_font || 'Fraunces';
+
+      populateTxKeyDropdown();
+      refreshTxFields();
+      renderOverridesList();
+    } catch (err) {
+      document.getElementById('settingsResult').style.color = 'var(--red)';
+      document.getElementById('settingsResult').textContent = err.message;
+    }
+  }
+  document.querySelector('.admin-tab[data-tab="settings"]').addEventListener('click', loadSettings);
+
+  document.getElementById('saveSettingsBtn').addEventListener('click', async (e) => {
+    const saveBtn = e.currentTarget;
+    saveBtn.disabled = true;
+    const resultEl = document.getElementById('settingsResult');
+    const n = (id) => { const el = document.getElementById(id); if (!el || el.value === '') return undefined; return parseFloat(el.value); };
+    const pricing = {};
+    const model_config = {};
+    for (const model of ['1step', '2step', '3step', 'instant']) {
+      pricing[model] = {};
+      for (const size of [1000, 2500, 5000, 10000, 25000, 50000, 100000, 200000, 250000, 500000]) {
+        const v = n(`p_${model}_${size}`);
+        if (v !== undefined) pricing[model][size] = v;
+      }
+      model_config[model] = {
+        total_phases: n(`m_${model}_phases`),
+        profit_target_pct: n(`m_${model}_target`),
+        max_daily_loss_pct: n(`m_${model}_daily`),
+        max_total_loss_pct: n(`m_${model}_total`),
+        profit_split_pct: n(`m_${model}_split`),
+        min_trading_days: n(`m_${model}_mintdays`),
+        min_daily_profit_pct: n(`m_${model}_mindailyprofit`),
+      };
+    }
+
+    const updates = {
+      brand_name: document.getElementById('s_brand_name').value.trim() || 'FundedBeyondBorders',
+      logo_svg: document.getElementById('s_logo_svg').value.trim() || undefined,
+      hero_tagline_override: document.getElementById('s_hero_tagline').value.trim() || null,
+      mission_text_override: document.getElementById('s_mission_text').value.trim() || null,
+      disclaimer_override: document.getElementById('s_disclaimer').value.trim() || null,
+      support_email: document.getElementById('s_support_email').value.trim(),
+      support_telegram: document.getElementById('s_support_telegram').value.trim(),
+      turnstile_site_key: document.getElementById('s_turnstile_site_key').value.trim(),
+      ga4_measurement_id: document.getElementById('s_ga4_measurement_id').value.trim(),
+      forex_poll_interval_ms: Math.max(5, parseInt(document.getElementById('s_forex_poll_seconds').value, 10) || 20) * 1000,
+      pricing,
+      model_config,
+      scaling_plan: {
+        enabled: document.getElementById('sp_enabled').value === 'true',
+        profit_milestone_pct: n('sp_milestone'),
+        balance_increase_pct: n('sp_balance_inc'),
+        profit_split_increase_pct: n('sp_split_inc'),
+        max_profit_split_pct: n('sp_split_max'),
+        max_scale_ups: n('sp_max_scaleups'),
+      },
+      account_reset: {
+        enabled: document.getElementById('ar_enabled').value === 'true',
+        fee_pct_of_original: n('ar_fee_pct'),
+        min_reset_fee_usd: n('ar_min_fee'),
+      },
+      news_windows: {
+        windows: Array.from(document.querySelectorAll('.news-window-row')).map(row => ({
+          start: row.querySelector('.nw-start').value.trim(),
+          end: row.querySelector('.nw-end').value.trim(),
+          label: row.querySelector('.nw-label').value.trim(),
+          multiplier: parseFloat(row.querySelector('.nw-mult').value) || 1,
+        })),
+        eod_window: {
+          start: document.getElementById('eod_start').value.trim(),
+          end: document.getElementById('eod_end').value.trim(),
+          multiplier: parseFloat(document.getElementById('eod_mult').value) || 1,
+        },
+      },
+      loyalty_rewards: {
+        enabled: document.getElementById('lr_enabled').value === 'true',
+        milestones: Array.from(document.querySelectorAll('.loyalty-milestone-row')).map(row => ({
+          orders_count: parseInt(row.querySelector('.lm-orders').value, 10),
+          discount_pct: parseFloat(row.querySelector('.lm-discount').value),
+        })),
+      },
+      referral_reward: {
+        enabled: document.getElementById('rr_enabled').value === 'true',
+        type: document.getElementById('rr_type').value,
+        reward_pct: parseFloat(document.getElementById('rr_reward_pct').value) || 0.10,
+      },
+      trading_costs: {
+        spread_pct: { crypto: n('tc_spread_crypto'), forex: n('tc_spread_forex'), metals: n('tc_spread_metals'), energy: n('tc_spread_energy'), indices: n('tc_spread_indices') },
+        commission_pct: { crypto: n('tc_comm_crypto'), forex: n('tc_comm_forex'), metals: n('tc_comm_metals'), energy: n('tc_comm_energy'), indices: n('tc_comm_indices') },
+      },
+      leverage: { crypto: n('lev_crypto'), forex: n('lev_forex'), metals: n('lev_metals'), energy: n('lev_energy'), indices: n('lev_indices') },
+      caps: {
+        max_plan_size: n('c_max_plan_size'),
+        max_funded_total: n('c_max_funded_total'),
+        max_active_accounts: n('c_max_active_accounts'),
+      },
+      payout_limits: {
+        min_payout_usd: n('pl_payout'),
+        min_withdrawal_usd: n('pl_withdrawal'),
+        max_daily_withdrawal_usd: n('pl_maxdaily'),
+        min_deposit_usd: n('pl_deposit'),
+      },
+      wallet_addresses: {
+        USDT_TRC20: document.getElementById('w_trc20').value.trim(),
+        USDT_ERC20: document.getElementById('w_erc20').value.trim(),
+        USDT_BEP20: document.getElementById('w_bep20').value.trim(),
+      },
+      theme: {
+        colors: {
+          ink: document.getElementById('th_ink').value,
+          ink2: document.getElementById('th_ink2').value,
+          ink3: document.getElementById('th_ink3').value,
+          gold: document.getElementById('th_gold').value,
+          goldSoft: document.getElementById('th_goldSoft').value,
+          teal: document.getElementById('th_teal').value,
+          tealSoft: document.getElementById('th_tealSoft').value,
+          paper: document.getElementById('th_paper').value,
+          paperDim: document.getElementById('th_paperDim').value,
+          green: document.getElementById('th_green').value,
+          red: document.getElementById('th_red').value,
+        },
+        body_font: document.getElementById('th_body_font').value.trim() || 'Vazirmatn',
+        display_font: document.getElementById('th_display_font').value.trim() || 'Fraunces',
+      },
+    };
+    // drop undefined leaf values so we don't overwrite a good default with "undefined"
+    if (!updates.logo_svg) delete updates.logo_svg;
+
+    try {
+      await adminFetch('/admin/settings', { method: 'PUT', body: JSON.stringify(updates) });
+      resultEl.style.color = 'var(--green)';
+      resultEl.textContent = '✓ Saved — live on the site now.';
+    } catch (err) { resultEl.style.color = 'var(--red)'; resultEl.textContent = err.message; }
+    finally { saveBtn.disabled = false; }
+  });
+
+  // ---- Discount codes ----
+  document.getElementById('dcCreateBtn').addEventListener('click', async (e) => {
+    const btn = e.currentTarget;
+    const resultEl = document.getElementById('dcResult');
+    btn.disabled = true;
+    try {
+      const code = document.getElementById('dcCode').value.trim();
+      const percent_off = parseFloat(document.getElementById('dcPercent').value);
+      const max_uses = document.getElementById('dcMaxUses').value ? parseInt(document.getElementById('dcMaxUses').value, 10) : undefined;
+      const result = await adminFetch('/discount-codes', { method: 'POST', body: JSON.stringify({ code, percent_off, max_uses }) });
+      resultEl.style.color = 'var(--green)';
+      resultEl.textContent = `Created: ${result.code} (${(result.percent_off * 100).toFixed(0)}% off)`;
+      loadDiscounts();
+    } catch (err) { resultEl.style.color = 'var(--red)'; resultEl.textContent = err.message; }
+    finally { btn.disabled = false; }
+  });
+
+  async function loadDiscounts() {
+    const list = document.getElementById('dcList');
+    list.innerHTML = 'Loading…';
+    try {
+      const codes = await adminFetch('/admin/discount-codes');
+      list.innerHTML = codes.length ? '' : '<p style="color:var(--paper-dim)">No codes yet.</p>';
+      codes.forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'row-item';
+        div.innerHTML = `
+          <div class="top"><strong>${esc(c.code)}</strong><span>${(c.percent_off * 100).toFixed(0)}% off · used ${c.used_count}${c.max_uses ? '/' + c.max_uses : ''} · ${esc(c.source)}</span></div>
+          <div class="meta">${c.active ? '✓ active' : '🚫 inactive'}${c.expires_at ? ' · expires ' + esc(c.expires_at) : ''}</div>
+          <div class="row-actions">
+            ${c.active
+              ? `<button class="btn btn-ghost btn-sm deactivate-code" data-code="${c.code}">Deactivate</button>`
+              : `<button class="btn btn-primary btn-sm activate-code" data-code="${c.code}">Activate</button>`}
+            <button class="btn btn-ghost btn-sm delete-code" data-code="${c.code}">Delete</button>
+          </div>`;
+        list.appendChild(div);
+      });
+      list.querySelectorAll('.deactivate-code').forEach(btn => btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        try { await adminFetch(`/admin/discount-codes/${btn.dataset.code}/deactivate`, { method: 'POST', body: '{}' }); loadDiscounts(); }
+        catch (err) { alert(err.message); btn.disabled = false; }
+      }));
+      list.querySelectorAll('.activate-code').forEach(btn => btn.addEventListener('click', async () => {
+        btn.disabled = true;
+        try { await adminFetch(`/admin/discount-codes/${btn.dataset.code}/activate`, { method: 'POST', body: '{}' }); loadDiscounts(); }
+        catch (err) { alert(err.message); btn.disabled = false; }
+      }));
+      list.querySelectorAll('.delete-code').forEach(btn => btn.addEventListener('click', async () => {
+        if (!confirm('Hide this code? It can be restored later if needed.')) return;
+        try { await adminFetch(`/admin/discount-codes/${btn.dataset.code}`, { method: 'DELETE' }); loadDiscounts(); }
+        catch (err) { alert(err.message); }
+      }));
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.querySelector('.admin-tab[data-tab="discounts"]').addEventListener('click', loadDiscounts);
+
+  async function loadLedger() {
+    const list = document.getElementById('ledgerList');
+    list.innerHTML = 'Loading…';
+    try {
+      const rows = await adminFetch('/admin/wallet-ledger');
+      list.innerHTML = rows.length ? '' : '<p style="color:var(--paper-dim)">No wallet activity yet.</p>';
+      list.innerHTML = `<div style="overflow-x:auto; -webkit-overflow-scrolling:touch;"><table class="mini"><thead><tr><th>When</th><th>User</th><th>Type</th><th>Amount</th><th>Reason</th></tr></thead><tbody>` +
+        rows.map(r => `<tr><td>${r.created_at}</td><td>${esc(r.email) || esc(r.user_id)}</td><td style="color:${r.type==='credit'?'var(--green)':'var(--red)'}">${esc(r.type)}</td><td>${fmt(r.amount)}</td><td>${esc(r.reason)}</td></tr>`).join('') +
+        `</tbody></table></div>`;
+    } catch (err) { list.innerHTML = `<p style="color:var(--red)">${err.message}</p>`; }
+  }
+  document.querySelector('.admin-tab[data-tab="ledger"]').addEventListener('click', loadLedger);
+
+  async function loadSuspiciousActivity() {
+    const ipList = document.getElementById('sharedIpList');
+    const hedgeList = document.getElementById('crossHedgeList');
+    const sameOwnerList = document.getElementById('correlatedSameOwnerList');
+    const groupList = document.getElementById('correlatedGroupList');
+    ipList.innerHTML = 'Loading…';
+    hedgeList.innerHTML = 'Loading…';
+    sameOwnerList.innerHTML = 'Loading…';
+    groupList.innerHTML = 'Loading…';
+    try {
+      const data = await adminFetch('/admin/suspicious-activity');
+
+      ipList.innerHTML = data.shared_ip_different_owners.length
+        ? data.shared_ip_different_owners.map(r => `
+            <div class="row-item">
+              <div class="top"><strong>${esc(r.ip_address)}</strong><span>${r.num_owners} different account owners</span></div>
+              <div class="meta">${esc(r.owners)}</div>
+            </div>`).join('')
+        : '<p style="color:var(--paper-dim)">Nothing found.</p>';
+
+      hedgeList.innerHTML = data.cross_account_opposite_trades.length
+        ? data.cross_account_opposite_trades.map(r => `
+            <div class="row-item">
+              <div class="top"><strong>${esc(r.symbol)}</strong><span>${esc(r.owner_a)} (${esc(r.side_a)}) ↔ ${esc(r.owner_b)} (${esc(r.side_b)})</span></div>
+              <div class="meta">${r.opened_a} vs ${r.opened_b} · qty ${r.qty_a} / ${r.qty_b} · positions ${r.position_a} / ${r.position_b}</div>
+            </div>`).join('')
+        : '<p style="color:var(--paper-dim)">Nothing found.</p>';
+
+      const renderCorrelated = (rows) => rows.map(r => `
+            <div class="row-item">
+              <div class="top"><strong>${esc(r.symbol_a)} ↔ ${esc(r.symbol_b)}</strong><span>${esc(r.owner_a)} (${esc(r.side_a)}) ↔ ${esc(r.owner_b)} (${esc(r.side_b)})</span></div>
+              <div class="meta">${r.opened_a} vs ${r.opened_b} · qty ${r.qty_a} / ${r.qty_b} · positions ${r.position_a} / ${r.position_b}</div>
+            </div>`).join('');
+
+      const sameOwnerRows = data.correlated_symbol_hedges.filter(r => r.same_owner);
+      const groupRows = data.correlated_symbol_hedges.filter(r => !r.same_owner);
+      sameOwnerList.innerHTML = sameOwnerRows.length ? renderCorrelated(sameOwnerRows) : '<p style="color:var(--paper-dim)">Nothing found.</p>';
+      groupList.innerHTML = groupRows.length ? renderCorrelated(groupRows) : '<p style="color:var(--paper-dim)">Nothing found.</p>';
+    } catch (err) {
+      ipList.innerHTML = `<p style="color:var(--red)">${err.message}</p>`;
+      hedgeList.innerHTML = '';
+      sameOwnerList.innerHTML = '';
+      groupList.innerHTML = '';
+    }
+  }
+  document.querySelector('.admin-tab[data-tab="suspicious"]').addEventListener('click', loadSuspiciousActivity);
+
+  // i18n.js (loaded only so we can read its dictionary as reference text
+  // below) also flips document dir/lang based on the site visitor's saved
+  // language — force this page back to English/LTR regardless.
+  document.addEventListener('DOMContentLoaded', () => {
+    document.documentElement.dir = 'ltr';
+    document.documentElement.lang = 'en';
+  });
+
+  // auto-login if a key is already stored this session
+  if (adminKey()) tryEnterAdmin(adminKey());
+</script>
+</body>
+</html>

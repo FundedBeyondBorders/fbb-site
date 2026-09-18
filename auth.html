@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'en';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<script>
+  // auth.html exists specifically for the not-yet-logged-in flow — a
+  // returning, already-authenticated session landing here (bookmark, back
+  // button, stale link) should go straight to the dashboard instead of
+  // showing a confusing login/signup form. Runs first, before anything
+  // else loads, so there's no flash of the form first.
+  if (localStorage.getItem('fbb_token')) location.replace('/dashboard.html');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_home">FundedBeyondBorders | Trading Evaluation, Without Borders</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<style>
+  .auth-wrap{ max-width:420px; margin:60px auto; padding:0 20px; }
+  .auth-toggle{ display:flex; gap:8px; margin-bottom:20px; }
+  .auth-toggle button{ flex:1; padding:10px; border-radius:10px; border:1px solid var(--line); background:var(--ink-3); color:var(--paper-dim); cursor:pointer; font-family:inherit; font-weight:700; }
+  .auth-toggle button.active{ background:var(--gold); color:#211605; border-color:var(--gold); }
+  .auth-panel{ display:none; }
+  .auth-panel.active{ display:block; }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="auth-wrap">
+  <h1 class="sr-only" data-i18n="auth1">Log in or sign up</h1>
+  <div class="auth-toggle">
+    <button id="tabLogin" class="active" data-i18n="auth_login_title">Log In</button>
+    <button id="tabRegister" data-i18n="auth_register_title">Sign Up</button>
+  </div>
+
+  <div class="card auth-panel active" id="loginPanel">
+    <div id="loginStep1">
+      <div class="field">
+        <label data-i18n="auth_email" for="loginEmail">ایمیل</label>
+        <input type="email" id="loginEmail" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label data-i18n="auth_password" for="loginPassword">رمز عبور</label>
+        <input type="password" id="loginPassword" required autocomplete="current-password">
+      </div>
+      <div id="turnstile-login" style="margin-bottom:12px;"></div>
+      <button class="btn btn-primary btn-block" id="loginBtn" data-i18n="auth_submit_login">Log In</button>
+    </div>
+    <div id="loginStep2" style="display:none;">
+      <div class="field">
+        <label for="loginTotpCode" data-i18n="auth2">Authenticator app code</label>
+        <input type="text" id="loginTotpCode" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" placeholder="000000">
+      </div>
+      <button class="btn btn-primary btn-block" id="loginVerify2faBtn" data-i18n="auth3">Verify</button>
+    </div>
+    <p id="loginError" style="color:var(--red); font-size:13px; margin-top:10px; display:none;" role="alert"></p>
+    <p style="text-align:center; margin-top:14px;">
+      <a href="#" id="showForgotBtn" style="font-size:13px; color:var(--gold-soft); text-decoration:underline;" data-i18n="auth4">Forgot my password</a>
+    </p>
+
+    <div id="forgotBox" style="display:none; border-top:1px solid var(--line); margin-top:14px; padding-top:14px;">
+      <div class="field">
+        <label for="forgotEmail" data-i18n="auth5">Enter your email and we'll send a reset link</label>
+        <input type="email" id="forgotEmail" required autocomplete="email">
+      </div>
+      <div id="turnstile-forgot" style="margin-bottom:12px;"></div>
+      <button class="btn btn-ghost btn-block" id="forgotSubmitBtn" data-i18n="auth6">Send reset link</button>
+      <p id="forgotMsg" style="font-size:13px; margin-top:10px;" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="card auth-panel" id="registerPanel">
+    <div class="field">
+      <label data-i18n="form_name" for="regFullName">نام</label>
+      <input type="text" id="regFullName">
+    </div>
+    <div class="field">
+      <label data-i18n="auth7" for="regCountry">کشور</label>
+      <input type="text" id="regCountry">
+    </div>
+    <div class="field">
+      <label data-i18n="auth8" for="regDob">تاریخ تولد (اختیاری)</label>
+      <input type="date" id="regDob">
+    </div>
+    <div class="field">
+      <label data-i18n="auth_email" for="regEmail">ایمیل</label>
+      <input type="email" id="regEmail" required autocomplete="username">
+    </div>
+    <div class="field">
+      <label data-i18n="auth_password" for="regPassword">رمز عبور</label>
+      <input type="password" id="regPassword" required autocomplete="new-password" minlength="8">
+    </div>
+    <div class="field">
+      <label data-i18n="auth_ref_code" for="regRefCode">کد دعوت (اختیاری)</label>
+      <input type="text" id="regRefCode">
+    </div>
+    <p style="font-size:12px; color:var(--paper-dim); margin-bottom:12px;" data-i18n="auth9">This information is only used later to cross-check against your ID document (KYC) before your first payout.</p>
+    <div id="turnstile-register" style="margin-bottom:12px;"></div>
+    <button class="btn btn-primary btn-block" id="registerBtn" data-i18n="auth_submit_register">Create Account</button>
+    <p id="regError" style="color:var(--red); font-size:13px; margin-top:10px; display:none;" role="alert"></p>
+  </div>
+
+  <p style="text-align:center; margin-top:20px; font-size:13px; color:var(--paper-dim);">
+    <span data-i18n="auth10">Having trouble?</span>
+    <a href="contact.html" style="color:var(--gold-soft); text-decoration:underline;" data-i18n="auth11">Contact support</a>
+    <span data-i18n="auth12">or</span>
+    <a href="faq.html" style="color:var(--gold-soft); text-decoration:underline;" data-i18n="auth13">check the FAQ</a>
+  </p>
+</div>
+
+<script src="js/i18n.js"></script>
+<script src="js/pwa.js"></script>
+<script src="js/api.js"></script>
+<script src="js/settings.js"></script>
+<script>
+  document.getElementById('tabLogin').addEventListener('click', () => {
+    document.getElementById('tabLogin').classList.add('active');
+    document.getElementById('tabRegister').classList.remove('active');
+    document.getElementById('loginPanel').classList.add('active');
+    document.getElementById('registerPanel').classList.remove('active');
+  });
+  document.getElementById('tabRegister').addEventListener('click', () => {
+    document.getElementById('tabRegister').classList.add('active');
+    document.getElementById('tabLogin').classList.remove('active');
+    document.getElementById('registerPanel').classList.add('active');
+    document.getElementById('loginPanel').classList.remove('active');
+  });
+
+  // pre-fill referral code from a ?ref=CODE link, e.g. shared from the dashboard
+  const params = new URLSearchParams(location.search);
+  if (params.get('ref')) {
+    document.getElementById('regRefCode').value = params.get('ref');
+    document.getElementById('tabRegister').click();
+  }
+  if (params.get('reason') === 'session_expired') {
+    showToast(T({fa:'نشست شما منقضی شده — لطفاً دوباره وارد شوید.', en:'Your session expired — please log in again.', ar:'انتهت جلستك — يرجى تسجيل الدخول مرة أخرى.', tr:'Oturumunuzun süresi doldu — lütfen tekrar giriş yapın.', ru:'Ваша сессия истекла — пожалуйста, войдите снова.', es:'Tu sesión expiró — por favor inicia sesión de nuevo.', ku:'دانیشتنەکەت بەسەرچووە — تکایە دووبارە بچۆرە ژوورەوە.'}));
+  }
+
+  let loginCaptchaToken = null, registerCaptchaToken = null, forgotCaptchaToken = null;
+
+  async function renderCaptchaWidgets() {
+    try {
+      const settings = await apiGet('/settings/public');
+      const siteKey = settings.turnstile_site_key;
+      if (!siteKey || typeof turnstile === 'undefined') return; // CAPTCHA not configured yet — forms still work, per the server's fail-open-with-warning behavior
+      turnstile.render('#turnstile-login', { sitekey: siteKey, callback: (t) => { loginCaptchaToken = t; } });
+      turnstile.render('#turnstile-register', { sitekey: siteKey, callback: (t) => { registerCaptchaToken = t; } });
+      turnstile.render('#turnstile-forgot', { sitekey: siteKey, callback: (t) => { forgotCaptchaToken = t; } });
+    } catch (err) { /* settings fetch failed — forms still work without CAPTCHA */ }
+  }
+  document.addEventListener('DOMContentLoaded', renderCaptchaWidgets);
+
+  let pendingTwoFactorToken = null;
+
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    const errEl = document.getElementById('loginError');
+    errEl.style.display = 'none';
+    try {
+      const result = await apiPost('/auth/login', {
+        email: document.getElementById('loginEmail').value.trim(),
+        password: document.getElementById('loginPassword').value,
+        captcha_token: loginCaptchaToken,
+      });
+      if (result.requires_2fa) {
+        pendingTwoFactorToken = result.pending_token;
+        document.getElementById('loginStep1').style.display = 'none';
+        document.getElementById('loginStep2').style.display = 'block';
+        return;
+      }
+      setSession(result.token, result.user);
+      location.href = 'dashboard.html';
+    } catch (err) { errEl.textContent = err.message; errEl.style.display = 'block'; }
+  });
+
+  document.getElementById('loginVerify2faBtn').addEventListener('click', async () => {
+    const errEl = document.getElementById('loginError');
+    errEl.style.display = 'none';
+    try {
+      const result = await apiPost('/auth/login/verify-2fa', {
+        pending_token: pendingTwoFactorToken,
+        code: document.getElementById('loginTotpCode').value.trim(),
+      });
+      setSession(result.token, result.user);
+      location.href = 'dashboard.html';
+    } catch (err) { errEl.textContent = err.message; errEl.style.display = 'block'; }
+  });
+
+  document.getElementById('showForgotBtn').addEventListener('click', (e) => {
+    e.preventDefault();
+    const box = document.getElementById('forgotBox');
+    box.style.display = box.style.display === 'none' ? 'block' : 'none';
+  });
+
+  document.getElementById('forgotSubmitBtn').addEventListener('click', async () => {
+    const msgEl = document.getElementById('forgotMsg');
+    const email = document.getElementById('forgotEmail').value.trim();
+    if (!email) return;
+    msgEl.style.color = 'var(--paper-dim)';
+    msgEl.textContent = '…';
+    try {
+      const result = await apiPost('/auth/forgot-password', { email, captcha_token: forgotCaptchaToken });
+      msgEl.style.color = 'var(--green)';
+      msgEl.textContent = result.message;
+    } catch (err) {
+      msgEl.style.color = 'var(--red)';
+      msgEl.textContent = err.message;
+    }
+  });
+
+  document.getElementById('registerBtn').addEventListener('click', async () => {
+    const errEl = document.getElementById('regError');
+    errEl.style.display = 'none';
+    try {
+      const result = await apiPost('/auth/register', {
+        email: document.getElementById('regEmail').value.trim(),
+        password: document.getElementById('regPassword').value,
+        full_name: document.getElementById('regFullName').value.trim(),
+        country: document.getElementById('regCountry').value.trim(),
+        date_of_birth: document.getElementById('regDob').value || undefined,
+        referral_code: document.getElementById('regRefCode').value.trim() || undefined,
+        captcha_token: registerCaptchaToken,
+      });
+      setSession(result.token, result.user);
+      if (typeof gtag === 'function') gtag('event', 'sign_up', { method: 'email' });
+      location.href = 'dashboard.html';
+    } catch (err) { errEl.textContent = err.message; errEl.style.display = 'block'; }
+  });
+</script>
+</body>
+</html>

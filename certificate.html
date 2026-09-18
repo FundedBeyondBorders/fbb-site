@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Certificate | FundedBeyondBorders</title>
+<meta property="og:title" content="Certificate of Achievement — FundedBeyondBorders">
+<meta property="og:description" content="Verified trading milestone, issued by FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Certificate of Achievement — FundedBeyondBorders">
+<meta name="twitter:description" content="Verified trading milestone, issued by FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body{ display:flex; align-items:center; justify-content:center; min-height:100vh; padding:20px; }
+  .cert{
+    width:100%; max-width:760px; aspect-ratio:1.42/1; background:linear-gradient(160deg, #16212C, #0F1720);
+    border:2px solid var(--gold); border-radius:8px; position:relative; padding:50px 60px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  }
+  .cert::before{
+    content:""; position:absolute; inset:14px; border:1px solid rgba(200,155,60,0.4); border-radius:4px; pointer-events:none;
+  }
+  .cert .brand{ font-size:14px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-soft); margin-bottom:26px; }
+  .cert h1{ font-family:'Fraunces',serif; font-size:clamp(22px,4vw,34px); font-weight:700; margin-bottom:10px; overflow-wrap:break-word; }
+  .cert .sub{ color:var(--paper-dim); font-size:14px; margin-bottom:30px; }
+  .cert .name{ font-family:'Fraunces',serif; font-size:clamp(26px,5vw,40px); color:var(--gold-soft); margin-bottom:10px; border-bottom:1px solid var(--line); padding-bottom:14px; min-width:60%; overflow-wrap:break-word; }
+  /* Fraunces has no Persian/Arabic/Kurdish glyphs — without this override,
+     those languages would silently fall back to the browser's generic
+     serif, breaking the certificate's intended polished look. Vazirmatn
+     is the same font already used sitewide for these languages. */
+  .cert.rtl-cert h1, .cert.rtl-cert .name{ font-family:'Vazirmatn', sans-serif; }
+  .cert .detail{ color:var(--paper); font-size:15px; line-height:1.9; overflow-wrap:break-word; }
+  .cert .footer-row{ display:flex; justify-content:space-between; width:100%; margin-top:34px; font-size:12px; color:var(--paper-dim); }
+  .actions{ margin-top:22px; display:flex; gap:10px; }
+  @media print{
+    .actions, nav{ display:none; }
+    body{ background:white; }
+    .cert{ background:white; border-color:#C89B3C; box-shadow:none; }
+    .cert::before{ border-color:rgba(200,155,60,0.5); }
+    .cert h1{ color:#16212C; }
+    .cert .brand{ color:#8a6a20; }
+    .cert .sub{ color:#555; }
+    .cert .name{ color:#8a6a20; border-bottom-color:#ccc; }
+    .cert .detail{ color:#16212C; }
+    .cert .footer-row{ color:#555; }
+  }
+</style>
+</head>
+<body>
+  <div>
+    <div style="text-align:center; margin-bottom:14px;" class="actions">
+      <label for="certLangSelect" style="font-size:12.5px; color:var(--paper-dim); align-self:center;">Certificate language:</label>
+      <select id="certLangSelect" style="padding:6px 10px; border-radius:6px; background:var(--ink-2); color:var(--paper); border:1px solid var(--line);">
+        <option value="en" selected>English</option>
+        <option value="fa">فارسی</option>
+        <option value="ar">العربية</option>
+        <option value="tr">Türkçe</option>
+        <option value="ru">Русский</option>
+        <option value="es">Español</option>
+        <option value="ku">کوردی</option>
+      </select>
+    </div>
+    <div class="cert" id="certBody">
+      <div class="brand">FundedBeyondBorders</div>
+      <h1 id="certTitle">Loading…</h1>
+      <div class="sub" id="certSub"></div>
+      <div class="name" id="certOwner">—</div>
+      <div class="detail" id="certDetail"></div>
+      <div class="footer-row">
+        <span id="certDate"></span>
+        <span id="certId"></span>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Save as PDF</button>
+      <a href="dashboard.html" class="btn btn-ghost">Back to dashboard</a>
+    </div>
+    <div id="shareActions" class="actions" style="display:none; margin-top:10px;">
+      <a id="shareTelegram" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">Share on Telegram</a>
+      <a id="shareTwitter" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">Share on X</a>
+      <a id="shareLinkedin" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">Share on LinkedIn</a>
+    </div>
+  </div>
+
+<script src="js/api.js"></script>
+<script src="js/pwa.js"></script>
+<script src="js/settings.js"></script>
+<script>
+  const id = new URLSearchParams(location.search).get('id');
+  const RTL_LANGS = ['fa', 'ar', 'ku'];
+
+  function certText(cert, lang) {
+    const isFunded = cert.type === 'funded';
+    const size = cert.plan_size.toLocaleString();
+    const T = {
+      en: { title: isFunded ? 'Certificate of Funding' : `Certificate of Achievement — Phase ${cert.phase - 1} Passed`, sub: 'This certifies that',
+            detail: isFunded ? `has successfully completed evaluation and been awarded a $${size} funded account (${cert.model}).` : `has successfully passed phase ${cert.phase - 1} of the $${size} ${cert.model} challenge.`, certId: 'Cert ID' },
+      fa: { title: isFunded ? 'گواهی فاندشدن' : `گواهی موفقیت — فاز ${cert.phase - 1} پاس‌شده`, sub: 'این گواهی می‌کند که',
+            detail: isFunded ? `با موفقیت ارزیابی را کامل کرده و یک حساب فاندشده $${size} (${cert.model}) دریافت کرده است.` : `با موفقیت فاز ${cert.phase - 1} چالش $${size} ${cert.model} را پاس کرده است.`, certId: 'شناسه گواهی' },
+      ar: { title: isFunded ? 'شهادة التمويل' : `شهادة الإنجاز — اجتياز المرحلة ${cert.phase - 1}`, sub: 'تشهد هذه الوثيقة بأن',
+            detail: isFunded ? `أكمل بنجاح التقييم وحصل على حساب ممول بقيمة $${size} (${cert.model}).` : `اجتاز بنجاح المرحلة ${cert.phase - 1} من تحدي $${size} ${cert.model}.`, certId: 'رقم الشهادة' },
+      tr: { title: isFunded ? 'Fonlama Sertifikası' : `Başarı Sertifikası — Aşama ${cert.phase - 1} Geçildi`, sub: 'Bu belge şunu onaylar:',
+            detail: isFunded ? `değerlendirmeyi başarıyla tamamladı ve $${size} fonlanmış hesap (${cert.model}) kazandı.` : `$${size} ${cert.model} mücadelesinin ${cert.phase - 1}. aşamasını başarıyla geçti.`, certId: 'Sertifika No' },
+      ru: { title: isFunded ? 'Сертификат финансирования' : `Сертификат достижения — пройден этап ${cert.phase - 1}`, sub: 'Настоящим удостоверяется, что',
+            detail: isFunded ? `успешно завершил(а) оценку и получил(а) профинансированный счёт $${size} (${cert.model}).` : `успешно прошёл(ла) этап ${cert.phase - 1} испытания $${size} ${cert.model}.`, certId: 'ID сертификата' },
+      es: { title: isFunded ? 'Certificado de Financiación' : `Certificado de Logro — Fase ${cert.phase - 1} Superada`, sub: 'Esto certifica que',
+            detail: isFunded ? `ha completado con éxito la evaluación y ha recibido una cuenta financiada de $${size} (${cert.model}).` : `ha superado con éxito la fase ${cert.phase - 1} del desafío de $${size} ${cert.model}.`, certId: 'ID de Certificado' },
+      ku: { title: isFunded ? 'بڕوانامەی پارەدارکردن' : `بڕوانامەی سەرکەوتن — قۆناغی ${cert.phase - 1} تێپەڕا`, sub: 'ئەم بڕوانامەیە پشتڕاست دەکاتەوە کە',
+            detail: isFunded ? `بە سەرکەوتوویی هەڵسەنگاندنی تەواو کرد و هەژمارێکی پارەدارکراوی $${size} (${cert.model}) وەرگرت.` : `بە سەرکەوتوویی قۆناغی ${cert.phase - 1} ی تاقیکردنەوەی $${size} ${cert.model} تێپەڕاند.`, certId: 'ناسنامەی بڕوانامە' },
+    };
+    return T[lang] || T.en;
+  }
+
+  function renderCert(cert, lang) {
+    const t = certText(cert, lang);
+    document.getElementById('certTitle').textContent = t.title;
+    document.getElementById('certSub').textContent = t.sub;
+    document.getElementById('certDetail').textContent = t.detail;
+    document.getElementById('certId').textContent = `${t.certId}: ${cert.id.slice(0, 8).toUpperCase()}`;
+    // Scoped to just the certificate element — the rest of the page (nav,
+    // buttons) stays LTR/English regardless of the certificate's language.
+    const certBody = document.getElementById('certBody');
+    const isRtl = RTL_LANGS.includes(lang);
+    certBody.dir = isRtl ? 'rtl' : 'ltr';
+    certBody.classList.toggle('rtl-cert', isRtl);
+  }
+
+  if (!id) {
+    document.getElementById('certTitle').textContent = 'Certificate not found';
+  } else {
+    apiGet(`/certificates/${id}`).then(cert => {
+      renderCert(cert, 'en');
+      document.getElementById('certOwner').textContent = cert.display_name;
+      document.getElementById('certDate').textContent = new Date(cert.issued_at + 'Z').toLocaleDateString();
+      document.getElementById('certLangSelect').addEventListener('change', (e) => renderCert(cert, e.target.value));
+
+      const isFunded = cert.type === 'funded';
+      const shareText = isFunded
+        ? `I just got funded with a $${cert.plan_size.toLocaleString()} account on FundedBeyondBorders! 🚀`
+        : `I just passed a phase of my $${cert.plan_size.toLocaleString()} challenge on FundedBeyondBorders! 📈`;
+      const shareUrl = `${API_BASE}/certificates/${id}/share`;
+      document.getElementById('shareTelegram').href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
+      document.getElementById('shareTwitter').href = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+      document.getElementById('shareLinkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+      document.getElementById('shareActions').style.display = 'flex';
+    }).catch(() => { document.getElementById('certTitle').textContent = 'Certificate not found'; });
+  }
+</script>
+</body>
+</html>

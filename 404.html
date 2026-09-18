@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'en';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>صفحه پیدا نشد — FundedBeyondBorders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<style>
+  :root{
+    --ink:#0F1720; --gold:#C89B3C; --gold-soft:#E3C878;
+    --paper:#EDEAE2; --paper-dim:#A9B2BC; --line: rgba(237,234,226,0.10);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--ink); color:var(--paper); font-family:'Vazirmatn', sans-serif;
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    text-align:center; padding:24px;
+  }
+  .code{ font-size:72px; font-weight:700; color:var(--gold); letter-spacing:-0.02em; }
+  h1{ font-size:22px; font-weight:600; margin:12px 0 8px; }
+  p{ color:var(--paper-dim); font-size:14.5px; margin-bottom:28px; line-height:1.7; }
+  .links{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+  a.btn{
+    display:inline-block; padding:10px 22px; border-radius:8px; font-size:14px; font-weight:600;
+    text-decoration:none; border:1px solid var(--line); transition:opacity .15s;
+  }
+  a.btn:hover{ opacity:.85; }
+  a.btn-primary{ background:var(--gold); color:#211605; border-color:var(--gold); }
+  a.btn-ghost{ color:var(--paper); }
+</style>
+</head>
+<body>
+  <div>
+    <div class="code">۴۰۴</div>
+    <h1>این صفحه پیدا نشد</h1>
+    <p>لینکی که دنبالش بودی یا حذف شده یا اشتباه تایپ شده.</p>
+    <div class="links">
+      <a class="btn btn-primary" href="/index.html">برگشت به صفحه‌ی اصلی</a>
+      <a class="btn btn-ghost" href="/dashboard.html">داشبورد من</a>
+    </div>
+  </div>
+</body>
+</html>
