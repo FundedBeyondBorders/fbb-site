@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'ru';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_faq">Вопросы и ответы | FundedBeyondBorders</title>
+<meta name="description" content="Часто задаваемые вопросы об испытаниях FundedBeyondBorders — включая наши комиссии и спреды, одни из самых низких в отрасли.">
+<meta property="og:title" content="Часто задаваемые вопросы | FundedBeyondBorders">
+<meta property="og:description" content="Часто задаваемые вопросы о трейдинговых испытаниях FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/ru/faq.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Часто задаваемые вопросы | FundedBeyondBorders">
+<meta name="twitter:description" content="Часто задаваемые вопросы о трейдинговых испытаниях FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .faq{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:1px; border-top:1px solid var(--line); }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-item summary{ cursor:pointer; list-style:none; padding:20px 4px; display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:15.5px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{ content:"+"; color:var(--gold-soft); font-size:22px; font-weight:300; }
+  .faq-item[open] summary::after{ content:"–"; }
+  .faq-item p{ padding:0 4px 20px; color:var(--paper-dim); font-size:14.5px; max-width:660px; line-height:1.9; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/faq.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/faq.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/faq.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/faq.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/faq.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/faq.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/faq.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/faq.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/ru/faq.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Является ли FundedBeyondBorders брокером?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Нет. Мы образовательная платформа для оценки трейдинга. Все сделки происходят в смоделированной среде — ни один ордер никогда не отправляется на реальный финансовый рынок."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Что произойдёт, если я не пройду этап?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Статус счёта испытания станет «нарушен», и вы больше не сможете торговать на нём. Вы можете купить новое испытание и попробовать снова."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Какое кредитное плечо вы предлагаете?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Плечо зависит от категории рынка (крипто ниже, форекс выше — точное число вы увидите рядом с каждым символом на самой платформе). Если ваш плавающий убыток превысит свободную маржу, ваши позиции автоматически закроются (маржин-колл) — полные детали на странице Правил."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как выплачивается прибыль с профинансированного счёта?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Когда вы подаёте запрос, ваша доля прибыли (согласно правилам) мгновенно зачисляется на ваш внутренний кошелёк в личном кабинете. Оттуда вы можете подать заявку на вывод реального USDT (TRC20, ERC20 или BEP20) на свой адрес, который мы отправляем вручную."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Зачем мне проходить KYC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Только перед первым запросом на вывод — чтобы убедиться, что выплата действительно поступает тому человеку, который открыл счёт. До этого вы можете торговать свободно."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Почему вы принимаете только USDT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "USDT не подвержен ценовым колебаниям, комиссии за транзакции (особенно в сетях TRC20 и BEP20) очень низкие, и он доступен почти везде — это делает депозиты, выводы и внутренний учёт простыми и предсказуемыми."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "В чём разница между бесплатным тестовым счётом и реальным испытанием?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Тестовый счёт нужен только для того, чтобы почувствовать спред и комиссию — у него нет цели по прибыли или лимита убытков, и он никогда не может стать профинансированным. Чтобы реально участвовать в оценке и получить финансируемый капитал, нужно купить один из планов испытания. Вы можете попробовать прямо сейчас, без регистрации, нажав кнопку «Бесплатный тестовый счёт» вверху этой страницы."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Сколько времени занимает подтверждение моего заказа?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Проверка суммы платежа всегда выполняется вручную нашей командой (для дополнительной безопасности), обычно в течение нескольких часов. Если это затягивается, обратитесь через тикет поддержки."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Могу ли я иметь больше одного счёта?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Да, до 3 активных счетов одновременно, с общей суммой до 750 000 долларов. Полные детали на странице Правил."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Что такое мгновенное финансирование (Instant Funding)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "План с более высокой ценой, который мгновенно финансирует ваш счёт без какого-либо этапа оценки — вы можете начать торговать сразу, не проходя ни одного этапа. (Обратите внимание: стандартный минимум в 14 дней перед первой выплатой действует и здесь, как и во всех остальных планах.) Взамен ваша доля прибыли (50%) ниже, чем в обычных планах, а лимиты убытков более консервативны. Подходит трейдерам, которые хотят начать сразу и готовы платить больше за это."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Что такое двухфакторная аутентификация (2FA) и как её включить?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Дополнительный уровень безопасности — даже если ваш пароль утечёт, никто не сможет войти в ваш аккаунт без кода из приложения-аутентификатора (например, Google Authenticator). В разделе «Безопасность аккаунта» личного кабинета нажмите включить и отсканируйте код в приложение. Мы настоятельно рекомендуем включить это."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Что такое Loyalty Rewards?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Как только количество ваших завершённых заказов достигает определённых рубежей (например, 3-го или 5-го покупки), к вашему аккаунту автоматически добавляется одноразовый код скидки — без каких-либо действий с вашей стороны. Ваши коды можно найти в разделе «Рефералы» личного кабинета."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Как работает реферальное вознаграждение?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Когда друг регистрируется по вашей реферальной ссылке и покупает свой первый испытательный счёт, 10% от суммы этой покупки зачисляется прямо наличными на ваш кошелёк — без каких-либо кодов или дополнительных действий. Это вознаграждение применяется только один раз, при первой покупке каждого приглашённого друга."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Какие у вас комиссии и спреды?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Наша комиссия за полный оборот на 1 стандартном форекс-лоте составляет всего $2.50, с узкими спредами (около 0.1 пункта на мажорных парах, например EUR/USD) — одни из самых низких торговых издержек в индустрии проп-трейдинга."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Главная</a>
+      <a href="index.html#plans" data-i18n="nav_plans">Тарифы</a>
+      <a href="rules.html" data-i18n="nav_rules">Правила</a>
+      <a href="faq.html" data-i18n="nav_faq">Вопросы</a>
+      <a href="/platform.html" data-i18n="nav_platform">Платформа</a>
+      <a href="contact.html" data-i18n="nav_contact">Контакты</a>
+      <a href="status.html" data-i18n="nav_status">Статус</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">Войти</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_faq">Вопросы</span></div>
+  <h1 data-i18n="faq_h1">Часто задаваемые вопросы</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="faq">
+
+    <details class="faq-item" open>
+      <summary><span data-i18n="faq1_q">Является ли FundedBeyondBorders брокером?</span></summary>
+      <p data-i18n="faq1_a">Нет. Мы образовательная платформа для оценки трейдинга. Все сделки происходят в смоделированной среде — ни один ордер никогда не отправляется на реальный финансовый рынок.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq2_q">Что произойдёт, если я не пройду этап?</span></summary>
+      <p data-i18n="faq2_a">Статус счёта испытания станет «нарушен», и вы больше не сможете торговать на нём. Вы можете купить новое испытание и попробовать снова.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq3_q">Какое кредитное плечо вы предлагаете?</span></summary>
+      <p data-i18n="faq3_a">Плечо зависит от категории рынка (крипто ниже, форекс выше — точное число вы увидите рядом с каждым символом на самой платформе). Если ваш плавающий убыток превысит свободную маржу, ваши позиции автоматически закроются (маржин-колл) — полные детали на странице Правил.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq4_q">Как выплачивается прибыль с профинансированного счёта?</span></summary>
+      <p data-i18n="faq4_a">Когда вы подаёте запрос, ваша доля прибыли (согласно правилам) мгновенно зачисляется на ваш внутренний кошелёк в личном кабинете. Оттуда вы можете подать заявку на вывод реального USDT (TRC20, ERC20 или BEP20) на свой адрес, который мы отправляем вручную.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq5_q">Зачем мне проходить KYC?</span></summary>
+      <p data-i18n="faq5_a">Только перед первым запросом на вывод — чтобы убедиться, что выплата действительно поступает тому человеку, который открыл счёт. До этого вы можете торговать свободно.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq6_q">Почему вы принимаете только USDT?</span></summary>
+      <p data-i18n="faq6_a">USDT не подвержен ценовым колебаниям, комиссии за транзакции (особенно в сетях TRC20 и BEP20) очень низкие, и он доступен почти везде — это делает депозиты, выводы и внутренний учёт простыми и предсказуемыми.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq7_q">В чём разница между бесплатным тестовым счётом и реальным испытанием?</span></summary>
+      <p data-i18n="faq7_a">Тестовый счёт нужен только для того, чтобы почувствовать спред и комиссию — у него нет цели по прибыли или лимита убытков, и он никогда не может стать профинансированным. Чтобы реально участвовать в оценке и получить финансируемый капитал, нужно купить один из планов испытания. Вы можете попробовать прямо сейчас, без регистрации, нажав кнопку «Бесплатный тестовый счёт» вверху этой страницы.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq8_q">Сколько времени занимает подтверждение моего заказа?</span></summary>
+      <p data-i18n="faq8_a">Проверка суммы платежа всегда выполняется вручную нашей командой (для дополнительной безопасности), обычно в течение нескольких часов. Если это затягивается, обратитесь через тикет поддержки.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq9_q">Могу ли я иметь больше одного счёта?</span></summary>
+      <p data-i18n="faq9_a">Да, до 3 активных счетов одновременно, с общей суммой до 750 000 долларов. Полные детали на странице Правил.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq10_q">Что такое мгновенное финансирование (Instant Funding)?</span></summary>
+      <p data-i18n="faq10_a">План с более высокой ценой, который мгновенно финансирует ваш счёт без какого-либо этапа оценки — вы можете начать торговать сразу, не проходя ни одного этапа. (Обратите внимание: стандартный минимум в 14 дней перед первой выплатой действует и здесь, как и во всех остальных планах.) Взамен ваша доля прибыли (50%) ниже, чем в обычных планах, а лимиты убытков более консервативны. Подходит трейдерам, которые хотят начать сразу и готовы платить больше за это.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq11_q">Что такое двухфакторная аутентификация (2FA) и как её включить?</span></summary>
+      <p data-i18n="faq11_a">Дополнительный уровень безопасности — даже если ваш пароль утечёт, никто не сможет войти в ваш аккаунт без кода из приложения-аутентификатора (например, Google Authenticator). В разделе «Безопасность аккаунта» личного кабинета нажмите включить и отсканируйте код в приложение. Мы настоятельно рекомендуем включить это.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq12_q">Что такое Loyalty Rewards?</span></summary>
+      <p data-i18n="faq12_a">Как только количество ваших завершённых заказов достигает определённых рубежей (например, 3-го или 5-го покупки), к вашему аккаунту автоматически добавляется одноразовый код скидки — без каких-либо действий с вашей стороны. Ваши коды можно найти в разделе «Рефералы» личного кабинета.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq13_q">Как работает реферальное вознаграждение?</span></summary>
+      <p data-i18n="faq13_a">Когда друг регистрируется по вашей реферальной ссылке и покупает свой первый испытательный счёт, 10% от суммы этой покупки зачисляется прямо наличными на ваш кошелёк — без каких-либо кодов или дополнительных действий. Это вознаграждение применяется только один раз, при первой покупке каждого приглашённого друга.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq14_q">Какие у вас комиссии и спреды?</span></summary>
+      <p data-i18n="faq14_a">Наша комиссия за полный оборот на 1 стандартном форекс-лоте составляет всего $2.50, с узкими спредами (около 0.1 пункта на мажорных парах, например EUR/USD) — одни из самых низких торговых издержек в индустрии проп-трейдинга.</p>
+</details>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">Правила</a>
+      <a href="privacy.html" data-i18n="footer_privacy">Конфиденциальность</a>
+      <a href="/platform.html" data-i18n="footer_platform">Платформа</a>
+      <a href="contact.html" data-i18n="footer_contact">Контакты</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© 2026 FundedBeyondBorders. Все права защищены.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>
