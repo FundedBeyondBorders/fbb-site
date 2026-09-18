@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'tr';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="priv1">Gizlilik Politikası | FundedBeyondBorders</title>
+<meta name="description" content="FundedBeyondBorders'ın kişisel verilerinizi nasıl topladığı, kullandığı ve koruduğu, KYC belgeleri ve ticaret hesabı bilgileri dahil.">
+<meta property="og:title" content="Gizlilik Politikası | FundedBeyondBorders">
+<meta property="og:description" content="FundedBeyondBorders'ın kişisel verilerinizi nasıl topladığı, kullandığı ve koruduğu, KYC belgeleri ve ticaret hesabı bilgileri dahil.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/tr/privacy.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gizlilik Politikası | FundedBeyondBorders">
+<meta name="twitter:description" content="FundedBeyondBorders'ın kişisel verilerinizi nasıl topladığı, kullandığı ve koruduğu, KYC belgeleri ve ticaret hesabı bilgileri dahil.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .policy-section{ max-width:760px; margin:0 auto 24px; }
+  .policy-section h3{ margin-bottom:10px; color:var(--gold-soft); }
+  .policy-section p, .policy-section li{ color:var(--paper-dim); font-size:14.5px; line-height:1.9; }
+  .policy-section ul{ padding-inline-start:20px; margin-top:8px; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/privacy.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/privacy.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/privacy.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/privacy.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/privacy.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/privacy.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/privacy.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/tr/privacy.html">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Ana Sayfa</a>
+      <a href="rules.html" data-i18n="nav_rules">Kurallar</a>
+      <a href="faq.html" data-i18n="nav_faq">SSS</a>
+      <a href="status.html" data-i18n="nav_status">Durum</a>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="footer_privacy">Gizlilik</span></div>
+  <h1 data-i18n="priv2">Gizlilik Politikası</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="policy-section">
+    <p data-i18n="priv3">Bu sayfa senden hangi bilgileri topladığımızı, nedenini ve nasıl koruduğumuzu açıklar.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv4">Ne topluyoruz</h3>
+    <ul>
+      <li data-i18n="priv5">E-posta, şifre (şifrelenmiş), tam ad, ülke ve doğum tarihi — kayıt sırasında</li>
+      <li data-i18n="priv6">Resmi kimlik belgesi (nüfus cüzdanı/pasaport/ehliyet) — sadece ödeme talep edersen</li>
+      <li data-i18n="priv7">İşlem geçmişi, hesap bakiyeleri ve her işlemin IP adresi — risk kurallarını uygulamak ve dolandırıcılığı tespit etmek için</li>
+      <li data-i18n="priv8">Destek talebi mesajları</li>
+      <li data-i18n="priv_news_collect">E-posta adresi — yalnızca ana sayfadaki bültene kaydolmayı seçersen</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv9">Nasıl koruyoruz</h3>
+    <ul>
+      <li data-i18n="priv10">Şifren asla düz metin olarak saklanmaz — yalnızca tek yönlü, geri döndürülemez bir özeti (hash) saklanır</li>
+      <li data-i18n="priv11">Kimlik belgen güçlü şifreleme (AES-256) ile saklanır</li>
+      <li data-i18n="priv12">Giriş oturumun da düz değil, özetlenmiş (hashed) olarak saklanır</li>
+      <li data-i18n="priv13">Bu bilgiye yalnızca site yöneticisi (ayrı bir güvenlik anahtarıyla) erişebilir</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv14">Neden topluyoruz</h3>
+    <ul>
+      <li data-i18n="priv15">Kimlik belgesi: ödemenin gerçekten hesabı açan kişiye ulaştığından emin olmak için (KYC)</li>
+      <li data-i18n="priv16">IP adresi: farklı hesaplar arasında koordineli hedge gibi kötüye kullanım kalıplarını tespit etmek için</li>
+      <li data-i18n="priv17">Doğum tarihi ve ülke: KYC incelemesi sırasında kimlik belgesiyle çapraz kontrol için</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv18">Verilerini silme</h3>
+    <p data-i18n="priv19">Bir destek talebi ile giriş kimliğinin (kimlik bilgileri ve kimlik belgesi) silinmesini talep edebilirsin. İşlem ve finansal kayıtlar, hesap silindikten sonra bile anlaşmazlık çözümü ve muhasebe amaçları için saklanır.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv20">Üçüncü taraflarla paylaşım</h3>
+    <p data-i18n="priv21">Bilgilerini satmıyoruz. Doğrulama e-postaları göndermek için Resend'i, canlı fiyatlar için Binance/Twelve Data'yı kullanıyoruz — bu hizmetler yalnızca işlevleri için gereken minimum veriyi görür (örneğin Resend yalnızca e-postanı görür, asla şifreni veya kimlik belgeni görmez).</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv_news_h3">Bülten</h3>
+    <p data-i18n="priv_news_p">Bültene kayıt tamamen isteğe bağlıdır ve yalnızca senin onayınla gerçekleşir. Gönderdiğimiz her e-postada bir abonelikten çıkma bağlantısı bulunur — tek tıkla, giriş yapmana gerek kalmadan anında listeden çıkarsın. E-postanı hiçbir üçüncü tarafla paylaşmayız.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv22">İletişim</h3>
+    <p data-i18n="priv23">Gizlilikle ilgili bir sorun mu var? İletişim sayfası veya sohbet düğmesi üzerinden ulaş.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">Kurallar</a>
+      <a href="privacy.html" data-i18n="footer_privacy">Gizlilik</a>
+      <a href="contact.html" data-i18n="footer_contact">İletişim</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© 2026 FundedBeyondBorders. Tüm hakları saklıdır.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

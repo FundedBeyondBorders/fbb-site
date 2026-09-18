@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'tr';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_faq">SSS | FundedBeyondBorders</title>
+<meta name="description" content="FundedBeyondBorders prop trading zorluklarıyla ilgili SSS — sektördeki en düşük komisyon ve spreadler dahil.">
+<meta property="og:title" content="SSS | FundedBeyondBorders">
+<meta property="og:description" content="FundedBeyondBorders prop trading zorluklarıyla ilgili sıkça sorulan sorular.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/tr/faq.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SSS | FundedBeyondBorders">
+<meta name="twitter:description" content="FundedBeyondBorders prop trading zorluklarıyla ilgili sıkça sorulan sorular.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .faq{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:1px; border-top:1px solid var(--line); }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-item summary{ cursor:pointer; list-style:none; padding:20px 4px; display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:15.5px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{ content:"+"; color:var(--gold-soft); font-size:22px; font-weight:300; }
+  .faq-item[open] summary::after{ content:"–"; }
+  .faq-item p{ padding:0 4px 20px; color:var(--paper-dim); font-size:14.5px; max-width:660px; line-height:1.9; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/faq.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/faq.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/faq.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/faq.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/faq.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/faq.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/faq.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/faq.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/tr/faq.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "FundedBeyondBorders bir aracı kurum mu?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hayır. Biz eğitim amaçlı bir trading değerlendirme platformuyuz. Tüm işlemler simüle edilmiş bir ortamda gerçekleşir — hiçbir emir gerçek bir finansal piyasaya gönderilmez."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Bir aşamayı geçemezsem ne olur?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meydan okuma hesabının durumu 'ihlal edildi' olur ve artık üzerinde işlem yapamazsın. Yeni bir meydan okuma satın alıp tekrar deneyebilirsin."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ne kadar kaldıraç sunuyorsunuz?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kaldıraç piyasa kategorisine göre değişir (kripto daha düşük, forex daha yüksek — platformun kendisinde her sembolün yanında tam sayıyı göreceksin). Değişken zararın serbest marjini aşarsa, pozisyonların otomatik olarak kapanır (margin call) — tam ayrıntılar Kurallar sayfasında."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Fonlanmış hesap kârı nasıl ödenir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Talep ettiğinde, kâr payın (kurallara göre) anında panelindeki iç cüzdanına yatırılır. Oradan, kendi adresine gerçek USDT (TRC20, ERC20 veya BEP20) için bir çekim talebi gönderebilirsin ve bunu elle göndeririz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Neden KYC göndermem gerekiyor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sadece ilk ödeme talebinden önce gerekli — ödemenin gerçekten hesabı açan kişiye ulaştığından emin olmak için. Bundan önce özgürce işlem yapabilirsin."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Neden sadece USDT kabul ediyorsunuz?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "USDT'nin fiyat oynaklığı yoktur, işlem ücretleri (özellikle TRC20 ve BEP20 ağlarında) çok düşüktür ve neredeyse her yerde erişilebilirdir — bu, para yatırma, çekme ve iç muhasebeyi basit ve öngörülebilir tutar."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Ücretsiz test hesabı ile gerçek bir meydan okuma arasındaki fark nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Test hesabı sadece spread ve komisyonu hissetmek içindir — kâr hedefi veya zarar limiti yoktur ve asla fonlanamaz. Değerlendirmeye gerçekten katılmak ve fonlanan sermayeye ulaşmak için meydan okuma planlarından birini satın almalısın. Bu sayfanın üstündeki 'Ücretsiz Test Hesabı' butonundan, kayıt olmadan hemen deneyebilirsin."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Siparişimin onaylanması ne kadar sürer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ödeme tutarının doğrulanması her zaman ekibimiz tarafından manuel olarak yapılır (ekstra güvenlik için), genellikle birkaç saat içinde. Uzun sürerse bir destek talebi ile takip et."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Birden fazla hesabım olabilir mi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Evet, aynı anda en fazla 3 aktif hesap, toplamda 750.000 dolara kadar. Tam ayrıntılar Kurallar sayfasında."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Anında Fonlama (Instant Funding) nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Hiçbir değerlendirme aşaması olmadan hesabını anında fonlayan, daha yüksek fiyatlı bir plan — hiçbir aşamayı geçmeden hemen işlem yapmaya başlayabilirsin. (Not: ilk ödemeden önceki standart 14 günlük minimum süre, diğer tüm planlarda olduğu gibi burada da geçerlidir.) Buna karşılık, kâr payın (%50) normal planlardan daha düşüktür ve zarar limitleri daha muhafazakârdır. Hemen başlamak isteyen ve daha fazla ödemeye istekli traderlar için uygundur."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "İki faktörlü kimlik doğrulama (2FA) nedir ve nasıl etkinleştiririm?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ek bir güvenlik katmanı — şifren sızsa bile, bir kimlik doğrulama uygulamasından (Google Authenticator gibi) kod olmadan kimse hesabına giriş yapamaz. Panelindeki Hesap Güvenliği bölümünden etkinleştire dokun ve kodu uygulamana tara. Bunu açmanı kesinlikle öneririz."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Loyalty Rewards nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Tamamlanan sipariş sayın belirli kilometre taşlarına ulaştığında (örneğin 3. veya 5. siparişin), hesabına otomatik olarak tek kullanımlık bir indirim kodu eklenir — senden hiçbir işlem gerekmez. Kodlarını panelindeki Referanslar bölümünde bulabilirsin."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Referans (Referral) ödülü nasıl çalışır?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Bir arkadaşın referans linkinle kaydolup ilk mücadelesini satın aldığında, o satın alma tutarının %10'u doğrudan nakit olarak cüzdanına yatırılır — hiçbir kod veya ekstra adıma gerek yok. Bu ödül, davet edilen her arkadaşın sadece ilk satın alımında bir kez uygulanır."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Komisyon ve spreadleriniz nedir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "1 standart forex lotunda tam tur komisyonumuz sadece 2,50 dolar, sıkı spreadlerle birlikte (EUR/USD gibi majörlerde yaklaşık 0,1 pip) — prop trading sektöründeki en düşük işlem maliyetleri arasında."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Ana Sayfa</a>
+      <a href="index.html#plans" data-i18n="nav_plans">Planlar</a>
+      <a href="rules.html" data-i18n="nav_rules">Kurallar</a>
+      <a href="faq.html" data-i18n="nav_faq">SSS</a>
+      <a href="/platform.html" data-i18n="nav_platform">Platform</a>
+      <a href="contact.html" data-i18n="nav_contact">İletişim</a>
+      <a href="status.html" data-i18n="nav_status">Durum</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">Giriş Yap</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_faq">SSS</span></div>
+  <h1 data-i18n="faq_h1">Sıkça Sorulan Sorular</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="faq">
+
+    <details class="faq-item" open>
+      <summary><span data-i18n="faq1_q">FundedBeyondBorders bir aracı kurum mu?</span></summary>
+      <p data-i18n="faq1_a">Hayır. Biz eğitim amaçlı bir trading değerlendirme platformuyuz. Tüm işlemler simüle edilmiş bir ortamda gerçekleşir — hiçbir emir gerçek bir finansal piyasaya gönderilmez.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq2_q">Bir aşamayı geçemezsem ne olur?</span></summary>
+      <p data-i18n="faq2_a">Meydan okuma hesabının durumu 'ihlal edildi' olur ve artık üzerinde işlem yapamazsın. Yeni bir meydan okuma satın alıp tekrar deneyebilirsin.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq3_q">Ne kadar kaldıraç sunuyorsunuz?</span></summary>
+      <p data-i18n="faq3_a">Kaldıraç piyasa kategorisine göre değişir (kripto daha düşük, forex daha yüksek — platformun kendisinde her sembolün yanında tam sayıyı göreceksin). Değişken zararın serbest marjini aşarsa, pozisyonların otomatik olarak kapanır (margin call) — tam ayrıntılar Kurallar sayfasında.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq4_q">Fonlanmış hesap kârı nasıl ödenir?</span></summary>
+      <p data-i18n="faq4_a">Talep ettiğinde, kâr payın (kurallara göre) anında panelindeki iç cüzdanına yatırılır. Oradan, kendi adresine gerçek USDT (TRC20, ERC20 veya BEP20) için bir çekim talebi gönderebilirsin ve bunu elle göndeririz.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq5_q">Neden KYC göndermem gerekiyor?</span></summary>
+      <p data-i18n="faq5_a">Sadece ilk ödeme talebinden önce gerekli — ödemenin gerçekten hesabı açan kişiye ulaştığından emin olmak için. Bundan önce özgürce işlem yapabilirsin.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq6_q">Neden sadece USDT kabul ediyorsunuz?</span></summary>
+      <p data-i18n="faq6_a">USDT'nin fiyat oynaklığı yoktur, işlem ücretleri (özellikle TRC20 ve BEP20 ağlarında) çok düşüktür ve neredeyse her yerde erişilebilirdir — bu, para yatırma, çekme ve iç muhasebeyi basit ve öngörülebilir tutar.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq7_q">Ücretsiz test hesabı ile gerçek bir meydan okuma arasındaki fark nedir?</span></summary>
+      <p data-i18n="faq7_a">Test hesabı sadece spread ve komisyonu hissetmek içindir — kâr hedefi veya zarar limiti yoktur ve asla fonlanamaz. Değerlendirmeye gerçekten katılmak ve fonlanan sermayeye ulaşmak için meydan okuma planlarından birini satın almalısın. Bu sayfanın üstündeki 'Ücretsiz Test Hesabı' butonundan, kayıt olmadan hemen deneyebilirsin.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq8_q">Siparişimin onaylanması ne kadar sürer?</span></summary>
+      <p data-i18n="faq8_a">Ödeme tutarının doğrulanması her zaman ekibimiz tarafından manuel olarak yapılır (ekstra güvenlik için), genellikle birkaç saat içinde. Uzun sürerse bir destek talebi ile takip et.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq9_q">Birden fazla hesabım olabilir mi?</span></summary>
+      <p data-i18n="faq9_a">Evet, aynı anda en fazla 3 aktif hesap, toplamda 750.000 dolara kadar. Tam ayrıntılar Kurallar sayfasında.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq10_q">Anında Fonlama (Instant Funding) nedir?</span></summary>
+      <p data-i18n="faq10_a">Hiçbir değerlendirme aşaması olmadan hesabını anında fonlayan, daha yüksek fiyatlı bir plan — hiçbir aşamayı geçmeden hemen işlem yapmaya başlayabilirsin. (Not: ilk ödemeden önceki standart 14 günlük minimum süre, diğer tüm planlarda olduğu gibi burada da geçerlidir.) Buna karşılık, kâr payın (%50) normal planlardan daha düşüktür ve zarar limitleri daha muhafazakârdır. Hemen başlamak isteyen ve daha fazla ödemeye istekli traderlar için uygundur.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq11_q">İki faktörlü kimlik doğrulama (2FA) nedir ve nasıl etkinleştiririm?</span></summary>
+      <p data-i18n="faq11_a">Ek bir güvenlik katmanı — şifren sızsa bile, bir kimlik doğrulama uygulamasından (Google Authenticator gibi) kod olmadan kimse hesabına giriş yapamaz. Panelindeki Hesap Güvenliği bölümünden etkinleştire dokun ve kodu uygulamana tara. Bunu açmanı kesinlikle öneririz.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq12_q">Loyalty Rewards nedir?</span></summary>
+      <p data-i18n="faq12_a">Tamamlanan sipariş sayın belirli kilometre taşlarına ulaştığında (örneğin 3. veya 5. siparişin), hesabına otomatik olarak tek kullanımlık bir indirim kodu eklenir — senden hiçbir işlem gerekmez. Kodlarını panelindeki Referanslar bölümünde bulabilirsin.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq13_q">Referans (Referral) ödülü nasıl çalışır?</span></summary>
+      <p data-i18n="faq13_a">Bir arkadaşın referans linkinle kaydolup ilk mücadelesini satın aldığında, o satın alma tutarının %10'u doğrudan nakit olarak cüzdanına yatırılır — hiçbir kod veya ekstra adıma gerek yok. Bu ödül, davet edilen her arkadaşın sadece ilk satın alımında bir kez uygulanır.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq14_q">Komisyon ve spreadleriniz nedir?</span></summary>
+      <p data-i18n="faq14_a">1 standart forex lotunda tam tur komisyonumuz sadece 2,50 dolar, sıkı spreadlerle birlikte (EUR/USD gibi majörlerde yaklaşık 0,1 pip) — prop trading sektöründeki en düşük işlem maliyetleri arasında.</p>
+</details>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">Kurallar</a>
+      <a href="privacy.html" data-i18n="footer_privacy">Gizlilik</a>
+      <a href="/platform.html" data-i18n="footer_platform">Platform</a>
+      <a href="contact.html" data-i18n="footer_contact">İletişim</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© 2026 FundedBeyondBorders. Tüm hakları saklıdır.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>
