@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'ar';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_faq">الأسئلة الشائعة | FundedBeyondBorders</title>
+<meta name="description" content="الأسئلة الشائعة حول تحديات التداول في FundedBeyondBorders — بما في ذلك عمولاتنا وفروقاتنا السعرية، من بين الأقل في الصناعة.">
+<meta property="og:title" content="الأسئلة الشائعة | FundedBeyondBorders">
+<meta property="og:description" content="الأسئلة الشائعة حول تحديات التداول الوهمي في FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/ar/faq.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="الأسئلة الشائعة | FundedBeyondBorders">
+<meta name="twitter:description" content="الأسئلة الشائعة حول تحديات التداول الوهمي في FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .faq{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:1px; border-top:1px solid var(--line); }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-item summary{ cursor:pointer; list-style:none; padding:20px 4px; display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:15.5px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{ content:"+"; color:var(--gold-soft); font-size:22px; font-weight:300; }
+  .faq-item[open] summary::after{ content:"–"; }
+  .faq-item p{ padding:0 4px 20px; color:var(--paper-dim); font-size:14.5px; max-width:660px; line-height:1.9; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/faq.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/faq.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/faq.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/faq.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/faq.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/faq.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/faq.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/faq.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/ar/faq.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "هل FundedBeyondBorders وسيط (بروكر)؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "لا. نحن منصة تعليمية لتقييم التداول. تتم جميع الصفقات في بيئة محاكاة — لا يُرسل أي أمر إلى سوق مالي حقيقي."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ماذا يحدث إذا فشلت في اجتياز مرحلة؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "تصبح حالة حساب التحدي 'منتهك' ولن تتمكن من التداول عليه بعد ذلك. يمكنك شراء تحدٍ جديد والمحاولة مرة أخرى."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ما هي الرافعة المالية التي تقدمونها؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "تختلف الرافعة المالية حسب فئة السوق (العملات الرقمية أقل، الفوركس أعلى — سترى الرقم الدقيق بجانب كل رمز في المنصة نفسها). إذا تجاوزت خسارتك العائمة هامشك الحر، تُغلق مراكزك تلقائياً (مارجن كول) — التفاصيل الكاملة في صفحة القواعد."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "كيف يتم دفع أرباح الحساب الممول؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "عند تقديم الطلب، تُضاف حصتك من الربح (وفقاً للقواعد) فوراً إلى محفظتك الداخلية في لوحة التحكم. من هناك، يمكنك تقديم طلب سحب لتتر حقيقي (TRC20 أو ERC20 أو BEP20) إلى عنوانك الخاص، ونرسله يدوياً."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "لماذا يجب أن أقدم KYC؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "فقط قبل أول طلب سحب — للتأكد من وصول الأرباح فعلاً إلى الشخص الذي فتح الحساب. يمكنك التداول بحرية قبل ذلك."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "لماذا تقبلون فقط USDT؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "لا يتقلب سعر USDT، ورسوم المعاملات (خاصة على شبكتي TRC20 و BEP20) منخفضة جداً، وهو متاح في كل مكان تقريباً — هذا يجعل الإيداع والسحب والمحاسبة الداخلية بسيطة وقابلة للتنبؤ."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ما الفرق بين حساب التجربة المجاني وتحدٍ حقيقي؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "حساب التجربة فقط للشعور بالفارق السعري والعمولة — لا يوجد له هدف ربح أو حد خسارة ولا يمكن أن يصبح ممولاً أبداً. للمشاركة الفعلية في التقييم والوصول إلى رأس المال، تحتاج لشراء إحدى خطط التحدي. يمكنك تجربته الآن، دون أي تسجيل، من زر 'حساب تجريبي مجاني' أعلى هذه الصفحة."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "كم من الوقت يستغرق تأكيد طلبي؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "يتم التحقق من مبلغ الدفع دائماً يدوياً من قبل فريقنا (لمزيد من الأمان)، عادة خلال بضع ساعات. إذا استغرق وقتاً أطول، تابع عبر تذكرة دعم."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "هل يمكنني امتلاك أكثر من حساب واحد؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "نعم، حتى 3 حسابات نشطة في وقت واحد، بإجمالي مشترك يصل إلى 750,000 دولار. التفاصيل الكاملة في صفحة القواعد."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ما هو التمويل الفوري (Instant Funding)؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "خطة أعلى سعراً تموّل حسابك فوراً، دون أي مرحلة تقييم على الإطلاق — يمكنك بدء التداول فوراً دون اجتياز أي مرحلة. (ملاحظة: الحد الأدنى القياسي البالغ 14 يوماً قبل أول سحب لا يزال ينطبق هنا، تماماً كأي خطة أخرى.) في المقابل، حصتك من الربح (50%) أقل من الخطط العادية وحدود الخسارة أكثر تحفظاً. مناسبة لمن يريد البدء فوراً ومستعد لدفع أكثر."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ما هي المصادقة الثنائية (2FA) وكيف أفعّلها؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "طبقة أمان إضافية — حتى لو تسربت كلمة مرورك، لا يمكن لأحد الدخول إلى حسابك دون رمز من تطبيق مصادقة (مثل Google Authenticator). من قسم أمان الحساب في لوحة التحكم، اضغط تفعيل وامسح الرمز في تطبيقك. نوصي بشدة بتفعيل هذا."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ما هي مكافآت الولاء (Loyalty Rewards)؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "بمجرد أن يصل عدد طلباتك المكتملة إلى معالم معينة (مثل الطلب الثالث أو الخامس)، يُضاف تلقائياً كود خصم لمرة واحدة إلى حسابك — دون أي إجراء منك. ستجد أكوادك في قسم الإحالات بلوحة التحكم."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "كيف تعمل مكافأة الإحالة (Referral)؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "عندما يسجل صديق باستخدام رابط الإحالة الخاص بك ويشتري تحديه الأول، تُضاف 10% من مبلغ تلك العملية نقداً مباشرة إلى محفظتك — دون الحاجة إلى أي كود أو إجراء إضافي. تُطبَّق هذه المكافأة مرة واحدة فقط لكل صديق تمت إحالته، عند أول عملية شراء له."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "كيف تقارن عمولاتكم وفروقاتكم السعرية بشركات التمويل الأخرى؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "عمولة الجولة الكاملة لدينا على لوت فوركس قياسي واحد هي 2.50 دولار فقط، مع فروقات سعرية ضيقة (حوالي 0.1 نقطة على الأزواج الرئيسية مثل اليورو/دولار) — من بين أقل تكاليف التداول في صناعة التمويل التجاري."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+      <a href="index.html#plans" data-i18n="nav_plans">الباقات</a>
+      <a href="rules.html" data-i18n="nav_rules">القوانين</a>
+      <a href="faq.html" data-i18n="nav_faq">الأسئلة الشائعة</a>
+      <a href="/platform.html" data-i18n="nav_platform">المنصة</a>
+      <a href="contact.html" data-i18n="nav_contact">اتصل بنا</a>
+      <a href="status.html" data-i18n="nav_status">حالة النظام</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">تسجيل الدخول</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_faq">الأسئلة الشائعة</span></div>
+  <h1 data-i18n="faq_h1">الأسئلة الشائعة</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="faq">
+
+    <details class="faq-item" open>
+      <summary><span data-i18n="faq1_q">هل FundedBeyondBorders وسيط (بروكر)؟</span></summary>
+      <p data-i18n="faq1_a">لا. نحن منصة تعليمية لتقييم التداول. تتم جميع الصفقات في بيئة محاكاة — لا يُرسل أي أمر إلى سوق مالي حقيقي.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq2_q">ماذا يحدث إذا فشلت في اجتياز مرحلة؟</span></summary>
+      <p data-i18n="faq2_a">تصبح حالة حساب التحدي 'منتهك' ولن تتمكن من التداول عليه بعد ذلك. يمكنك شراء تحدٍ جديد والمحاولة مرة أخرى.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq3_q">ما هي الرافعة المالية التي تقدمونها؟</span></summary>
+      <p data-i18n="faq3_a">تختلف الرافعة المالية حسب فئة السوق (العملات الرقمية أقل، الفوركس أعلى — سترى الرقم الدقيق بجانب كل رمز في المنصة نفسها). إذا تجاوزت خسارتك العائمة هامشك الحر، تُغلق مراكزك تلقائياً (مارجن كول) — التفاصيل الكاملة في صفحة القواعد.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq4_q">كيف يتم دفع أرباح الحساب الممول؟</span></summary>
+      <p data-i18n="faq4_a">عند تقديم الطلب، تُضاف حصتك من الربح (وفقاً للقواعد) فوراً إلى محفظتك الداخلية في لوحة التحكم. من هناك، يمكنك تقديم طلب سحب لتتر حقيقي (TRC20 أو ERC20 أو BEP20) إلى عنوانك الخاص، ونرسله يدوياً.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq5_q">لماذا يجب أن أقدم KYC؟</span></summary>
+      <p data-i18n="faq5_a">فقط قبل أول طلب سحب — للتأكد من وصول الأرباح فعلاً إلى الشخص الذي فتح الحساب. يمكنك التداول بحرية قبل ذلك.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq6_q">لماذا تقبلون فقط USDT؟</span></summary>
+      <p data-i18n="faq6_a">لا يتقلب سعر USDT، ورسوم المعاملات (خاصة على شبكتي TRC20 و BEP20) منخفضة جداً، وهو متاح في كل مكان تقريباً — هذا يجعل الإيداع والسحب والمحاسبة الداخلية بسيطة وقابلة للتنبؤ.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq7_q">ما الفرق بين حساب التجربة المجاني وتحدٍ حقيقي؟</span></summary>
+      <p data-i18n="faq7_a">حساب التجربة فقط للشعور بالفارق السعري والعمولة — لا يوجد له هدف ربح أو حد خسارة ولا يمكن أن يصبح ممولاً أبداً. للمشاركة الفعلية في التقييم والوصول إلى رأس المال، تحتاج لشراء إحدى خطط التحدي. يمكنك تجربته الآن، دون أي تسجيل، من زر 'حساب تجريبي مجاني' أعلى هذه الصفحة.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq8_q">كم من الوقت يستغرق تأكيد طلبي؟</span></summary>
+      <p data-i18n="faq8_a">يتم التحقق من مبلغ الدفع دائماً يدوياً من قبل فريقنا (لمزيد من الأمان)، عادة خلال بضع ساعات. إذا استغرق وقتاً أطول، تابع عبر تذكرة دعم.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq9_q">هل يمكنني امتلاك أكثر من حساب واحد؟</span></summary>
+      <p data-i18n="faq9_a">نعم، حتى 3 حسابات نشطة في وقت واحد، بإجمالي مشترك يصل إلى 750,000 دولار. التفاصيل الكاملة في صفحة القواعد.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq10_q">ما هو التمويل الفوري (Instant Funding)؟</span></summary>
+      <p data-i18n="faq10_a">خطة أعلى سعراً تموّل حسابك فوراً، دون أي مرحلة تقييم على الإطلاق — يمكنك بدء التداول فوراً دون اجتياز أي مرحلة. (ملاحظة: الحد الأدنى القياسي البالغ 14 يوماً قبل أول سحب لا يزال ينطبق هنا، تماماً كأي خطة أخرى.) في المقابل، حصتك من الربح (50%) أقل من الخطط العادية وحدود الخسارة أكثر تحفظاً. مناسبة لمن يريد البدء فوراً ومستعد لدفع أكثر.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq11_q">ما هي المصادقة الثنائية (2FA) وكيف أفعّلها؟</span></summary>
+      <p data-i18n="faq11_a">طبقة أمان إضافية — حتى لو تسربت كلمة مرورك، لا يمكن لأحد الدخول إلى حسابك دون رمز من تطبيق مصادقة (مثل Google Authenticator). من قسم أمان الحساب في لوحة التحكم، اضغط تفعيل وامسح الرمز في تطبيقك. نوصي بشدة بتفعيل هذا.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq12_q">ما هي مكافآت الولاء (Loyalty Rewards)؟</span></summary>
+      <p data-i18n="faq12_a">بمجرد أن يصل عدد طلباتك المكتملة إلى معالم معينة (مثل الطلب الثالث أو الخامس)، يُضاف تلقائياً كود خصم لمرة واحدة إلى حسابك — دون أي إجراء منك. ستجد أكوادك في قسم الإحالات بلوحة التحكم.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq13_q">كيف تعمل مكافأة الإحالة (Referral)؟</span></summary>
+      <p data-i18n="faq13_a">عندما يسجل صديق باستخدام رابط الإحالة الخاص بك ويشتري تحديه الأول، تُضاف 10% من مبلغ تلك العملية نقداً مباشرة إلى محفظتك — دون الحاجة إلى أي كود أو إجراء إضافي. تُطبَّق هذه المكافأة مرة واحدة فقط لكل صديق تمت إحالته، عند أول عملية شراء له.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq14_q">كم هي عمولاتكم وفروقاتكم السعرية؟</span></summary>
+      <p data-i18n="faq14_a">عمولة الجولة الكاملة لدينا على لوت فوركس قياسي واحد هي 2.50 دولار فقط، مع فروقات سعرية ضيقة (حوالي 0.1 نقطة على الأزواج الرئيسية مثل اليورو/دولار) — من بين أقل تكاليف التداول في صناعة التمويل التجاري.</p>
+</details>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">القوانين</a>
+      <a href="privacy.html" data-i18n="footer_privacy">الخصوصية</a>
+      <a href="/platform.html" data-i18n="footer_platform">المنصة</a>
+      <a href="contact.html" data-i18n="footer_contact">اتصل بنا</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© 2026 FundedBeyondBorders. جميع الحقوق محفوظة.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

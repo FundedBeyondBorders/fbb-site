@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'ar';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_rules">القواعد | FundedBeyondBorders</title>
+<meta name="description" content="قواعد التداول ومعايير التقييم لتحديات FundedBeyondBorders.">
+<meta property="og:title" content="القواعد | FundedBeyondBorders">
+<meta property="og:description" content="قواعد التداول ومعايير التقييم لتحديات FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/ar/rules.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="القواعد | FundedBeyondBorders">
+<meta name="twitter:description" content="قواعد التداول ومعايير التقييم لتحديات FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .rule-card{ margin-bottom:18px; }
+  .rule-card h3{ font-size:17px; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+  .rule-card h3 .num{ font-family:'Fraunces',serif; color:var(--gold-soft); font-size:14px; border:1px solid var(--gold); border-radius:999px; width:26px; height:26px; display:flex; align-items:center; justify-content:center; flex:none; }
+  .rule-card p{ color:var(--paper-dim); font-size:14.5px; }
+  .rule-card .badge-row{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .lang-note{ font-size:12.5px; color:var(--paper-dim); background:var(--ink-2); border:1px solid var(--line); border-radius:12px; padding:12px 16px; margin-bottom:30px; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/rules.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/rules.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/rules.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/rules.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/rules.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/rules.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/rules.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/rules.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/ar/rules.html">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <div class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">الرئيسية</a>
+      <a href="index.html#plans" data-i18n="nav_plans">الباقات</a>
+      <a href="rules.html" data-i18n="nav_rules">القوانين</a>
+      <a href="faq.html" data-i18n="nav_faq">الأسئلة الشائعة</a>
+      <a href="/platform.html" data-i18n="nav_platform">المنصة</a>
+      <a href="contact.html" data-i18n="nav_contact">اتصل بنا</a>
+      <a href="status.html" data-i18n="nav_status">حالة النظام</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">تسجيل الدخول</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_rules">القوانين</span></div>
+  <h1 data-i18n="rules_h1">قوانين التحدي والحساب الممول</h1>
+  <p data-i18n="rules_p">اقرأ هذه الصفحة بالكامل قبل شراء أي تحدي. الدفع يعني موافقتك على هذه القوانين.</p>
+</div>
+
+<section style="padding-top:0;">
+  <div class="wrap-narrow">
+
+    <div class="lang-note" data-i18n="rules_lang_note">هذه الصفحة مترجمة إلى جميع لغات الموقع السبع.</div>
+
+    <div class="eyebrow"><span data-i18n="rules_section_caps">حدود الحساب</span></div>
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">1</span><span data-i18n="rule1_title">الحد الأقصى لحجم الحساب</span></h3>
+      <p data-i18n="rule1_desc">لا يمكن أن يتجاوز حجم أي حساب تحدٍ 500,000 دولار.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">2</span><span data-i18n="rule2_title">الحد الأقصى لإجمالي رأس المال لكل متداول</span></h3>
+      <p data-i18n="rule2_desc">لا يمكن أن يتجاوز إجمالي حجم حسابات المتداول النشطة/الممولة 750,000 دولار.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">3</span><span data-i18n="rule3_title">الحد الأقصى للحسابات النشطة</span></h3>
+      <p data-i18n="rule3_desc">يمكن لكل متداول امتلاك 3 حسابات نشطة كحد أقصى في نفس الوقت.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:36px;"><span data-i18n="rules_section_risk">قوانين المخاطرة</span></div>
+
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">4</span><span data-i18n="rule4_title">قانون المخاطرة العائمة</span></h3>
+      <p data-i18n="rule4_desc">يجب ألا تتجاوز مخاطرة الصفقة الواحدة أو مجموع الصفقات المفتوحة في نفس الوقت 3% من الحساب (للأحجام من 1,000 إلى 50,000 دولار) أو 2% (للأحجام 100,000 دولار فأكثر). تجاوز هذا الحد بسبب الانزلاق السعري لا يُعتبر مخالفة؛ فقط التجاوز المتعمد (عدم وضع وقف خسارة مع انخفاض فعلي في حقوق الحساب يتجاوز الحد) يُعتبر مخالفة.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">5</span><span data-i18n="rule5_title">الحد الأدنى لأيام التداول</span></h3>
+      <p data-i18n="rule5_desc">تحتاج إلى 3 أيام تداول على الأقل، كل يوم بربح لا يقل عن 0.5% — لاجتياز أي مرحلة تقييم، وأيضاً (على الحساب الممول نفسه) كشرط لأول طلب سحب، في جميع الخطط بما فيها التمويل الفوري.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">6</span><span data-i18n="rule6_title">قانون الصفقة الواحدة 80%</span></h3>
+      <p data-i18n="rule6_desc">لا يجوز أن يمثل ربح أي صفقة واحدة أكثر من 80% من إجمالي ربح المرحلة (أو، في خطة التمويل الفوري، إجمالي الربح منذ بدء الحساب).</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">7</span><span data-i18n="rule7_title">قانون الاتساق 40% (مرحلة التمويل)</span></h3>
+      <p data-i18n="rule7_desc">في الحساب الممول، يجب ألا يتجاوز ربح أي يوم واحد 40% من إجمالي ربح الحساب.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:36px;"><span data-i18n="rules_section_general">قوانين عامة</span></div>
+
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">8</span><span data-i18n="rule8_title">حظر مشاركة بيانات الحساب (CID)</span></h3>
+      <p data-i18n="rule8_desc">مشاركة بيانات الحساب مع أي شخص آخر ممنوعة وتؤدي إلى إغلاق الحساب فوراً.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">9</span><span data-i18n="rule9_title">حظر التحوط (Hedging)</span></h3>
+      <p data-i18n="rule9_desc">فتح صفقات متعاكسة على نفس الرمز أو رموز مترابطة بين عدة حسابات لنفس المتداول ممنوع. (التحوط الجماعي محظور، وفي حال اكتشافه يؤدي إلى إغلاق جميع الحسابات ذات الصلة.)</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">10</span><span data-i18n="rule10_title">حظر نسخ الصفقات بين الحسابات</span></h3>
+      <p data-i18n="rule10_desc">نسخ الصفقات بين عدة حسابات ممنوع، وعند اكتشافه تتم مراجعة الحسابات وقد تُغلق.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">11</span><span data-i18n="rule11_title">حظر استغلال فروق التأخير السعري</span></h3>
+      <p data-i18n="rule11_desc">استغلال التأخير بين مصادر التسعير لتحقيق ربح دون مخاطرة سوقية حقيقية ممنوع.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">12</span><span data-i18n="rule12_title">الروبوتات والمستشارون الخبراء</span></h3>
+      <p data-i18n="rule12_desc">الروبوتات التي تستغل أخطاء الخادم ممنوعة؛ الاستخدام العادي لـ EA مسموح.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:36px;"><span data-i18n="rules_section_payout">حصة الربح والمدفوعات</span></div>
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">13</span><span data-i18n="rule13_title">حصة الربح من الحساب الممول</span></h3>
+      <p data-i18n="rule13_desc">في الحساب الممول، الحصة الأساسية للمتداول من الربح 75% (خطة خطوة واحدة) أو 80% (خطة خطوتين/ثلاث خطوات) أو 50% (خطة التمويل الفوري). مع كل توسع للحساب (كل 10% من الربح المحقق)، تزداد هذه الحصة 5 نقاط مئوية، حتى سقف 100%.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">14</span><span data-i18n="rule14_title">جدول السحب</span></h3>
+      <p data-i18n="rule14_desc">بالنسبة لأول عملية سحب، يجب أن تمر 14 يوماً على الأقل منذ أول صفقة لك في الحساب الممول. بعد ذلك، يجب أن يكون كل سحب لاحق بعد 7 أيام على الأقل من السحب السابق. يتم الدفع خلال 48 ساعة من الموافقة.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">15</span><span data-i18n="rule15_title">التنفيذ العادل والموحد</span></h3>
+      <p data-i18n="rule15_desc">يتم تطبيق السبريد والعمولة والانزلاق السعري بشكل متطابق على كل متداول وفق هذه القواعد الثابتة والمعلنة. لا يتم تعديلها يدويًا أو استهداف متداول معين لإسقاطه أبدًا.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">16</span><span data-i18n="rule16_title">تعريف "يوم التداول"</span></h3>
+      <p data-i18n="rule16_desc">يوم التداول يُحدَّد بمنتصف الليل بالتوقيت العالمي (UTC) — وليس توقيتك المحلي.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">17</span><span data-i18n="rule17_title">نداء الهامش</span></h3>
+      <p data-i18n="rule17_desc">إذا تجاوزت الخسائر العائمة هامشك الحر، تُغلق جميع الصفقات فوراً.</p>
+    </div>
+
+    <div class="rule-item">
+      <h3><span class="num">18</span><span data-i18n="rule18_title">استرداد رسوم التحدي</span></h3>
+      <p data-i18n="rule18_desc">يتم استرداد رسوم التحدي بالكامل، إضافة إلى حصتك من الأرباح، في أول مرة تطلب فيها بنجاح سحب أرباح من حسابك الممول.</p>
+    </div>
+
+    <p style="margin-top:30px; font-size:13px; color:var(--paper-dim);" data-i18n="rules_footer_note">يؤدي انتهاك أي من هذه القوانين إلى إغلاق تلقائي للحساب و/أو مراجعة يدوية من فريقنا.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">القوانين</a>
+      <a href="privacy.html" data-i18n="footer_privacy">الخصوصية</a>
+      <a href="/platform.html" data-i18n="footer_platform">المنصة</a>
+      <a href="contact.html" data-i18n="footer_contact">اتصل بنا</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© 2026 FundedBeyondBorders. جميع الحقوق محفوظة.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>
