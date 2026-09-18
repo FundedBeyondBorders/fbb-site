@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'fa';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="priv1">حریم خصوصی | FundedBeyondBorders</title>
+<meta name="description" content="نحوه‌ی جمع‌آوری، استفاده، و محافظت از داده‌های شخصی شما توسط FundedBeyondBorders، شامل مدارک KYC و اطلاعات حساب معاملاتی.">
+<meta property="og:title" content="حریم خصوصی | FundedBeyondBorders">
+<meta property="og:description" content="نحوه‌ی جمع‌آوری، استفاده، و محافظت از داده‌های شخصی شما توسط FundedBeyondBorders، شامل مدارک KYC و اطلاعات حساب معاملاتی.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/fa/privacy.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="حریم خصوصی | FundedBeyondBorders">
+<meta name="twitter:description" content="نحوه‌ی جمع‌آوری، استفاده، و محافظت از داده‌های شخصی شما توسط FundedBeyondBorders، شامل مدارک KYC و اطلاعات حساب معاملاتی.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .policy-section{ max-width:760px; margin:0 auto 24px; }
+  .policy-section h3{ margin-bottom:10px; color:var(--gold-soft); }
+  .policy-section p, .policy-section li{ color:var(--paper-dim); font-size:14.5px; line-height:1.9; }
+  .policy-section ul{ padding-inline-start:20px; margin-top:8px; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/privacy.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/privacy.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/privacy.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/privacy.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/privacy.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/privacy.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/privacy.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/fa/privacy.html">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">خانه</a>
+      <a href="rules.html" data-i18n="nav_rules">قوانین</a>
+      <a href="faq.html" data-i18n="nav_faq">سوالات متداول</a>
+      <a href="status.html" data-i18n="nav_status">وضعیت سیستم</a>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="footer_privacy">حریم خصوصی</span></div>
+  <h1 data-i18n="priv2">سیاست حریم خصوصی</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="policy-section">
+    <p data-i18n="priv3">این صفحه توضیح می‌ده چه اطلاعاتی ازت جمع می‌کنیم، چرا، و چطور ازش محافظت می‌کنیم.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv4">چه اطلاعاتی جمع می‌کنیم</h3>
+    <ul>
+      <li data-i18n="priv5">ایمیل، رمز عبور (رمزنگاری‌شده)، نام، کشور، و تاریخ تولد — موقع ثبت‌نام</li>
+      <li data-i18n="priv6">مدرک هویتی (کارت ملی/پاسپورت/گواهینامه) — فقط اگه بخوای درخواست برداشت سود بدی</li>
+      <li data-i18n="priv7">تاریخچه‌ی معاملات، موجودی حساب، و آدرس IP هر معامله — برای اجرای قوانین ریسک و جلوگیری از تقلب</li>
+      <li data-i18n="priv8">پیام‌های تیکت پشتیبانی</li>
+      <li data-i18n="priv_news_collect">آدرس ایمیل — فقط اگه خودت با میل خودت تو فرم خبرنامه‌ی صفحه‌ی اصلی عضو بشی</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv9">چطور ازش محافظت می‌کنیم</h3>
+    <ul>
+      <li data-i18n="priv10">رمز عبورت هیچ‌وقت به‌صورت خام ذخیره نمی‌شه — فقط هش (یک‌طرفه، غیرقابل‌بازگشت) اون ذخیره می‌شه</li>
+      <li data-i18n="priv11">مدرک هویتی با رمزنگاری قوی (AES-256) ذخیره می‌شه</li>
+      <li data-i18n="priv12">نشست ورودت (session) هم به‌صورت هش‌شده ذخیره می‌شه، نه خام</li>
+      <li data-i18n="priv13">فقط ادمین سایت (با کلید امنیتی جداگانه) به این اطلاعات دسترسی داره</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv14">چرا جمعش می‌کنیم</h3>
+    <ul>
+      <li data-i18n="priv15">مدرک هویتی: برای اطمینان از اینکه سود واقعی به همون شخصی می‌رسه که حسابو باز کرده (KYC)</li>
+      <li data-i18n="priv16">آدرس IP: برای تشخیص تخلفاتی مثل هج هماهنگ‌شده بین چند حساب متفاوت</li>
+      <li data-i18n="priv17">تاریخ تولد و کشور: برای تطبیق با مدرک هویتی موقع بررسی KYC</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv18">حذف اطلاعات</h3>
+    <p data-i18n="priv19">می‌تونی از طریق تیکت پشتیبانی درخواست بدی حساب کاربری‌ات (اطلاعات ورود و مدرک هویتی) حذف بشه. سوابق معاملاتی و مالی برای رسیدگی به اختلافات احتمالی و الزامات حسابداری، حتی بعد از حذف حساب، نگه داشته می‌شه.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv20">اشتراک‌گذاری با شخص ثالث</h3>
+    <p data-i18n="priv21">اطلاعاتت رو نمی‌فروشیم. برای ارسال ایمیل تایید از سرویس Resend، و برای دریافت قیمت لحظه‌ای از Binance و Twelve Data استفاده می‌کنیم — این سرویس‌ها فقط داده‌ی لازم برای کارشون رو می‌بینن (مثلاً Resend فقط ایمیلت رو می‌بینه، نه رمز عبور یا مدرک هویتی).</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv_news_h3">خبرنامه</h3>
+    <p data-i18n="priv_news_p">عضویت تو خبرنامه کاملاً اختیاریه و فقط با اجازه‌ی خودت انجام می‌شه. هر ایمیلی که می‌فرستیم یه لینک لغو اشتراک داره — با یه کلیک، فوری و بدون نیاز به لاگین، از لیست حذف می‌شی. ایمیلت رو با هیچ شخص ثالثی به اشتراک نمی‌ذاریم.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv22">تماس</h3>
+    <p data-i18n="priv23">سوالی درباره‌ی حریم خصوصی داری؟ از صفحه‌ی تماس با ما یا دکمه‌ی چت پیام بده.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">قوانین</a>
+      <a href="privacy.html" data-i18n="footer_privacy">حریم خصوصی</a>
+      <a href="contact.html" data-i18n="footer_contact">تماس با ما</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© ۲۰۲۶ FundedBeyondBorders. تمامی حقوق محفوظ است.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'fa';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_contact">تماس با ما | FundedBeyondBorders</title>
+<meta name="description" content="تماس با پشتیبانی FundedBeyondBorders.">
+<meta property="og:title" content="تماس با ما | FundedBeyondBorders">
+<meta property="og:description" content="تماس با پشتیبانی FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/fa/contact.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="تماس با ما | FundedBeyondBorders">
+<meta name="twitter:description" content="تماس با پشتیبانی FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/contact.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/contact.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/contact.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/contact.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/contact.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/contact.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/contact.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/contact.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/fa/contact.html">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <div class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">خانه</a>
+      <a href="index.html#plans" data-i18n="nav_plans">پلن‌ها</a>
+      <a href="rules.html" data-i18n="nav_rules">قوانین</a>
+      <a href="faq.html" data-i18n="nav_faq">سوالات متداول</a>
+      <a href="/platform.html" data-i18n="nav_platform">پلتفرم</a>
+      <a href="contact.html" data-i18n="nav_contact">تماس با ما</a>
+      <a href="status.html" data-i18n="nav_status">وضعیت سیستم</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">ورود</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_contact">تماس با ما</span></div>
+  <h1 data-i18n="contact_h1">سوالی داری؟ بگو</h1>
+  <p data-i18n="contact_p">فرم زیر رو پر کن یا از دکمه‌ی گفتگوی آنلاین استفاده کن.</p>
+</div>
+
+<section style="padding-top:0;">
+  <div class="wrap-narrow">
+    <div class="card">
+      <form id="contactForm">
+        <div class="field-row">
+          <div class="field">
+            <label for="contactName" data-i18n="form_name">نام</label>
+            <input type="text" id="contactName" name="name" required>
+          </div>
+          <div class="field">
+            <label for="contactMethod" data-i18n="form_contact">ایمیل یا تلگرام</label>
+            <input type="text" id="contactMethod" name="contact" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="contactSubject" data-i18n="form_subject">موضوع</label>
+          <select id="contactSubject" name="subject">
+            <option value="general" data-i18n="subj_general">سوال عمومی</option>
+            <option value="payment" data-i18n="subj_payment">مشکل پرداخت</option>
+            <option value="account" data-i18n="subj_account">مشکل حساب چالش</option>
+            <option value="bug" data-i18n="subj_bug">گزارش باگ پلتفرم</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="contactMessage" data-i18n="form_message">پیام</label>
+          <textarea id="contactMessage" name="message" rows="5" required></textarea>
+        </div>
+        <div id="turnstile-contact" style="margin-bottom:12px;"></div>
+        <button type="submit" class="btn btn-primary btn-block" data-i18n="form_submit">ارسال پیام</button>
+        <p id="contactSuccess" style="display:none; color:var(--green); font-size:14px; margin-top:12px; text-align:center;" data-i18n="form_success" aria-live="polite">پیامت ثبت شد، به‌زودی جواب می‌دیم.</p>
+        <p id="contactError" style="display:none; color:var(--red); font-size:14px; margin-top:12px; text-align:center;" role="alert"></p>
+      </form>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3 style="margin-bottom:10px;" data-i18n="chat_title">پشتیبانی آنلاین</h3>
+      <p style="color:var(--paper-dim); font-size:14.5px;" data-i18n="live_support_desc">برای پاسخ سریع‌تر، از دکمه‌ی گفتگوی پایین سمت صفحه استفاده کن.</p>
+      <div class="support-contact-links">
+        <a class="support-telegram-link" href="#" target="_blank" rel="noopener" style="display:none;">
+          <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+          <span></span>
+        </a>
+        <a class="support-email-link" href="#" style="display:none;">
+          <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+          <span></span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">قوانین</a>
+      <a href="privacy.html" data-i18n="footer_privacy">حریم خصوصی</a>
+      <a href="/platform.html" data-i18n="footer_platform">پلتفرم</a>
+      <a href="contact.html" data-i18n="footer_contact">تماس با ما</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© ۲۰۲۶ FundedBeyondBorders. تمامی حقوق محفوظ است.</div>
+  </div>
+</footer>
+
+<button class="chat-bubble" id="chatBubble">💬</button>
+<div class="chat-panel" id="chatPanel">
+  <h4 data-i18n="chat_title">پشتیبانی آنلاین</h4>
+  <p data-i18n="chat_body">سوالی داری؟ برامون پیام بذار، در سریع‌ترین زمان جواب می‌دیم.</p>
+  <textarea rows="3" data-i18n-placeholder="chat_placeholder" placeholder="پیامت رو بنویس..."></textarea>
+  <button class="btn btn-primary btn-sm btn-block" data-i18n="chat_send">ارسال</button>
+</div>
+
+<script>
+  document.getElementById('chatBubble').addEventListener('click', () => document.getElementById('chatPanel').classList.toggle('open'));
+
+  let contactCaptchaToken = null;
+  async function renderCaptchaWidgets() {
+    try {
+      const settings = await apiGet('/settings/public');
+      const siteKey = settings.turnstile_site_key;
+      if (!siteKey || typeof turnstile === 'undefined') return; // CAPTCHA not configured yet — form still works, per the server's fail-open-with-warning behavior
+      turnstile.render('#turnstile-contact', { sitekey: siteKey, callback: (t) => { contactCaptchaToken = t; } });
+    } catch (err) { /* non-critical — form still works without CAPTCHA if this fails */ }
+  }
+  document.addEventListener('DOMContentLoaded', renderCaptchaWidgets);
+
+  document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const successEl = document.getElementById('contactSuccess');
+    const errorEl = document.getElementById('contactError');
+    errorEl.style.display = 'none';
+    try {
+      await apiPost('/tickets', {
+        subject: form.subject.selectedOptions[0].text,
+        message: `From: ${form.name.value} <${form.contact.value}>\n\n${form.message.value}`,
+        category: form.subject.value,
+        contact_email: form.contact.value,
+        captcha_token: contactCaptchaToken,
+      });
+      successEl.style.display = 'block';
+      form.reset();
+    } catch (err) {
+      errorEl.textContent = err.message;
+      errorEl.style.display = 'block';
+    }
+  });
+</script>
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>
