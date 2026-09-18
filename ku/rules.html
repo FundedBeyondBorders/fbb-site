@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'ku';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_rules">یاساکان | FundedBeyondBorders</title>
+<meta name="description" content="یاسا و پێوەرەکانی هەڵسەنگاندنی مامەڵەکردن بۆ ئاڵنگاریەکانی FundedBeyondBorders.">
+<meta property="og:title" content="یاساکان | FundedBeyondBorders">
+<meta property="og:description" content="یاسا و پێوەرەکانی هەڵسەنگاندنی مامەڵەکردن بۆ ئاڵنگاریەکانی FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/ku/rules.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="یاساکان | FundedBeyondBorders">
+<meta name="twitter:description" content="یاسا و پێوەرەکانی هەڵسەنگاندنی مامەڵەکردن بۆ ئاڵنگاریەکانی FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .rule-card{ margin-bottom:18px; }
+  .rule-card h3{ font-size:17px; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+  .rule-card h3 .num{ font-family:'Fraunces',serif; color:var(--gold-soft); font-size:14px; border:1px solid var(--gold); border-radius:999px; width:26px; height:26px; display:flex; align-items:center; justify-content:center; flex:none; }
+  .rule-card p{ color:var(--paper-dim); font-size:14.5px; }
+  .rule-card .badge-row{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .lang-note{ font-size:12.5px; color:var(--paper-dim); background:var(--ink-2); border:1px solid var(--line); border-radius:12px; padding:12px 16px; margin-bottom:30px; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/rules.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/rules.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/rules.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/rules.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/rules.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/rules.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/rules.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/rules.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/ku/rules.html">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <div class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">سەرەکی</a>
+      <a href="index.html#plans" data-i18n="nav_plans">پلانەکان</a>
+      <a href="rules.html" data-i18n="nav_rules">یاساکان</a>
+      <a href="faq.html" data-i18n="nav_faq">پرسیارە دووبارەبووەکان</a>
+      <a href="/platform.html" data-i18n="nav_platform">پلاتفۆرم</a>
+      <a href="contact.html" data-i18n="nav_contact">پەیوەندی</a>
+      <a href="status.html" data-i18n="nav_status">دۆخی سیستەم</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">چوونەژوورەوە</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_rules">یاساکان</span></div>
+  <h1 data-i18n="rules_h1">یاساکانی تاقیکردنەوە و هەژماری پارەدارکراو</h1>
+  <p data-i18n="rules_p">پێش کڕین ئەم پەڕەیە بخوێنەرەوە. پارەدان مانای قبووڵکردنی یاساکانە.</p>
+</div>
+
+<section style="padding-top:0;">
+  <div class="wrap-narrow">
+
+    <div class="lang-note" data-i18n="rules_lang_note">ئەم پەڕەیە بۆ ٧ زمان وەرگێڕدراوە.</div>
+
+    <div class="eyebrow"><span data-i18n="rules_section_caps">سنووری هەژمار</span></div>
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">1</span><span data-i18n="rule1_title">زۆرترین قەبارەی هەژمار</span></h3>
+      <p data-i18n="rule1_desc">نابێت لە ٥٠٠,٠٠٠ دۆلار زیاتر بێت.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">2</span><span data-i18n="rule2_title">زۆرترین سەرمایە بۆ هەر بازرگانیکارێک</span></h3>
+      <p data-i18n="rule2_desc">نابێت لە ٧٥٠,٠٠٠ دۆلار زیاتر بێت.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">3</span><span data-i18n="rule3_title">زۆرترین هەژماری چالاک</span></h3>
+      <p data-i18n="rule3_desc">زۆرترین ٣ هەژماری چالاک.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:36px;"><span data-i18n="rules_section_risk">یاساکانی مەترسی</span></div>
+
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">4</span><span data-i18n="rule4_title">یاسای مەترسی مەلەوان</span></h3>
+      <p data-i18n="rule4_desc">مەترسی یەک مامەڵە یان کۆی مامەڵە کراوەکانی هاوکات نابێت زیاتر لە ٪٣ی هەژمار بێت (بۆ قەبارەی $١,٠٠٠ تا $٥٠,٠٠٠) یان ٪٢ (بۆ قەبارەی $١٠٠,٠٠٠ بەرزتر). تێپەڕاندنی ئەم سنوورە بەهۆی سلیپەیجەوە پێشێلکردن نییە؛ تەنها تێپەڕاندنی بەئەنقەست (نەدانانی حەدی زیان لەگەڵ دابەزینی ڕاستەقینەی ئیکوێتی هەژمار بۆ ژێر سنوور) پێشێلکردن دەژمێردرێت.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">5</span><span data-i18n="rule5_title">کەمترین ڕۆژی بازرگانی</span></h3>
+      <p data-i18n="rule5_desc">پێویستە کەمترین ٣ ڕۆژی بازرگانیت هەبێت، هەریەکەیان کەمترین ٪٠.٥ قازانج — بۆ تێپەڕاندنی هەر قۆناغێکی هەڵسەنگاندن، هەروەها (لەسەر خودی هەژماری پارەدارکراو) وەک مەرجی یەکەم داواکاری دەرهێنان، لە هەموو پلانەکاندا لەوانە پارەدانی فەوری.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">6</span><span data-i18n="rule6_title">یاسای ٪٨٠ لە یەک مامەڵە</span></h3>
+      <p data-i18n="rule6_desc">قازانجی هیچ مامەڵەیەک ناتوانێت زیاتر لە ٪٨٠ی قازانجی قۆناغەکە (یان لە پلانی پارەدانی فەوری، کۆی قازانج لە دەستپێکی هەژمارەوە) بێت.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">7</span><span data-i18n="rule7_title">یاسای بەردەوامی ٪٤٠</span></h3>
+      <p data-i18n="rule7_desc">لە هەژماری پارەدارکراودا ڕۆژێک نابێت زیاتر لە ٪٤٠ بێت.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:36px;"><span data-i18n="rules_section_general">یاسا گشتییەکان</span></div>
+
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">8</span><span data-i18n="rule8_title">قەدەغەکردنی هاوبەشکردنی CID</span></h3>
+      <p data-i18n="rule8_desc">هاوبەشکردنی زانیاری هەژمار قەدەغەیە.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">9</span><span data-i18n="rule9_title">قەدەغەکردنی هێج</span></h3>
+      <p data-i18n="rule9_desc">کردنەوەی پۆزیشنی پێچەوانە لەسەر یەک هێما یان هێمای هاوپەیوەندی لەنێوان هەژمارەکانی خۆی تریدەرێک قەدەغەیە. (هێجی گروپی قەدەغەیە و ئەگەر دۆزرایەوە، دەبێتە هۆی داخستنی هەموو هەژمارە پەیوەندیدارەکان.)</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">10</span><span data-i18n="rule10_title">قەدەغەکردنی کۆپی‌تریدینگ</span></h3>
+      <p data-i18n="rule10_desc">کۆپیکردنی مامەڵە لەنێوان هەژمارەکان قەدەغەیە.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">11</span><span data-i18n="rule11_title">قەدەغەکردنی سوودوەرگرتن لە دواکەوتنی نرخ</span></h3>
+      <p data-i18n="rule11_desc">قەدەغەیە.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">12</span><span data-i18n="rule12_title">ڕۆبۆت و EA</span></h3>
+      <p data-i18n="rule12_desc">ڕۆبۆتی هەڵەی سێرڤەر قەدەغەیە؛ EAی ئاسایی ڕێگەپێدراوە.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:36px;"><span data-i18n="rules_section_payout">بەشی قازانج و پارەدان</span></div>
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">13</span><span data-i18n="rule13_title">بەشی قازانج لە هەژماری پارەدارکراو</span></h3>
+      <p data-i18n="rule13_desc">بەشی بنەڕەتی بازرگانیکار لە قازانج ٪٧٥ (یەک‌هەنگاو)، ٪٨٠ (دوو/سێ‌هەنگاو)، یان ٪٥٠ (پلانی پارەدانی فەوری)ە. لەگەڵ هەر پیوانەکردنێکی هەژمار (هەر ٪١٠ قازانجی وەدی‌هاتوو)، ئەم بەشە ٥ خاڵی سەدی زیاد دەکات، تا سەقفی ٪١٠٠.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">14</span><span data-i18n="rule14_title">کاتی دەرهێنانی قازانج</span></h3>
+      <p data-i18n="rule14_desc">بۆ یەکەم دەرهێنانت، دەبێت لانیکەم ١٤ ڕۆژ لە یەکەم مامەڵەت لە هەژماری پارەدارکراو تێپەڕیبێت. دوای ئەوە، هەر دەرهێنانێکی دیکە دەبێت لانیکەم ٧ ڕۆژ دوای ئەوی پێشوو بێت. پارەدان لە ماوەی ٤٨ کاتژمێردا دەبێت.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">15</span><span data-i18n="rule15_title">جێبەجێکردنی دادپەروەرانە و یەکسان</span></h3>
+      <p data-i18n="rule15_desc">سپرێد، کۆمیسیۆن، و سلیپەیج بەپێی هەمان یاسا جێگیر و بڵاوکراوەکان، بە یەکسانی بۆ هەموو بازرگانیکارێک جێبەجێ دەکرێت. هەرگیز بە دەستی یان بۆ ئامانجی شکستهێنانی بازرگانیکارێکی دیاریکراو ڕێکنابخرێت.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">16</span><span data-i18n="rule16_title">پێناسەی "ڕۆژی مامەڵە"</span></h3>
+      <p data-i18n="rule16_desc">ڕۆژی مامەڵە بە نیوەشەوی کاتی جیهانی (UTC) دیاری دەکرێت.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">17</span><span data-i18n="rule17_title">بانگی مارجین</span></h3>
+      <p data-i18n="rule17_desc">ئەگەر زیانی مەلایین لە مارجینی ئازادت زیاتر بێت، هەموو پۆزیشنەکان دادەخرێن.</p>
+    </div>
+
+    <div class="rule-item">
+      <h3><span class="num">18</span><span data-i18n="rule18_title">گەڕاندنەوەی کرێی ئاڵنگاری</span></h3>
+      <p data-i18n="rule18_desc">کرێی ئاڵنگارییەکەت بە تەواوی دەگەڕێندرێتەوە، سەربار لە بەشی قازانجەکەت، یەکەم جار کە بە سەرکەوتوویی داوای دەرچوونی قازانج لە هەژماری پارەدارکراوت دەکەیت.</p>
+    </div>
+
+    <p style="margin-top:30px; font-size:13px; color:var(--paper-dim);" data-i18n="rules_footer_note">سەرپێچی دەبێتە هۆی داخستنی هەژمار.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">یاساکان</a>
+      <a href="privacy.html" data-i18n="footer_privacy">تایبەتمەندی</a>
+      <a href="/platform.html" data-i18n="footer_platform">پلاتفۆرم</a>
+      <a href="contact.html" data-i18n="footer_contact">پەیوەندی</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© ۲۰۲۶ FundedBeyondBorders. هەموو مافەکان پارێزراون.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'ku';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="priv1">سیاسەتی تایبەتمەندی | FundedBeyondBorders</title>
+<meta name="description" content="چۆنیەتی کۆکردنەوە، بەکارهێنان، و پاراستنی داتا کەسیەکانت لەلایەن FundedBeyondBorders، لەوانە بەڵگەنامەکانی KYC و زانیاری هەژماری مامەڵەکردن.">
+<meta property="og:title" content="سیاسەتی تایبەتمەندی | FundedBeyondBorders">
+<meta property="og:description" content="چۆنیەتی کۆکردنەوە، بەکارهێنان، و پاراستنی داتا کەسیەکانت لەلایەن FundedBeyondBorders، لەوانە بەڵگەنامەکانی KYC و زانیاری هەژماری مامەڵەکردن.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/ku/privacy.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="سیاسەتی تایبەتمەندی | FundedBeyondBorders">
+<meta name="twitter:description" content="چۆنیەتی کۆکردنەوە، بەکارهێنان، و پاراستنی داتا کەسیەکانت لەلایەن FundedBeyondBorders، لەوانە بەڵگەنامەکانی KYC و زانیاری هەژماری مامەڵەکردن.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .policy-section{ max-width:760px; margin:0 auto 24px; }
+  .policy-section h3{ margin-bottom:10px; color:var(--gold-soft); }
+  .policy-section p, .policy-section li{ color:var(--paper-dim); font-size:14.5px; line-height:1.9; }
+  .policy-section ul{ padding-inline-start:20px; margin-top:8px; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/privacy.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/privacy.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/privacy.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/privacy.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/privacy.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/privacy.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/privacy.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/ku/privacy.html">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">سەرەکی</a>
+      <a href="rules.html" data-i18n="nav_rules">یاساکان</a>
+      <a href="faq.html" data-i18n="nav_faq">پرسیارە دووبارەبووەکان</a>
+      <a href="status.html" data-i18n="nav_status">دۆخی سیستەم</a>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="footer_privacy">تایبەتمەندی</span></div>
+  <h1 data-i18n="priv2">سیاسەتی تایبەتمەندی</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="policy-section">
+    <p data-i18n="priv3">ئەم پەڕەیە باس لەوە دەکات کە چ زانیارییەکمان لێت کۆدەکەینەوە، بۆچی، و چۆن دەیپارێزین.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv4">چی کۆدەکەینەوە</h3>
+    <ul>
+      <li data-i18n="priv5">ئیمەیل، وشەی نهێنی (کۆدکراو)، ناوی تەواو، وڵات، و بەرواری لەدایکبوون — لە کاتی تۆمارکردن</li>
+      <li data-i18n="priv6">بەڵگەنامەی ناسنامەی حکومی (ناسنامەی نیشتیمانی/پاسپۆرت/مۆڵەت) — تەنها ئەگەر داوای دەرهێنانی قازانج بکەیت</li>
+      <li data-i18n="priv7">مێژووی بازرگانی، باڵانسی هەژمار، و ناونیشانی IP ی هەر مامەڵەیەک — بۆ جێبەجێکردنی یاساکانی مەترسی و دۆزینەوەی فێڵ</li>
+      <li data-i18n="priv8">نامەکانی تیکێتی پشتگیری</li>
+      <li data-i18n="priv_news_collect">ناونیشانی ئیمەیل — تەنها ئەگەر بڕیار بدەیت خۆت تۆمار بکەیت لە هەواڵنامەکەی پەڕەی سەرەکی</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv9">چۆن دەیپارێزین</h3>
+    <ul>
+      <li data-i18n="priv10">وشەی نهێنیت هەرگیز بە شێوەی دەقی خاو هەڵناگیرێت — تەنها هاشێکی یەک‌ئاراستەیی و ناگەڕاوەتەوەی ئەو هەڵدەگیرێت</li>
+      <li data-i18n="priv11">بەڵگەنامەی ناسنامەت بە کۆدکردنێکی بەهێز (AES-256) هەڵدەگیرێت</li>
+      <li data-i18n="priv12">دانیشتنی چوونەژوورەوەشت بە شێوەی هاشکراو هەڵدەگیرێت، نەک بە دەقی خاو</li>
+      <li data-i18n="priv13">تەنها بەڕێوەبەری سایت (بە کلیلێکی ئاسایشی جیاواز) دەتوانێت دەستی بەم زانیارییانە بگات</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv14">بۆچی کۆیدەکەینەوە</h3>
+    <ul>
+      <li data-i18n="priv15">بەڵگەنامەی ناسنامە: بۆ دڵنیابوون لەوەی قازانجەکە ڕاستەوخۆ دەگاتە کەسێک کە هەژمارەکەی کردووەتەوە (KYC)</li>
+      <li data-i18n="priv16">ناونیشانی IP: بۆ دۆزینەوەی نەخشەی سوءئیستفادە وەک هێجکردنی هاوئاهەنگ لەنێوان چەند هەژمارێکی جیاواز</li>
+      <li data-i18n="priv17">بەرواری لەدایکبوون و وڵات: بۆ چاوپێدانی لەگەڵ بەڵگەنامەی ناسنامە لە کاتی پێداچوونەوەی KYC</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv18">سڕینەوەی داتاکانت</h3>
+    <p data-i18n="priv19">دەتوانیت داوای سڕینەوەی ناسنامەی چوونەژوورەوەت (زانیاری چوونەژوورەوە و بەڵگەنامەی ناسنامە) بکەیت لە ڕێگەی تیکێتی پشتگیریەوە. تۆمارە بازرگانی و داراییەکان بۆ چارەسەرکردنی ناکۆکی و مەبەستی ژمێریاری هەڵدەگیرێن، تەنانەت دوای سڕینەوەی هەژماریش.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv20">هاوبەشکردن لەگەڵ لایەنی سێیەم</h3>
+    <p data-i18n="priv21">زانیارییەکانت نافرۆشین. Resend بۆ ناردنی ئیمەیلی پشتڕاستکردنەوە، و Binance/Twelve Data بۆ نرخی زیندوو بەکاردەهێنین — ئەم خزمەتگوزارییانە تەنها کەمترین داتای پێویست بۆ کارەکانیان دەبینن (بۆ نموونە Resend تەنها ئیمەیلەکەت دەبینێت، هەرگیز وشەی نهێنی یان بەڵگەنامەی ناسنامەت نا).</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv_news_h3">هەواڵنامە</h3>
+    <p data-i18n="priv_news_p">تۆمارکردن لە هەواڵنامەدا بە تەواوی ئارەزوومەندانەیە و تەنها بە ڕەزامەندی خۆت ئەنجام دەدرێت. هەموو ئیمەیلێک کە دەینێرین لینکی هەڵوەشاندنەوەی ئەندامێتی تێدایە — یەک کلیک، دەتسڕێتەوە بە دەم‌جێ و بەبێ پێویستی چوونەژوورەوە. ئیمەیلەکەت لەگەڵ هیچ لایەنێکی سێیەم هاوبەش ناکەین.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv22">پەیوەندی</h3>
+    <p data-i18n="priv23">پرسیارت هەیە دەربارەی تایبەتمەندی؟ لە ڕێگەی پەڕەی پەیوەندی یان دوگمەی چاتەوە پەیوەندیمان پێوە بکە.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">یاساکان</a>
+      <a href="privacy.html" data-i18n="footer_privacy">تایبەتمەندی</a>
+      <a href="contact.html" data-i18n="footer_contact">پەیوەندی</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© ۲۰۲۶ FundedBeyondBorders. هەموو مافەکان پارێزراون.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

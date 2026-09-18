@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'ku';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_faq">پرسیارە دووبارەبووەکان | FundedBeyondBorders</title>
+<meta name="description" content="پرسیارە باوەکان دەربارەی ئاڵنگاریەکانی FundedBeyondBorders — لەگەڵ کۆمیسیۆن و ئاسپرێدەکانمان، یەکێک لە نزمترینەکانی پیشەسازی.">
+<meta property="og:title" content="پرسیارە باوەکان | FundedBeyondBorders">
+<meta property="og:description" content="پرسیارە باوەکان دەربارەی ئاڵنگاریەکانی مامەڵەکردنی FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/ku/faq.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="پرسیارە باوەکان | FundedBeyondBorders">
+<meta name="twitter:description" content="پرسیارە باوەکان دەربارەی ئاڵنگاریەکانی مامەڵەکردنی FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .faq{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:1px; border-top:1px solid var(--line); }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-item summary{ cursor:pointer; list-style:none; padding:20px 4px; display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:15.5px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{ content:"+"; color:var(--gold-soft); font-size:22px; font-weight:300; }
+  .faq-item[open] summary::after{ content:"–"; }
+  .faq-item p{ padding:0 4px 20px; color:var(--paper-dim); font-size:14.5px; max-width:660px; line-height:1.9; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/faq.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/faq.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/faq.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/faq.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/faq.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/faq.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/faq.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/faq.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/ku/faq.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "ئایا FundedBeyondBorders بروکەرێکە؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "نەخێر. ئێمە پلاتفۆرمێکی خوێندنی هەڵسەنگاندنی بازرگانین. هەموو مامەڵەکان لە ژینگەیەکی مۆدێلکراودا ئەنجام دەدرێن — هیچ داواکارییەک بۆ بازاڕی داراییی ڕاستەقینە نانێردرێت."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ئەگەر لە قۆناغێک دەرنەچم چی ڕوودەدات؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "دۆخی هەژماری تاقیکردنەوە دەبێتە 'پێشێلکراو' و ئیتر ناتوانیت مامەڵەی لەسەر بکەیت. دەتوانیت تاقیکردنەوەیەکی نوێ بکڕیت و دووبارە هەوڵ بدەیت."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "چ لیڤەرێجێکتان هەیە؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "لیڤەرێج بەپێی جۆری بازاڕ جیاوازە (کریپتۆ کەمترە، فۆرێکس زیاترە — ژمارەی وردی لای هەر هێمایەک لەسەر خودی پلاتفۆرمەکە دەبینیت). ئەگەر زیانی گۆڕانکاریت لە مارجینی ئازادت زیاتر بێت، پۆزیشنەکانت خۆکار دادەخرێن (مارجین کۆڵ) — وردەکارییەکانی تەواو لە پەڕەی یاساکاندایە."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "قازانجی هەژماری پارەدارکراو چۆن دەدرێتەوە؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "کاتێک داوا دەکەیت، بەشی قازانجت (بەپێی یاساکان) دەستبەجێ دەچێتە ناو جزدانی ناوخۆیی لە پانێڵەکەت. لەوێوە، دەتوانیت داواکاری دەرهێنانێک بۆ USDT ڕاستەقینە (TRC20، ERC20، یان BEP20) بۆ ناونیشانی خۆت بنێریت، کە بە دەست دەینێرین."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "بۆچی پێویستە KYC بنێرم؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "تەنها پێش یەکەم داواکاری دەرهێنان پێویستە — بۆ دڵنیابوون لەوەی قازانجەکە ڕاستەوخۆ دەگاتە کەسێک کە هەژمارەکەی کردووەتەوە. پێش ئەوە دەتوانیت بە ئازادی مامەڵە بکەیت."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "بۆچی تەنها USDT وەردەگرن؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "USDT هیچ گۆڕانکارییەکی نرخی نییە، کرێی مامەڵەکان (بەتایبەت لەسەر تۆڕەکانی TRC20 و BEP20) زۆر نزمە، و لە هەموو جیهاندا بەردەستە — ئەمە وا دەکات دانان، دەرهێنان، و ژمێریاری ناوخۆیی سادە و پێشبینیکراو بمێننەوە."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "جیاوازی هەژماری تاقیکردنەوەی بەخۆڕایی و تاقیکردنەوەیەکی ڕاستەقینە چییە؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "هەژماری تاقیکردنەوە تەنها بۆ هەستکردن بە جیاوازی نرخ و کۆمیسیۆنە — هیچ ئامانجی قازانج یان سنووری زیانی نییە و هەرگیز ناتوانێت ببێتە پارەدارکراو. بۆ بەشداریکردنی ڕاستەقینە لە هەڵسەنگاندن و گەیشتن بە سەرمایەی پارەدارکراو، پێویستە یەکێک لە پلانەکانی تاقیکردنەوە بکڕیت. دەتوانیت ئێستا، بەبێ هیچ تۆمارکردنێک، لە دوگمەی 'هەژماری تاقیکردنەوەی بەخۆڕایی' لەسەرووی ئەم پەڕەیە تاقی بکەیتەوە."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "داواکاریم چەند کات دەخایەنێت تا پشتڕاستبکرێتەوە؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "پشتڕاستکردنەوەی بڕی دروستی پارەدان هەمیشە بەدەستی تیمەکەمان ئەنجام دەدرێت (بۆ ئاسایشی زیاتر)، بەگشتی لە ماوەی چەند کاتژمێرێکدا. ئەگەر درێژخایەن بوو، لە ڕێگەی تیکێتی پشتگیرییەوە بەدواداچوونی بکە."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "دەتوانم زیاتر لە یەک هەژمار هەبێت؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "بەڵێ، تا ٣ هەژماری چالاک لە هەمان کاتدا، بە کۆی گشتی تا ٧٥٠,٠٠٠ دۆلار. وردەکارییەکانی تەواو لە پەڕەی یاساکاندایە."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "پارەدانی فەوری (Instant Funding) چییە؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "پلانێکی نرخی بەرزتر کە دەستبەجێ هەژمارەکەت پارەدار دەکات، بەبێ هیچ قۆناغێکی هەڵسەنگاندن — دەتوانیت دەستبەجێ دەست بە مامەڵە بکەیت بەبێ تێپەڕاندنی هیچ قۆناغێک. (تێبینی: کەمترین ماوەی ستانداردی ١٤ ڕۆژ پێش یەکەم دەرهێنانت، وەک هەموو پلانەکانی دیکە، لێرەش جێبەجێ دەبێت.) لە بەرامبەردا، بەشی قازانجت (٪٥٠) لە پلانە ئاساییەکان کەمترە و سنوورەکانی زیان وریاترن. بۆ ئەوانە گونجاوە کە دەیانەوێت دەستبەجێ دەست پێبکەن و ئامادەن زیاتر بدەن."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ڕاستاندنی دوو هەنگاوی (2FA) چییە و چۆن چالاکی بکەم؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "چینێکی ئاسایشی زیادە — تەنانەت ئەگەر وشەی نهێنیت دەرکەوێت، کەس ناتوانێت بەبێ کۆدێک لە ئەپێکی ڕاستاندن (وەک Google Authenticator) بچێتە ناو هەژمارەکەت. لە بەشی ئاسایشی هەژمار لە پانێڵەکەت، چالاککردن دابگرە و کۆدەکە بخوێنەوە بۆ ئەپەکەت. بەتوندی پێشنیار دەکەین ئەمە چالاک بکەیت."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Loyalty Rewards چییە؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "کاتێک ژمارەی داواکاری تەواوبووەکانت دەگاتە خاڵە دیاریکراوەکان (بۆ نموونە سێیەم یان پێنجەم کڕینت)، کۆدی داشکاندنێکی یەک‌جارە بەخۆکار زیاد دەکرێت بۆ هەژمارەکەت — بەبێ هیچ کارێک لەلایەن تۆوە. کۆدەکانت لە بەشی ناساندن لە پانێڵەکەت دەدۆزیتەوە."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "پاداشتی بانگهێشتکردن (Referral) چۆن کار دەکات؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "کاتێک هاوڕێیەک بە لینکی ڕیفراڵی تۆ خۆی تۆمار دەکات و یەکەم تاقیکردنەوەی خۆی دەکڕێت، ٪١٠ی بڕی ئەو کڕینە ڕاستەوخۆ بە کاش دەچێتە ناو جزدانەکەت — بەبێ پێویستی بە هیچ کۆدێک یان هەنگاوی زیادە. ئەم پاداشتە تەنها یەک جار بۆ یەکەم کڕینی هەر هاوڕێیەکی بانگهێشتکراو جێبەجێ دەبێت."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "کۆمیسیۆن و ئاسپرێدەکانتان چۆن لەگەڵ ئەو پراپ‌فێرمانەی دیکە بەراوردی دەکرێن؟",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "کۆمیسیۆنی چوونەژوورەوە-چوونەدەرەوەمان لەسەر ١ لۆتی ستانداردی فۆرێکس تەنها ٢.٥٠ دۆلارە، لەگەڵ ئاسپرێدی توند (نزیکەی ٠.١ پیپ لەسەر جووتە سەرەکییەکان وەک یۆرۆ/دۆلار) — یەکێک لە نزمترین تێچووی مامەڵەکردن لە پیشەسازی پراپ‌تریدینگدا."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">سەرەکی</a>
+      <a href="index.html#plans" data-i18n="nav_plans">پلانەکان</a>
+      <a href="rules.html" data-i18n="nav_rules">یاساکان</a>
+      <a href="faq.html" data-i18n="nav_faq">پرسیارە دووبارەبووەکان</a>
+      <a href="/platform.html" data-i18n="nav_platform">پلاتفۆرم</a>
+      <a href="contact.html" data-i18n="nav_contact">پەیوەندی</a>
+      <a href="status.html" data-i18n="nav_status">دۆخی سیستەم</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">چوونەژوورەوە</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_faq">پرسیارە دووبارەبووەکان</span></div>
+  <h1 data-i18n="faq_h1">پرسیارە دووبارەبووەکان</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="faq">
+
+    <details class="faq-item" open>
+      <summary><span data-i18n="faq1_q">ئایا FundedBeyondBorders بروکەرێکە؟</span></summary>
+      <p data-i18n="faq1_a">نەخێر. ئێمە پلاتفۆرمێکی خوێندنی هەڵسەنگاندنی بازرگانین. هەموو مامەڵەکان لە ژینگەیەکی مۆدێلکراودا ئەنجام دەدرێن — هیچ داواکارییەک بۆ بازاڕی داراییی ڕاستەقینە نانێردرێت.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq2_q">ئەگەر لە قۆناغێک دەرنەچم چی ڕوودەدات؟</span></summary>
+      <p data-i18n="faq2_a">دۆخی هەژماری تاقیکردنەوە دەبێتە 'پێشێلکراو' و ئیتر ناتوانیت مامەڵەی لەسەر بکەیت. دەتوانیت تاقیکردنەوەیەکی نوێ بکڕیت و دووبارە هەوڵ بدەیت.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq3_q">چ لیڤەرێجێکتان هەیە؟</span></summary>
+      <p data-i18n="faq3_a">لیڤەرێج بەپێی جۆری بازاڕ جیاوازە (کریپتۆ کەمترە، فۆرێکس زیاترە — ژمارەی وردی لای هەر هێمایەک لەسەر خودی پلاتفۆرمەکە دەبینیت). ئەگەر زیانی گۆڕانکاریت لە مارجینی ئازادت زیاتر بێت، پۆزیشنەکانت خۆکار دادەخرێن (مارجین کۆڵ) — وردەکارییەکانی تەواو لە پەڕەی یاساکاندایە.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq4_q">قازانجی هەژماری پارەدارکراو چۆن دەدرێتەوە؟</span></summary>
+      <p data-i18n="faq4_a">کاتێک داوا دەکەیت، بەشی قازانجت (بەپێی یاساکان) دەستبەجێ دەچێتە ناو جزدانی ناوخۆیی لە پانێڵەکەت. لەوێوە، دەتوانیت داواکاری دەرهێنانێک بۆ USDT ڕاستەقینە (TRC20، ERC20، یان BEP20) بۆ ناونیشانی خۆت بنێریت، کە بە دەست دەینێرین.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq5_q">بۆچی پێویستە KYC بنێرم؟</span></summary>
+      <p data-i18n="faq5_a">تەنها پێش یەکەم داواکاری دەرهێنان پێویستە — بۆ دڵنیابوون لەوەی قازانجەکە ڕاستەوخۆ دەگاتە کەسێک کە هەژمارەکەی کردووەتەوە. پێش ئەوە دەتوانیت بە ئازادی مامەڵە بکەیت.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq6_q">بۆچی تەنها USDT وەردەگرن؟</span></summary>
+      <p data-i18n="faq6_a">USDT هیچ گۆڕانکارییەکی نرخی نییە، کرێی مامەڵەکان (بەتایبەت لەسەر تۆڕەکانی TRC20 و BEP20) زۆر نزمە، و لە هەموو جیهاندا بەردەستە — ئەمە وا دەکات دانان، دەرهێنان، و ژمێریاری ناوخۆیی سادە و پێشبینیکراو بمێننەوە.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq7_q">جیاوازی هەژماری تاقیکردنەوەی بەخۆڕایی و تاقیکردنەوەیەکی ڕاستەقینە چییە؟</span></summary>
+      <p data-i18n="faq7_a">هەژماری تاقیکردنەوە تەنها بۆ هەستکردن بە جیاوازی نرخ و کۆمیسیۆنە — هیچ ئامانجی قازانج یان سنووری زیانی نییە و هەرگیز ناتوانێت ببێتە پارەدارکراو. بۆ بەشداریکردنی ڕاستەقینە لە هەڵسەنگاندن و گەیشتن بە سەرمایەی پارەدارکراو، پێویستە یەکێک لە پلانەکانی تاقیکردنەوە بکڕیت. دەتوانیت ئێستا، بەبێ هیچ تۆمارکردنێک، لە دوگمەی 'هەژماری تاقیکردنەوەی بەخۆڕایی' لەسەرووی ئەم پەڕەیە تاقی بکەیتەوە.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq8_q">داواکاریم چەند کات دەخایەنێت تا پشتڕاستبکرێتەوە؟</span></summary>
+      <p data-i18n="faq8_a">پشتڕاستکردنەوەی بڕی دروستی پارەدان هەمیشە بەدەستی تیمەکەمان ئەنجام دەدرێت (بۆ ئاسایشی زیاتر)، بەگشتی لە ماوەی چەند کاتژمێرێکدا. ئەگەر درێژخایەن بوو، لە ڕێگەی تیکێتی پشتگیرییەوە بەدواداچوونی بکە.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq9_q">دەتوانم زیاتر لە یەک هەژمار هەبێت؟</span></summary>
+      <p data-i18n="faq9_a">بەڵێ، تا ٣ هەژماری چالاک لە هەمان کاتدا، بە کۆی گشتی تا ٧٥٠,٠٠٠ دۆلار. وردەکارییەکانی تەواو لە پەڕەی یاساکاندایە.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq10_q">پارەدانی فەوری (Instant Funding) چییە؟</span></summary>
+      <p data-i18n="faq10_a">پلانێکی نرخی بەرزتر کە دەستبەجێ هەژمارەکەت پارەدار دەکات، بەبێ هیچ قۆناغێکی هەڵسەنگاندن — دەتوانیت دەستبەجێ دەست بە مامەڵە بکەیت بەبێ تێپەڕاندنی هیچ قۆناغێک. (تێبینی: کەمترین ماوەی ستانداردی ١٤ ڕۆژ پێش یەکەم دەرهێنانت، وەک هەموو پلانەکانی دیکە، لێرەش جێبەجێ دەبێت.) لە بەرامبەردا، بەشی قازانجت (٪٥٠) لە پلانە ئاساییەکان کەمترە و سنوورەکانی زیان وریاترن. بۆ ئەوانە گونجاوە کە دەیانەوێت دەستبەجێ دەست پێبکەن و ئامادەن زیاتر بدەن.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq11_q">ڕاستاندنی دوو هەنگاوی (2FA) چییە و چۆن چالاکی بکەم؟</span></summary>
+      <p data-i18n="faq11_a">چینێکی ئاسایشی زیادە — تەنانەت ئەگەر وشەی نهێنیت دەرکەوێت، کەس ناتوانێت بەبێ کۆدێک لە ئەپێکی ڕاستاندن (وەک Google Authenticator) بچێتە ناو هەژمارەکەت. لە بەشی ئاسایشی هەژمار لە پانێڵەکەت، چالاککردن دابگرە و کۆدەکە بخوێنەوە بۆ ئەپەکەت. بەتوندی پێشنیار دەکەین ئەمە چالاک بکەیت.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq12_q">Loyalty Rewards چییە؟</span></summary>
+      <p data-i18n="faq12_a">کاتێک ژمارەی داواکاری تەواوبووەکانت دەگاتە خاڵە دیاریکراوەکان (بۆ نموونە سێیەم یان پێنجەم کڕینت)، کۆدی داشکاندنێکی یەک‌جارە بەخۆکار زیاد دەکرێت بۆ هەژمارەکەت — بەبێ هیچ کارێک لەلایەن تۆوە. کۆدەکانت لە بەشی ناساندن لە پانێڵەکەت دەدۆزیتەوە.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq13_q">پاداشتی بانگهێشتکردن (Referral) چۆن کار دەکات؟</span></summary>
+      <p data-i18n="faq13_a">کاتێک هاوڕێیەک بە لینکی ڕیفراڵی تۆ خۆی تۆمار دەکات و یەکەم تاقیکردنەوەی خۆی دەکڕێت، ٪١٠ی بڕی ئەو کڕینە ڕاستەوخۆ بە کاش دەچێتە ناو جزدانەکەت — بەبێ پێویستی بە هیچ کۆدێک یان هەنگاوی زیادە. ئەم پاداشتە تەنها یەک جار بۆ یەکەم کڕینی هەر هاوڕێیەکی بانگهێشتکراو جێبەجێ دەبێت.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq14_q">کۆمیسیۆن و ئاسپرێدەکانتان چەندن؟</span></summary>
+      <p data-i18n="faq14_a">کۆمیسیۆنی چوونەژوورەوە-چوونەدەرەوەمان لەسەر ١ لۆتی ستانداردی فۆرێکس تەنها ٢.٥٠ دۆلارە، لەگەڵ ئاسپرێدی توند (نزیکەی ٠.١ پیپ لەسەر جووتە سەرەکییەکان وەک یۆرۆ/دۆلار) — یەکێک لە نزمترین تێچووی مامەڵەکردن لە پیشەسازی پراپ‌تریدینگدا.</p>
+</details>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">یاساکان</a>
+      <a href="privacy.html" data-i18n="footer_privacy">تایبەتمەندی</a>
+      <a href="/platform.html" data-i18n="footer_platform">پلاتفۆرم</a>
+      <a href="contact.html" data-i18n="footer_contact">پەیوەندی</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© ۲۰۲۶ FundedBeyondBorders. هەموو مافەکان پارێزراون.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'ku';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="status_title">دۆخی سیستەم | FundedBeyondBorders</title>
+<meta name="description" content="دۆخی ڕاستەوخۆی سیستەم، کاتەکانی چاککردنەوە، و ئاگادارکردنەوەکانی پلاتفۆرمی FundedBeyondBorders.">
+<meta property="og:title" content="دۆخی سیستەم | FundedBeyondBorders">
+<meta property="og:description" content="دۆخی ڕاستەوخۆی سیستەم، کاتەکانی چاککردنەوە، و ئاگادارکردنەوەکانی پلاتفۆرمی FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/ku/status.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="دۆخی سیستەم | FundedBeyondBorders">
+<meta name="twitter:description" content="دۆخی ڕاستەوخۆی سیستەم، کاتەکانی چاککردنەوە، و ئاگادارکردنەوەکانی پلاتفۆرمی FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .status-banner{ display:flex; align-items:center; gap:10px; padding:16px 20px; border-radius:12px; margin-bottom:28px; font-weight:600; }
+  .status-banner.ok{ background:rgba(76,154,106,0.12); border:1px solid var(--green); color:var(--green); }
+  .status-banner.down{ background:rgba(200,92,60,0.12); border:1px solid var(--red); color:var(--red); }
+  .status-dot{ width:10px; height:10px; border-radius:50%; background:currentColor; flex-shrink:0; }
+  .announcement{ border-bottom:1px solid var(--line); padding:16px 4px; }
+  .announcement .badge{ font-size:11px; padding:3px 10px; border-radius:999px; font-weight:600; text-transform:uppercase; }
+  .badge.info{ background:rgba(44,140,153,0.15); color:var(--teal-soft); }
+  .badge.maintenance{ background:rgba(200,155,60,0.15); color:var(--gold-soft); }
+  .badge.incident{ background:rgba(200,92,60,0.15); color:var(--red); }
+  .badge.resolved{ background:rgba(76,154,106,0.15); color:var(--green); }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/status.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/status.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/status.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/status.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/status.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/status.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/status.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/status.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/ku/status.html">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">سەرەکی</a>
+      <a href="index.html#plans" data-i18n="nav_plans">پلانەکان</a>
+      <a href="rules.html" data-i18n="nav_rules">یاساکان</a>
+      <a href="faq.html" data-i18n="nav_faq">پرسیارە دووبارەبووەکان</a>
+      <a href="/platform.html" data-i18n="nav_platform">پلاتفۆرم</a>
+      <a href="contact.html" data-i18n="nav_contact">پەیوەندی</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">چوونەژوورەوە</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_status">دۆخی سیستەم</span></div>
+  <h1 data-i18n="status_h1">دۆخی زیندووی پلاتفۆرم</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="wrap-narrow">
+    <div id="statusBanner" class="status-banner ok"><span class="status-dot"></span><span data-i18n="verify_email_checking">لە پشکنیندایە...</span></div>
+
+    <h3 style="margin-bottom:12px;" data-i18n="status_recent_announcements">ئاگادارییە نوێیەکان</h3>
+    <div id="announcementsList">
+      <p style="color:var(--paper-dim);" data-i18n="loading">بارکردن...</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">یاساکان</a>
+      <a href="privacy.html" data-i18n="footer_privacy">تایبەتمەندی</a>
+      <a href="/platform.html" data-i18n="footer_platform">پلاتفۆرم</a>
+      <a href="contact.html" data-i18n="footer_contact">پەیوەندی</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© ۲۰۲۶ FundedBeyondBorders. هەموو مافەکان پارێزراون.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+<script>
+  function escStatus(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
+  function T(dict) { return dict[localStorage.getItem('fbb_lang') || 'fa'] ?? dict.en; }
+  const SEVERITY_LABELS = {
+    info: {fa:'اطلاع‌رسانی', en:'Info', ar:'معلومات', tr:'Bilgi', ru:'Информация', es:'Información', ku:'زانیاری'},
+    maintenance: {fa:'نگهداری', en:'Maintenance', ar:'صيانة', tr:'Bakım', ru:'Обслуживание', es:'Mantenimiento', ku:'چاککردنەوە'},
+    incident: {fa:'حادثه', en:'Incident', ar:'حادث', tr:'Olay', ru:'Инцидент', es:'Incidente', ku:'ڕووداو'},
+    resolved: {fa:'رفع‌شده', en:'Resolved', ar:'تم الحل', tr:'Çözüldü', ru:'Решено', es:'Resuelto', ku:'چارەسەرکراو'},
+  };
+  (async () => {
+    const isFa = (localStorage.getItem('fbb_lang') || 'fa') === 'fa';
+    const bannerEl = document.getElementById('statusBanner');
+    const listEl = document.getElementById('announcementsList');
+    try {
+      const { healthy, announcements } = await apiGet('/status');
+      bannerEl.className = 'status-banner ' + (healthy ? 'ok' : 'down');
+      bannerEl.innerHTML = `<span class="status-dot"></span><span>${
+        healthy ? T({fa:'همه‌چیز عادیه — سیستم در دسترسه', en:'All systems operational', ar:'كل الأنظمة تعمل بشكل طبيعي', tr:'Tüm sistemler çalışıyor', ru:'Все системы работают нормально', es:'Todos los sistemas operativos', ku:'هەموو سیستەمەکان کاردەکەن'}) : T({fa:'مشکلی در سرویس تشخیص داده شد', en:'A service issue has been detected', ar:'تم اكتشاف مشكلة في الخدمة', tr:'Bir hizmet sorunu tespit edildi', ru:'Обнаружена проблема с сервисом', es:'Se ha detectado un problema de servicio', ku:'کێشەیەک لە خزمەتگوزاری دۆزراوەتەوە'})
+      }</span>`;
+
+      listEl.innerHTML = announcements.length
+        ? announcements.map(a => `
+            <div class="announcement">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <strong>${escStatus(a.title)}</strong>
+                <span class="badge ${escStatus(a.severity)}">${SEVERITY_LABELS[a.severity] ? T(SEVERITY_LABELS[a.severity]) : escStatus(a.severity)}</span>
+              </div>
+              <p style="color:var(--paper-dim); font-size:13.5px; margin-bottom:4px;">${escStatus(a.body)}</p>
+              <p style="color:var(--paper-dim); font-size:11px;">${new Date(a.created_at).toLocaleString()}</p>
+            </div>`).join('')
+        : `<p style="color:var(--paper-dim);">${T({fa:'اطلاعیه‌ای ثبت نشده — همه‌چیز روال عادی داره.', en:'No announcements — everything is running normally.', ar:'لا توجد إعلانات — كل شيء يعمل بشكل طبيعي.', tr:'Duyuru yok — her şey normal çalışıyor.', ru:'Объявлений нет — всё работает в обычном режиме.', es:'Sin anuncios — todo funciona con normalidad.', ku:'هیچ ئاگادارییەک نییە — هەموو شت بە ئاسایی کاردەکات.'})}</p>`;
+    } catch (err) {
+      bannerEl.className = 'status-banner down';
+      bannerEl.innerHTML = `<span class="status-dot"></span><span>${T({fa:'در حال حاضر نمی‌تونیم وضعیت رو بررسی کنیم', en:'Unable to check status right now', ar:'تعذر التحقق من الحالة الآن', tr:'Şu anda durum kontrol edilemiyor', ru:'Не удаётся проверить статус сейчас', es:'No se puede comprobar el estado ahora', ku:'ئێستا ناتوانین دۆخ بپشکنین'})}</span>`;
+      listEl.innerHTML = '';
+    }
+  })();
+</script>
+</body>
+</html>
