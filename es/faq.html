@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'es';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_faq">Preguntas Frecuentes | FundedBeyondBorders</title>
+<meta name="description" content="Preguntas frecuentes sobre los desafíos de FundedBeyondBorders — incluyendo nuestras comisiones y spreads, entre los más bajos de la industria.">
+<meta property="og:title" content="Preguntas frecuentes | FundedBeyondBorders">
+<meta property="og:description" content="Preguntas frecuentes sobre los desafíos de prop trading de FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/es/faq.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Preguntas frecuentes | FundedBeyondBorders">
+<meta name="twitter:description" content="Preguntas frecuentes sobre los desafíos de prop trading de FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .faq{ max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:1px; border-top:1px solid var(--line); }
+  .faq-item{ border-bottom:1px solid var(--line); }
+  .faq-item summary{ cursor:pointer; list-style:none; padding:20px 4px; display:flex; justify-content:space-between; align-items:center; font-weight:600; font-size:15.5px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary::after{ content:"+"; color:var(--gold-soft); font-size:22px; font-weight:300; }
+  .faq-item[open] summary::after{ content:"–"; }
+  .faq-item p{ padding:0 4px 20px; color:var(--paper-dim); font-size:14.5px; max-width:660px; line-height:1.9; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/faq.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/faq.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/faq.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/faq.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/faq.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/faq.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/faq.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/faq.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/es/faq.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Es FundedBeyondBorders un bróker?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Somos una plataforma educativa de evaluación de trading. Todas las operaciones ocurren en un entorno simulado — nunca se envía ninguna orden a un mercado financiero real."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué pasa si no apruebo una fase?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El estado de la cuenta de desafío se vuelve 'incumplido' y ya no podrás operar en ella. Puedes comprar un nuevo desafío e intentarlo de nuevo."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué apalancamiento ofrecen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El apalancamiento varía según la categoría del mercado (cripto es menor, forex es mayor — verás el número exacto junto a cada símbolo en la propia plataforma). Si tu pérdida flotante supera tu margen libre, tus posiciones se cierran automáticamente (margin call) — todos los detalles están en la página de Reglas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo se paga la ganancia de una cuenta financiada?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cuando lo solicitas, tu parte de la ganancia (según las reglas) se acredita instantáneamente a tu billetera interna en el panel. Desde ahí, puedes enviar una solicitud de retiro de USDT real (TRC20, ERC20 o BEP20) a tu propia dirección, que enviamos manualmente."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué necesito enviar KYC?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Solo antes de tu primera solicitud de pago — para asegurar que el pago realmente llegue a la persona que abrió la cuenta. Puedes operar libremente antes de eso."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Por qué solo aceptan USDT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "USDT no tiene volatilidad de precio, las comisiones de transacción (especialmente en TRC20 y BEP20) son muy bajas, y es accesible casi en todas partes — esto mantiene los depósitos, retiros y la contabilidad interna simples y predecibles."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuál es la diferencia entre la cuenta de prueba gratuita y un desafío real?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La cuenta de prueba es solo para sentir el spread y la comisión — no tiene objetivo de ganancia ni límite de pérdida y nunca puede llegar a estar financiada. Para participar realmente en la evaluación y alcanzar capital financiado, necesitas comprar uno de los planes de desafío. Puedes probarla ahora mismo, sin registro, desde el botón 'Cuenta de Prueba Gratuita' en la parte superior de esta página."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto tiempo tarda en verificarse mi pedido?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La verificación del monto exacto del pago siempre la realiza manualmente nuestro equipo (para mayor seguridad), generalmente en pocas horas. Si tarda más, haz seguimiento mediante un ticket de soporte."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo tener más de una cuenta?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, hasta 3 cuentas activas a la vez, con un total combinado de hasta $750,000. Todos los detalles están en la página de Reglas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es la Financiación Instantánea (Instant Funding)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Un plan de mayor precio que financia tu cuenta de inmediato, sin ninguna fase de evaluación — puedes empezar a operar de inmediato sin superar ninguna fase. (Nota: el mínimo estándar de 14 días antes de tu primer pago sigue aplicando aquí, igual que en cualquier otro plan.) A cambio, tu parte de la ganancia (50%) es menor que en los planes regulares y los límites de pérdida son más conservadores. Es ideal para quienes quieren empezar de inmediato y están dispuestos a pagar más por ello."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué es la autenticación de dos factores (2FA) y cómo la activo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Una capa de seguridad adicional — incluso si tu contraseña se filtra, nadie puede iniciar sesión en tu cuenta sin un código de una aplicación de autenticación (como Google Authenticator). Desde la sección de Seguridad de la Cuenta en tu panel, toca activar y escanea el código en tu aplicación. Recomendamos encarecidamente activar esto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué son las Loyalty Rewards?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cuando tu número de pedidos completados alcanza ciertos hitos (por ejemplo, tu 3ra o 5ta compra), se agrega automáticamente un código de descuento de un solo uso a tu cuenta — sin ninguna acción de tu parte. Encontrarás tus códigos en la sección de Referidos de tu panel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo funciona la recompensa por referidos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cuando un amigo se registra con tu enlace de referido y compra su primer desafío, el 10% del monto de esa compra se acredita directamente en efectivo a tu billetera — sin necesidad de ningún código o paso adicional. Esta recompensa solo se aplica una vez, en la primera compra de cada amigo referido."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo se comparan sus spreads y comisiones con otras prop firms?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nuestra comisión de ida y vuelta en 1 lote estándar de forex es de solo $2.50, con spreads ajustados (alrededor de 0.1 pip en pares mayores como EUR/USD) — entre los costos de trading más bajos de la industria de prop trading."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Inicio</a>
+      <a href="index.html#plans" data-i18n="nav_plans">Planes</a>
+      <a href="rules.html" data-i18n="nav_rules">Reglas</a>
+      <a href="faq.html" data-i18n="nav_faq">Preguntas Frecuentes</a>
+      <a href="/platform.html" data-i18n="nav_platform">Plataforma</a>
+      <a href="contact.html" data-i18n="nav_contact">Contacto</a>
+      <a href="status.html" data-i18n="nav_status">Estado</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">Iniciar Sesión</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_faq">Preguntas Frecuentes</span></div>
+  <h1 data-i18n="faq_h1">Preguntas Frecuentes</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="faq">
+
+    <details class="faq-item" open>
+      <summary><span data-i18n="faq1_q">¿Es FundedBeyondBorders un bróker?</span></summary>
+      <p data-i18n="faq1_a">No. Somos una plataforma educativa de evaluación de trading. Todas las operaciones ocurren en un entorno simulado — nunca se envía ninguna orden a un mercado financiero real.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq2_q">¿Qué pasa si no apruebo una fase?</span></summary>
+      <p data-i18n="faq2_a">El estado de la cuenta de desafío se vuelve 'incumplido' y ya no podrás operar en ella. Puedes comprar un nuevo desafío e intentarlo de nuevo.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq3_q">¿Qué apalancamiento ofrecen?</span></summary>
+      <p data-i18n="faq3_a">El apalancamiento varía según la categoría del mercado (cripto es menor, forex es mayor — verás el número exacto junto a cada símbolo en la propia plataforma). Si tu pérdida flotante supera tu margen libre, tus posiciones se cierran automáticamente (margin call) — todos los detalles están en la página de Reglas.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq4_q">¿Cómo se paga la ganancia de una cuenta financiada?</span></summary>
+      <p data-i18n="faq4_a">Cuando lo solicitas, tu parte de la ganancia (según las reglas) se acredita instantáneamente a tu billetera interna en el panel. Desde ahí, puedes enviar una solicitud de retiro de USDT real (TRC20, ERC20 o BEP20) a tu propia dirección, que enviamos manualmente.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq5_q">¿Por qué necesito enviar KYC?</span></summary>
+      <p data-i18n="faq5_a">Solo antes de tu primera solicitud de pago — para asegurar que el pago realmente llegue a la persona que abrió la cuenta. Puedes operar libremente antes de eso.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq6_q">¿Por qué solo aceptan USDT?</span></summary>
+      <p data-i18n="faq6_a">USDT no tiene volatilidad de precio, las comisiones de transacción (especialmente en TRC20 y BEP20) son muy bajas, y es accesible casi en todas partes — esto mantiene los depósitos, retiros y la contabilidad interna simples y predecibles.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq7_q">¿Cuál es la diferencia entre la cuenta de prueba gratuita y un desafío real?</span></summary>
+      <p data-i18n="faq7_a">La cuenta de prueba es solo para sentir el spread y la comisión — no tiene objetivo de ganancia ni límite de pérdida y nunca puede llegar a estar financiada. Para participar realmente en la evaluación y alcanzar capital financiado, necesitas comprar uno de los planes de desafío. Puedes probarla ahora mismo, sin registro, desde el botón 'Cuenta de Prueba Gratuita' en la parte superior de esta página.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq8_q">¿Cuánto tiempo tarda en verificarse mi pedido?</span></summary>
+      <p data-i18n="faq8_a">La verificación del monto exacto del pago siempre la realiza manualmente nuestro equipo (para mayor seguridad), generalmente en pocas horas. Si tarda más, haz seguimiento mediante un ticket de soporte.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq9_q">¿Puedo tener más de una cuenta?</span></summary>
+      <p data-i18n="faq9_a">Sí, hasta 3 cuentas activas a la vez, con un total combinado de hasta $750,000. Todos los detalles están en la página de Reglas.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq10_q">¿Qué es la Financiación Instantánea (Instant Funding)?</span></summary>
+      <p data-i18n="faq10_a">Un plan de mayor precio que financia tu cuenta de inmediato, sin ninguna fase de evaluación — puedes empezar a operar de inmediato sin superar ninguna fase. (Nota: el mínimo estándar de 14 días antes de tu primer pago sigue aplicando aquí, igual que en cualquier otro plan.) A cambio, tu parte de la ganancia (50%) es menor que en los planes regulares y los límites de pérdida son más conservadores. Es ideal para quienes quieren empezar de inmediato y están dispuestos a pagar más por ello.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq11_q">¿Qué es la autenticación de dos factores (2FA) y cómo la activo?</span></summary>
+      <p data-i18n="faq11_a">Una capa de seguridad adicional — incluso si tu contraseña se filtra, nadie puede iniciar sesión en tu cuenta sin un código de una aplicación de autenticación (como Google Authenticator). Desde la sección de Seguridad de la Cuenta en tu panel, toca activar y escanea el código en tu aplicación. Recomendamos encarecidamente activar esto.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq12_q">¿Qué son las Loyalty Rewards?</span></summary>
+      <p data-i18n="faq12_a">Cuando tu número de pedidos completados alcanza ciertos hitos (por ejemplo, tu 3ra o 5ta compra), se agrega automáticamente un código de descuento de un solo uso a tu cuenta — sin ninguna acción de tu parte. Encontrarás tus códigos en la sección de Referidos de tu panel.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq13_q">¿Cómo funciona la recompensa por referidos?</span></summary>
+      <p data-i18n="faq13_a">Cuando un amigo se registra con tu enlace de referido y compra su primer desafío, el 10% del monto de esa compra se acredita directamente en efectivo a tu billetera — sin necesidad de ningún código o paso adicional. Esta recompensa solo se aplica una vez, en la primera compra de cada amigo referido.</p>
+    </details>
+
+    <details class="faq-item">
+      <summary><span data-i18n="faq14_q">¿Cuáles son sus comisiones y spreads?</span></summary>
+      <p data-i18n="faq14_a">Nuestra comisión de ida y vuelta en 1 lote estándar de forex es de solo $2.50, con spreads ajustados (alrededor de 0.1 pip en pares mayores como EUR/USD) — entre los costos de trading más bajos de la industria de prop trading.</p>
+</details>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">Reglas</a>
+      <a href="privacy.html" data-i18n="footer_privacy">Privacidad</a>
+      <a href="/platform.html" data-i18n="footer_platform">Plataforma</a>
+      <a href="contact.html" data-i18n="footer_contact">Contacto</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© 2026 FundedBeyondBorders. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

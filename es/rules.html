@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'es';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="title_rules">Reglas | FundedBeyondBorders</title>
+<meta name="description" content="Reglas de trading y criterios de evaluación para los desafíos de prop trading de FundedBeyondBorders.">
+<meta property="og:title" content="Reglas | FundedBeyondBorders">
+<meta property="og:description" content="Reglas de trading y criterios de evaluación para los desafíos de prop trading de FundedBeyondBorders.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/es/rules.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reglas | FundedBeyondBorders">
+<meta name="twitter:description" content="Reglas de trading y criterios de evaluación para los desafíos de prop trading de FundedBeyondBorders.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .rule-card{ margin-bottom:18px; }
+  .rule-card h3{ font-size:17px; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+  .rule-card h3 .num{ font-family:'Fraunces',serif; color:var(--gold-soft); font-size:14px; border:1px solid var(--gold); border-radius:999px; width:26px; height:26px; display:flex; align-items:center; justify-content:center; flex:none; }
+  .rule-card p{ color:var(--paper-dim); font-size:14.5px; }
+  .rule-card .badge-row{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .lang-note{ font-size:12.5px; color:var(--paper-dim); background:var(--ink-2); border:1px solid var(--line); border-radius:12px; padding:12px 16px; margin-bottom:30px; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/rules.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/rules.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/rules.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/rules.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/rules.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/rules.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/rules.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/rules.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/es/rules.html">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <div class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Inicio</a>
+      <a href="index.html#plans" data-i18n="nav_plans">Planes</a>
+      <a href="rules.html" data-i18n="nav_rules">Reglas</a>
+      <a href="faq.html" data-i18n="nav_faq">Preguntas Frecuentes</a>
+      <a href="/platform.html" data-i18n="nav_platform">Plataforma</a>
+      <a href="contact.html" data-i18n="nav_contact">Contacto</a>
+      <a href="status.html" data-i18n="nav_status">Estado</a>
+    </div>
+    <div class="nav-actions">
+      <a href="/checkout.html" class="cart-badge">🛒<span class="cart-count">0</span></a>
+      <a href="/auth.html" class="btn btn-ghost btn-sm auth-nav-link" data-i18n="login_btn">Iniciar Sesión</a>
+      <div class="lang-toggle">
+        <button class="lang-btn">🌐 <span class="lang-current-label">فارسی</span></button>
+        <div class="lang-menu">
+          <button data-lang="fa">فارسی</button><button data-lang="ar">العربية</button><button data-lang="en">English</button>
+          <button data-lang="tr">Türkçe</button><button data-lang="ru">Русский</button><button data-lang="es">Español</button><button data-lang="ku">کوردی</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="nav_rules">Reglas</span></div>
+  <h1 data-i18n="rules_h1">Reglas de Desafío y Cuenta Financiada</h1>
+  <p data-i18n="rules_p">Lee esta página antes de comprar. El pago implica aceptar estas reglas.</p>
+</div>
+
+<section style="padding-top:0;">
+  <div class="wrap-narrow">
+
+    <div class="lang-note" data-i18n="rules_lang_note">Esta página está traducida a los 7 idiomas del sitio.</div>
+
+    <div class="eyebrow"><span data-i18n="rules_section_caps">Límites de Cuenta</span></div>
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">1</span><span data-i18n="rule1_title">Tamaño máximo de cuenta</span></h3>
+      <p data-i18n="rule1_desc">No más de $500,000 por cuenta.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">2</span><span data-i18n="rule2_title">Capital máximo por trader</span></h3>
+      <p data-i18n="rule2_desc">No más de $750,000 combinados en cuentas activas/financiadas.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">3</span><span data-i18n="rule3_title">Máximo de cuentas activas</span></h3>
+      <p data-i18n="rule3_desc">Máximo 3 cuentas activas a la vez.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:36px;"><span data-i18n="rules_section_risk">Reglas de Riesgo</span></div>
+
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">4</span><span data-i18n="rule4_title">Regla de Riesgo Flotante</span></h3>
+      <p data-i18n="rule4_desc">El riesgo de una sola operación o de operaciones abiertas simultáneamente no debe superar el 3% de la cuenta (para tamaños de $1,000–$50,000) o el 2% (para tamaños de $100,000 en adelante). Superar este límite por deslizamiento (slippage) no se considera una infracción; solo una infracción deliberada (sin stop-loss establecido, junto con una caída real del capital de la cuenta por debajo del límite) cuenta como infracción.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">5</span><span data-i18n="rule5_title">Días mínimos de trading</span></h3>
+      <p data-i18n="rule5_desc">Necesitas al menos 3 días de trading con al menos 0.5% de ganancia cada uno — para superar cualquier fase de evaluación, y también (en la cuenta financiada misma) como condición para tu primer pago, en todos los planes incluyendo Financiación Instantánea.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">6</span><span data-i18n="rule6_title">Regla del 80% por operación</span></h3>
+      <p data-i18n="rule6_desc">La ganancia de ninguna operación puede superar el 80% de la ganancia total de la fase (o, en el plan de financiación instantánea, la ganancia total desde el inicio de la cuenta).</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">7</span><span data-i18n="rule7_title">Regla de consistencia 40%</span></h3>
+      <p data-i18n="rule7_desc">En cuenta financiada, un día no puede superar el 40% de la ganancia total.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:36px;"><span data-i18n="rules_section_general">Reglas Generales</span></div>
+
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">8</span><span data-i18n="rule8_title">Prohibido compartir CID</span></h3>
+      <p data-i18n="rule8_desc">Compartir credenciales está prohibido y cierra la cuenta.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">9</span><span data-i18n="rule9_title">Prohibido el hedging</span></h3>
+      <p data-i18n="rule9_desc">Abrir posiciones opuestas en el mismo símbolo o símbolos correlacionados entre las propias cuentas de un trader está prohibido. (La cobertura grupal está prohibida y, si se descubre, resulta en el cierre de TODAS las cuentas relacionadas.)</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">10</span><span data-i18n="rule10_title">Prohibido copy-trading entre cuentas</span></h3>
+      <p data-i18n="rule10_desc">Copiar operaciones entre cuentas está prohibido.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">11</span><span data-i18n="rule11_title">Prohibido arbitraje de latencia</span></h3>
+      <p data-i18n="rule11_desc">Aprovechar retrasos de precios está prohibido.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">12</span><span data-i18n="rule12_title">Bots y Expert Advisors</span></h3>
+      <p data-i18n="rule12_desc">Bots que exploten errores del servidor están prohibidos; uso normal de EA permitido.</p>
+    </div>
+
+    <div class="eyebrow" style="margin-top:36px;"><span data-i18n="rules_section_payout">Reparto de Ganancias y Pagos</span></div>
+    <div class="card rule-card" style="margin-top:14px;">
+      <h3><span class="num">13</span><span data-i18n="rule13_title">Reparto de ganancias en cuenta financiada</span></h3>
+      <p data-i18n="rule13_desc">La parte base del trader es 75% (un paso), 80% (dos/tres pasos), o 50% (plan de financiación instantánea). Cada vez que la cuenta escala (cada 10% de ganancia realizada), esta parte aumenta 5 puntos porcentuales, hasta un tope del 100%.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">14</span><span data-i18n="rule14_title">Calendario de pagos</span></h3>
+      <p data-i18n="rule14_desc">Para tu primer retiro, deben pasar al menos 14 días desde tu primera operación en la cuenta financiada. Después de eso, cada retiro posterior debe ser al menos 7 días después del anterior. El pago se realiza dentro de 48 horas tras la aprobación.</p>
+    </div>
+    <div class="card rule-card">
+      <h3><span class="num">15</span><span data-i18n="rule15_title">Ejecución Justa y Uniforme</span></h3>
+      <p data-i18n="rule15_desc">El spread, la comisión y el slippage se aplican de forma idéntica a cada trader según estas mismas reglas fijas y publicadas. Nunca se ajustan manualmente ni se dirigen a hacer fallar a un trader específico.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">16</span><span data-i18n="rule16_title">Definición de "día de trading"</span></h3>
+      <p data-i18n="rule16_desc">El día de trading se define por la medianoche UTC, no por tu hora local.</p>
+    </div>
+
+    <div class="card rule-card">
+      <h3><span class="num">17</span><span data-i18n="rule17_title">Llamada de margen</span></h3>
+      <p data-i18n="rule17_desc">Si las pérdidas flotantes superan tu margen libre, todas las posiciones se cierran de inmediato.</p>
+    </div>
+
+    <div class="rule-item">
+      <h3><span class="num">18</span><span data-i18n="rule18_title">Reembolso de la Tarifa del Desafío</span></h3>
+      <p data-i18n="rule18_desc">La tarifa de tu desafío se reembolsa por completo, sumada a tu parte de ganancias, la primera vez que solicites con éxito un pago desde tu cuenta financiada.</p>
+    </div>
+
+    <p style="margin-top:30px; font-size:13px; color:var(--paper-dim);" data-i18n="rules_footer_note">Infringir las reglas resulta en cierre de cuenta y/o revisión manual.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">Reglas</a>
+      <a href="privacy.html" data-i18n="footer_privacy">Privacidad</a>
+      <a href="/platform.html" data-i18n="footer_platform">Plataforma</a>
+      <a href="contact.html" data-i18n="footer_contact">Contacto</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© 2026 FundedBeyondBorders. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>

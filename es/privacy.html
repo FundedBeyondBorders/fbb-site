@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<script>
+  // Sets the correct lang/dir BEFORE the browser paints anything — without
+  // this, a returning visitor who chose a non-Persian language would see
+  // a jarring flash of Persian/RTL layout on every page load/refresh,
+  // then a disruptive jump to their actual language once js/i18n.js loads
+  // later in the page. Mirrors i18n.js's own RTL_LANGS list exactly.
+  (function() {
+    var lang = localStorage.getItem('fbb_lang') || 'es';
+    document.documentElement.lang = lang;
+    document.documentElement.dir = ['fa', 'ar', 'ku'].includes(lang) ? 'rtl' : 'ltr';
+  })();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#C89B3C">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/favicon-16.png" sizes="16x16">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="FBB">
+<meta name="mobile-web-app-capable" content="yes">
+<title data-i18n="priv1">Política de Privacidad | FundedBeyondBorders</title>
+<meta name="description" content="Cómo FundedBeyondBorders recopila, usa y protege tus datos personales, incluidos documentos KYC e información de la cuenta de trading.">
+<meta property="og:title" content="Política de privacidad | FundedBeyondBorders">
+<meta property="og:description" content="Cómo FundedBeyondBorders recopila, usa y protege tus datos personales, incluidos documentos KYC e información de la cuenta de trading.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fundedbeyondborders.com/es/privacy.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Política de privacidad | FundedBeyondBorders">
+<meta name="twitter:description" content="Cómo FundedBeyondBorders recopila, usa y protege tus datos personales, incluidos documentos KYC e información de la cuenta de trading.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+  .policy-section{ max-width:760px; margin:0 auto 24px; }
+  .policy-section h3{ margin-bottom:10px; color:var(--gold-soft); }
+  .policy-section p, .policy-section li{ color:var(--paper-dim); font-size:14.5px; line-height:1.9; }
+  .policy-section ul{ padding-inline-start:20px; margin-top:8px; }
+</style>
+<link rel="alternate" hreflang="en" href="https://fundedbeyondborders.com/privacy.html">
+<link rel="alternate" hreflang="fa" href="https://fundedbeyondborders.com/fa/privacy.html">
+<link rel="alternate" hreflang="ar" href="https://fundedbeyondborders.com/ar/privacy.html">
+<link rel="alternate" hreflang="tr" href="https://fundedbeyondborders.com/tr/privacy.html">
+<link rel="alternate" hreflang="ru" href="https://fundedbeyondborders.com/ru/privacy.html">
+<link rel="alternate" hreflang="es" href="https://fundedbeyondborders.com/es/privacy.html">
+<link rel="alternate" hreflang="ku" href="https://fundedbeyondborders.com/ku/privacy.html">
+<link rel="alternate" hreflang="x-default" href="https://fundedbeyondborders.com/privacy.html">
+<link rel="canonical" href="https://fundedbeyondborders.com/es/privacy.html">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav>
+  <div class="wrap row">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" data-i18n="nav_home">Inicio</a>
+      <a href="rules.html" data-i18n="nav_rules">Reglas</a>
+      <a href="faq.html" data-i18n="nav_faq">Preguntas Frecuentes</a>
+      <a href="status.html" data-i18n="nav_status">Estado</a>
+    </div>
+  </div>
+</nav>
+
+<div id="main-content" class="page-header">
+  <div class="eyebrow" style="justify-content:center;"><span data-i18n="footer_privacy">Privacidad</span></div>
+  <h1 data-i18n="priv2">Política de Privacidad</h1>
+</div>
+
+<section style="padding-top:0;">
+  <div class="policy-section">
+    <p data-i18n="priv3">Esta página explica qué información recopilamos de ti, por qué, y cómo la protegemos.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv4">Qué recopilamos</h3>
+    <ul>
+      <li data-i18n="priv5">Correo electrónico, contraseña (encriptada), nombre completo, país y fecha de nacimiento — al registrarte</li>
+      <li data-i18n="priv6">Un documento de identidad gubernamental (identificación nacional/pasaporte/licencia) — solo si solicitas un pago</li>
+      <li data-i18n="priv7">Historial de trading, saldos de cuenta, y la dirección IP de cada operación — para hacer cumplir las reglas de riesgo y detectar fraude</li>
+      <li data-i18n="priv8">Mensajes de tickets de soporte</li>
+      <li data-i18n="priv_news_collect">Dirección de correo electrónico — solo si eliges suscribirte al boletín en la página principal</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv9">Cómo la protegemos</h3>
+    <ul>
+      <li data-i18n="priv10">Tu contraseña nunca se almacena en texto plano — solo se guarda un hash unidireccional e irreversible de la misma</li>
+      <li data-i18n="priv11">Tu documento de identidad se almacena con encriptación fuerte (AES-256)</li>
+      <li data-i18n="priv12">Tu sesión de inicio también se almacena en forma de hash, no en texto plano</li>
+      <li data-i18n="priv13">Solo el administrador del sitio (con una clave de seguridad separada) puede acceder a esta información</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv14">Por qué la recopilamos</h3>
+    <ul>
+      <li data-i18n="priv15">Documento de identidad: para asegurar que un pago realmente llegue a la persona que abrió la cuenta (KYC)</li>
+      <li data-i18n="priv16">Dirección IP: para detectar patrones de abuso como cobertura coordinada entre diferentes cuentas</li>
+      <li data-i18n="priv17">Fecha de nacimiento y país: para verificar con el documento de identidad durante la revisión KYC</li>
+    </ul>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv18">Eliminar tus datos</h3>
+    <p data-i18n="priv19">Puedes solicitar la eliminación de tu identidad de acceso (credenciales y documento de identidad) mediante un ticket de soporte. Los registros de trading y financieros se conservan para resolución de disputas y fines contables, incluso después de eliminar la cuenta.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv20">Compartir con terceros</h3>
+    <p data-i18n="priv21">No vendemos tu información. Usamos Resend para enviar correos de verificación, y Binance/Twelve Data para precios en vivo — estos servicios solo ven el mínimo de datos necesarios para su función (por ejemplo, Resend solo ve tu correo, nunca tu contraseña o documento de identidad).</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv_news_h3">Boletín</h3>
+    <p data-i18n="priv_news_p">La suscripción al boletín es totalmente opcional y solo ocurre con tu consentimiento. Cada correo que enviamos incluye un enlace para darte de baja — un clic te elimina al instante, sin necesidad de iniciar sesión. Nunca compartimos tu correo con terceros.</p>
+  </div>
+
+  <div class="policy-section">
+    <h3 data-i18n="priv22">Contacto</h3>
+    <p data-i18n="priv23">¿Tienes una pregunta sobre privacidad? Contáctanos a través de la página de Contacto o el botón de chat.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="logo" style="font-size:15px;">
+      <span class="logo-mark" style="width:20px;height:20px;"><svg aria-hidden="true" viewBox="0 0 40 40" fill="none"><path d="M4 34V20C4 11 11 4 20 4C29 4 36 11 36 20V34" stroke="#C89B3C" stroke-width="2.4"/><path d="M12 34V22C12 15.4 15.6 12 20 12C24.4 12 28 15.4 28 22V34" stroke="#2C8C99" stroke-width="2.4"/></svg></span>
+      <span data-i18n="brand_name">FundedBeyondBorders</span>
+    </div>
+    <div class="foot-links">
+      <a href="rules.html" data-i18n="footer_rules">Reglas</a>
+      <a href="privacy.html" data-i18n="footer_privacy">Privacidad</a>
+      <a href="contact.html" data-i18n="footer_contact">Contacto</a>
+    </div>
+    <div class="social-icons">
+      <a href="https://t.me/FundedBeyondBordersHQ" target="_blank" rel="noopener" aria-label="Telegram">
+        <svg viewBox="0 0 24 24"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/fundedbeyondborders" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="copy" data-i18n="footer_rights">© 2026 FundedBeyondBorders. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script src="/js/i18n.js"></script>
+<script src="/js/pwa.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/settings.js"></script>
+</body>
+</html>
